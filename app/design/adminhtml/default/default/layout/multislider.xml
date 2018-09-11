@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <multislider_adminhtml_multislider_index>
+        <reference name="content">
+            <block type="multislider/adminhtml_multislider" name="multislider" />
+        </reference>
+    </multislider_adminhtml_multislider_index>
+</layout>

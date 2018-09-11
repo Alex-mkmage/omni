@@ -1,0 +1,20 @@
+    <?xml version="1.0"?>
+    <config>
+      <modules>
+        <Industry_Distribution>
+          <version>0.1.0</version>
+        </Industry_Distribution>
+      </modules>
+      <global>
+        <page>
+          <layouts>
+            <Distribution translate="label">
+              <label>Distribution_Layout</label>
+              <template>page/2columns-right-distributor.phtml</template>
+              <layout_handle>page_two_columns_right</layout_handle>
+            </Distribution>
+            <!-- add more layouts here -->
+          </layouts>
+        </page>
+      </global>
+    </config>

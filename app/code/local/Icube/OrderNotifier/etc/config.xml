@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Icube_OrderNotifier>
+            <version>1.0.0</version>
+        </Icube_OrderNotifier>
+    </modules>
+    <global>
+        <models>
+            <icube_orderNotifier>
+                <class>Icube_OrderNotifier_Model</class>
+            </icube_orderNotifier>
+        </models>
+        <helpers>
+            <icube_orderNotifier>
+                <class>Icube_OrderNotifier_Helper</class>
+            </icube_orderNotifier>
+        </helpers>
+        <blocks>
+            <icube_orderNotifier>
+                <class>Icube_OrderNotifier_Block</class>
+            </icube_orderNotifier>
+        </blocks>
+        <template>
+            <email>
+               <sales_icube_orderNotifier_email_template>
+                   <label>Omni Custom Order Notifier</label>
+                   <file>icube_orderNotifier.html</file>
+                   <type>html</type>
+               </sales_icube_orderNotifier_email_template>
+            </email>
+        </template>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <icube_orderNotifier_sendNotificationEmailToAdmin>
+                        <class>icube_orderNotifier/observer</class>
+                        <method>sendNotificationEmailToAdmin</method>
+                    </icube_orderNotifier_sendNotificationEmailToAdmin>
+                </observers>
+            </sales_order_place_after>
+        </events>
+    </global>
+</config>

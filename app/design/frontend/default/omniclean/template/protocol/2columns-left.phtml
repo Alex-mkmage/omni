@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+	<container id="after-body-start">
+		<?php echo $this->getChildHtml('global_notices') ?>
+		<?php echo $this->getChildHtml('after_body_start') ?>
+	</container>
+	<header id="header">
+		<?php echo $this->getChildHtml('header') ?>
+	</header>
+	<main id="main-content">
+		<?php echo $this->getChildHtml('breadcrumbs') ?>
+		<?php echo $this->getChildHtml('page_title') ?>
+		<div class="application-header-image">
+			<img src="/skin/frontend/default/omniclean/images/Protocol%20Database.png" alt="Omni's Protocol Database header image">
+		</div>
+		<div class="main">
+			<form action="" name="application-search" id="application-search-form">
+				<!-- 
+				Emulsion Icon: Created by Evan MacDonald
+				Human Icon: Created by Lemon Liu
+				Cell Icon: Created by Sergey Demushkin
+				Plant Icon: Created by Pham Thi Dieu Linh
+				Animal Icon: Created by Francisca Arévalo
+				Calendar Icon: Created by Joris Hoogendoorn
+				Pdf Icon: Created by Graham Dragonborn Wilsdon 
+				-->
+				<div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
+				<div class="col-main">
+					<?php echo $this->getChildHtml('global_messages') ?>
+					<?php echo $this->getChildHtml('content') ?>
+				</div>
+			</form>
+		</div>
+	</main>
+	<footer id="footer">
+		<?php echo $this->getChildHtml('footer') ?>
+	</footer>
+	<container id="before-body-end">
+		<?php echo $this->getChildHtml('before_body_end') ?>
+	</container>
+	<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

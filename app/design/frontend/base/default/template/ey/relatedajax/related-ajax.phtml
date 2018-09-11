@@ -1,0 +1,104 @@
+<?php //print_r($this->getData()); ?>
+<?php 
+	$related_ids = $this->getData('related_ids') ;
+	$allOPA = array();
+	$allOptions = array();
+	$allOptionsID = array();
+	$pom = false;
+?>
+
+<div class="col-lg-9 inline-elements pull-right" id="go-to">
+	<div class="row">
+		<div class="ajax-breadcrumbs">
+			<ul>
+				<li class="breadcrumb-item bc-link">Categories</li>
+				<li class="current-category"></li>
+			</ul>
+			<i class="fa fa-angle-left bc-link"></i>
+		</div>
+		<ul class="loadmore">
+			<?php foreach ($related_ids as $id): ?>
+				<?php 
+					$product = Mage::getModel('catalog/product')->load($id); 
+					$option_id = $product->getData('accessories_tab');
+					$option_text = $product->getAttributeText('accessories_tab');  
+					$position = Mage::getResourceModel('eav/entity_attribute_option_collection')
+					->setIdFilter($option_id)
+					->getFirstItem()
+					->getSortOrder();
+					if(!empty($option_id)) { 
+						$allOPA[$option_id] = $position;
+					} else {
+						$option_id = '0'; // for product withot information for 'accessories_tab' .
+						$option_text = 'Other'; 
+						$pom = true;
+					}
+					$allOptions[] = ['option-id' => $option_id,'option-text' => $option_text];
+				?>
+				<li class="col-lg-4 accesories-items <?php echo 'cat-'.$option_id; ?>" data-position="<?php echo $position; ?>" >
+					<a href="<?php echo $product->getProductUrl(); ?>" class="related_name">
+						<span class="search_name product-name-acc" ><?php echo $product->getName(); ?></span>
+					</a>
+					<img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(100,100); ?> "/>
+					<div class="accessories_info">
+						<p class="label-text"><?php echo $this->__('Sku: ') ?></p>
+						<?php echo nl2br($product->getSku()) ?>
+					</div>
+					<div class="accessories_info">
+						<p class="label-text"><?php echo $this->__('Price: ') ?></p>
+						<?php echo Mage::helper('core')->currency($product->getFinalPrice(), true, false); ?>
+					</div>
+					<div class="accessories_actions">
+						<a href="<?php echo $product->getProductUrl(); ?>" class="left-button">
+							<span class="search_name" ><?php echo $this->__('View Product') ?></span>
+						</a>
+						<?php
+						$currentCountry = Mage::getSingleton('core/session')->getData('current_country');
+						$hideCartBtn = !is_null($currentCountry) && !empty($currentCountry) && $currentCountry['code'] != 'US' && $currentCountry['code'] != 'CA' ? true : false;
+						?>
+						<?php if(!$hideCartBtn): ?>
+						<a href="<?php echo Mage::getUrl('checkout/cart/add', array('product'=>$product->getId(),'qty'=>1, 'form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>" class="right-button add-ajax-accesories" data-productid="<?php echo $product->getId(); ?>">
+							<span class="search_name" ><?php echo $this->__('Add to Cart') ?></span>
+						</a>
+						<?php else: ?>
+						<?php $action = $this->helper('qquoteadv/catalog_product_data')->getAddToQuoteAction($product->getId()); ?>
+						<a href="<?php echo $action; ?>" class="right-button">
+							<span class="search_name" ><?php echo $this->__('Add to Quote') ?></span>
+						</a>
+						<?php endif; ?>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+</div>
+
+<div class="col-lg-3 inline-elements padding-0">
+	<div class="row">
+		<?php 
+			asort($allOPA);
+			if ($pom) {
+				$allOPA[0] = '0'; // for product withot information for 'accessories_tab' .
+			}
+		?>
+		<select class="mobile-accessories">
+			<option class="category-option">Select a Category</option>
+			<?php foreach($allOPA as $value => $position ): ?>
+				<?php $key = array_search($value, array_column($allOptions, 'option-id')); ?>
+				<?php 
+					$optionText = $allOptions[$key]['option-text']; 
+				?>
+				<option class="category-option" value="<?php echo $value; ?>" data-position="<?php echo $position; ?>"><?php echo $optionText; ?></option>
+			<?php endforeach; ?>
+		</select>
+		<ul class="padding-0 desktop-menu">
+		<?php foreach($allOPA as $value => $position ): ?>
+			<?php $key = array_search($value, array_column($allOptions, 'option-id')); ?>
+			<?php 
+				$optionText = $allOptions[$key]['option-text']; 
+			?>
+			<li class="category-ajax" id-value="<?php echo $value; ?>" cat-id="<?php echo $value; ?>" cat-name="<?php echo $optionText ?>" data-position="<?php echo $position; ?>" ><?php echo $optionText; ?><i class="fa fa-angle-right"></i></li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+</div>

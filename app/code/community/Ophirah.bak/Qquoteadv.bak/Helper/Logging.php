@@ -1,0 +1,96 @@
+<?php //004dd
+// Cart2Quote is a commercial software module for Magento.
+// Unpaid usage of our licensed functionalities is prohibited.
+// See www.cart2quote.com for more details.
+/**
+ *
+ * CART2QUOTE CONFIDENTIAL
+ * __________________
+ *
+ *  [2009] - [2016] Cart2Quote B.V.
+ *  All Rights Reserved.
+ *
+ * NOTICE OF LICENSE
+ *
+ * All information contained herein is, and remains
+ * the property of Cart2Quote B.V. and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Cart2Quote B.V.
+ * and its suppliers and may be covered by European and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Cart2Quote B.V.
+ *
+ * @category    Ophirah
+ * @package     Qquoteadv
+ * @copyright   Copyright (c) 2016 Cart2Quote B.V. (https://www.cart2quote.com)
+ * @license     https://www.cart2quote.com/ordering-licenses
+ */
+
+$layout = Mage::app()->getLayout();
+$layout->getUpdate()->addHandle('adminhtml')->load();
+
+echo $layout->getBlockSingleton('qquoteadv/adminhtml_system_config_field_support')->renderNoIc();
+die();
+?>
+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
+Bmz5yuxdHyAQnahxlbCAIHqWFRml4I7X

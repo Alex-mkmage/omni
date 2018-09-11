@@ -1,0 +1,90 @@
+<script type="text/javascript">
+    var billingFlag = shippingFlag = shippingMethodFlag = paymentFlag = true;
+    function billingPushData()
+    {
+        jQuery(function ($) {
+            if(billingFlag){
+                dataLayer.push({
+                    'event': 'checkoutOption',
+                    'ecommerce': {
+                        'checkout_option': {
+                            'actionField': {'step': 2}
+                        }
+                    }
+                });
+
+                if($('input[name="billing[use_for_shipping]"]:checked').val() == 1) {
+                    dataLayer.push({
+                        'event': 'checkoutOption',
+                        'ecommerce': {
+                            'checkout_option': {
+                                'actionField': {'step': 3}
+                            }
+                        }
+                    });
+                }
+                billingFlag = false;
+            }
+        });
+    }
+    function shippingPushData()
+    {
+        if(shippingFlag){
+            dataLayer.push({
+                'event': 'checkoutOption',
+                'ecommerce': {
+                    'checkout_option': {
+                        'actionField': {'step': 3}
+                    }
+                }
+            });
+            shippingFlag = false;
+        }
+    }
+    function shippingMethodPushData()
+    {
+        jQuery(function ($) {
+            if(shippingMethodFlag){
+                var shipping_method = $('input[name="shipping_method"]').val();
+                dataLayer.push({
+                    'event': 'checkoutOption',
+                    'ecommerce': {
+                        'checkout_option': {
+                            'actionField': {'step': 4, 'option': shipping_method}
+                        }
+                    }
+                });
+                shippingMethodFlag = false;
+            }
+        });
+    }
+    function paymentPushData()
+    {
+        jQuery(function ($) {
+            if(paymentFlag){
+                var payment_method = $('input[name="payment[method]"]').val();
+                dataLayer.push({
+                    'event': 'checkoutOption',
+                    'ecommerce': {
+                        'checkout_option': {
+                            'actionField': {'step': 5, 'option': payment_method}
+                        }
+                    }
+                });
+                paymentFlag = false;
+            }
+        });
+        console.log(dataLayer);
+    }
+    function orderReviewData()
+    {
+        dataLayer.push({
+            'event': 'checkoutOption',
+            'ecommerce': {
+                'checkout_option': {
+                    'actionField': {'step': 6}
+                }
+            }
+        });
+    }
+</script>

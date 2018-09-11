@@ -1,0 +1,242 @@
+<?php
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@mageworx.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ * or send an email to sales@mageworx.com
+ *
+ * @category   design_default
+ * @package    MageWorx_Downloads
+ * @copyright  Copyright (c) 2009 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * Downloads extension
+ *
+ * @category   design_default
+ * @package    MageWorx_Downloads
+ * @author     MageWorx Dev Team <dev@mageworx.com>
+ */
+?>
+
+<?php
+$isAllCategories = $this->getIsAllCategories();
+$items = $this->getItems();
+$_helper = Mage::helper('downloads');
+$showMessage = false;
+?>
+<!-- <script type='text/javascript'>
+    if (typeof jQuery != 'undefined') {
+        var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
+        var baseHref = '';
+        if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+        var hrefRedirect = '';
+     
+        jQuery('body').on('click', 'a', function(event) {
+            var el = jQuery(this);
+            var track = true;
+            var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') : '';
+            var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
+            if (!href.match(/^javascript:/i)) {
+                var elEv = []; elEv.value=0, elEv.non_i=false;
+                if (href.match(/^mailto\:/i)) {
+                    elEv.category = 'email';
+                    elEv.action = 'click';
+                    elEv.label = href.replace(/^mailto\:/i, '');
+                    elEv.loc = href;
+                }
+                else if (href.match(filetypes)) {
+                    var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+                    elEv.category = 'download';
+                    elEv.action = 'click-' + extension[0];
+                    elEv.label = href.replace(/ /g,'-');
+                    elEv.loc = baseHref + href;
+                }
+                else if (href.match(/^https?\:/i) && !isThisDomain) {
+                    elEv.category = 'external';
+                    elEv.action = 'click';
+                    elEv.label = href.replace(/^https?\:\/\//i, '');
+                    elEv.non_i = true;
+                    elEv.loc = href;
+                }
+                else if (href.match(/^tel\:/i)) {
+                    elEv.category = 'telephone';
+                    elEv.action = 'click';
+                    elEv.label = href.replace(/^tel\:/i, '');
+                    elEv.loc = href;
+                }
+                else track = false;
+     
+                if (track) {
+                    var ret = true;
+     
+                    if((elEv.category == 'external' || elEv.category == 'download') && (el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') ) {
+                        hrefRedirect = elEv.loc;
+     
+                        ga('send','event', elEv.category.toLowerCase(),elEv.action.toLowerCase(),elEv.label.toLowerCase(),elEv.value,{
+                            'nonInteraction': elEv.non_i ,
+                            'hitCallback':gaHitCallbackHandler
+                        });
+     
+                        ret = false;
+                    }
+                    else {
+                        ga('send','event', elEv.category.toLowerCase(),elEv.action.toLowerCase(),elEv.label.toLowerCase(),elEv.value,{
+                            'nonInteraction': elEv.non_i
+                        });
+                    }
+     
+                    return ret;
+                }
+            }
+        });
+     
+        gaHitCallbackHandler = function() {
+            window.location.href = hrefRedirect;
+        }
+    }
+</script> -->
+</script>
+<?php if ($items && $_helper->isEnabled()): ?>
+    <?php if ($_helper->getGroupByCategory() || $_helper->checkCustomerAccess($items)): ?>
+       <!--<div class="downloads-links-block" <?php if(!$this->getIsGridMode()){ ?>style="margin-top: 35px;"<?php } ?>>-->
+            
+        <?php $categoryId = false; ?>
+        
+       <?php if(!$_helper->getGroupByCategory()): ?>
+            <div class="downloads">
+                <?php foreach ($items as $item): ?>
+                    <?php if ($isAllCategories): ?>
+                        <?php if ($item->getCategoryId() !== $categoryId): ?>
+                            <?php $categoryId = $item->getCategoryId();?>
+                            <div class="title"><h5><?php echo $item->getTitle() ?></h5></div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <div class="wrapper">
+                        <div class="icon"><?php echo $_helper->getIcon($item) ?></div>
+                        <div class="filename">
+                            <?php $fileName = $item->getName() ?>
+                            <?php if ($_helper->checkCustomerGroupAccess($item)): ?>
+                                <?php if ($item->getEmbedCode() != ''): ?>
+                                    <a href="#" onclick="ga('send', 'event', 'download-pdf', 'Download', 'Pdf-download');" data-layer="<?php echo $_helper->htmlEscape($fileName) ?>" downloads.open('<?php echo $_helper->getEmbedLink($item) ?>', '<?php echo $item->getName() ?>'); return false;" title="<?php echo $_helper->htmlEscape($fileName) ?>"><b><?php echo $fileName ?></b></a>
+                                <?php else: ?>
+                                    <a href="<?php echo $item->getUrl() != '' ? $item->getUrl() : $_helper->getDownloadLink($item) ?>"  data-layer="<?php echo $_helper->htmlEscape($fileName) ?>" onclick="ga('send', 'event', 'download-pdf', 'Download', 'Pdf-download');" downloads.updateDownloads('<?php echo Mage::getUrl('downloads/dl/updateDownloads', array('id' => $item->getId())) ?>', '<?php echo $item->getUrl() != '' ? $item->getUrl() : $_helper->getDownloadLink($item) ?>', <?php if ($item->getUrl() != '' || $item->getType() == 'pdf'){ echo '1'; } else { echo '0';} ?>); return false;" title="<?php echo $_helper->htmlEscape($fileName) ?>"><b><?php echo $this->getType() == 'downloads/product_link' && Mage::app()->getRequest()->getParam('mode') != 'list' && strlen($fileName) > Mage::helper('downloads')->getNameSize() ? (substr($fileName, 0, Mage::helper('downloads')->getNameSize()) . '...') : $fileName?></b></a>
+                                <?php endif; ?>
+                            <?php else:  ?>
+                                <b><?php echo $fileName ?></b>
+                            <?php endif; ?>
+                            
+                            <?php if ($this->getType() != 'downloads/product_link' && $_helper->isDisplaySize() && $item->getUrl() == ''): ?>
+                                <?php echo $this->__("(").$_helper->__('Size') ?>: <?php echo $_helper->prepareFileSize($item->getSize()).$this->__(")") ?>
+                            <?php endif; ?>
+                        
+                            <?php if (!$_helper->checkCustomerGroupAccess($item)):?>
+                                <?php $showMessage = true; ?>
+                                <span> *</span>
+                            <?php endif; ?>
+                            <?php if ($_helper->isDisplayDownloads() && !$this->getIsCategory() && $item->getUrl()==''): ?>
+                                <?php echo $_helper->__('Downloads') ?>: <?php echo $item->getDownloads() ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php if ($this->getType() != 'downloads/product_link' && $item->getFileDescription()): ?>
+                    <div>
+                        <div class="description"><?php echo $item->getFileDescription() ?></div>
+                    </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div><!-- End of Downloads -->
+        <?php else: ?>
+            <?php foreach($items as $category): ?>
+                <?php $title = strtolower(str_replace( array(' ', '&'), "", $category['title'])); ?>
+                <?php if($title == 'applicationnotes' || $title == 'productbrochure' || $title == 'productmanuals' || $title == 'repairinstallationguide' || $title ==  'quickstartguides')?>
+                    <div class="<?php echo strtolower(str_replace( array(' ', '&'), "", $category['title'])); ?>">
+                        <!-- <div class="sub-title"><h3><?php echo $category['title'];?></h3></div> -->
+                        <table class="table table-striped table-responsive">
+                            <tbody>
+                                <?php foreach($category['files'] as $item): ?>
+                                    <?php if ($isAllCategories): ?>
+                                        <?php if ($item->getCategoryId() !== $categoryId): ?>
+                                            <?php $categoryId = $item->getCategoryId();?>
+                                            <div>
+                                               <div class="title">
+                                                   <h5><?php echo $item->getTitle() ?></h5>
+                                               </div>
+                                            </div>
+                                        <?php endif ?>
+                                    <?php endif ?>
+                                <tr>
+                                    <?php if ($_helper->checkCustomerGroupAccess($item)) { ?>
+                                        
+                                    <?php } else { ?>
+                                        <div class="locked-download"></div>
+                                    <?php } ?>
+                                    <td>
+                                        <div class="lock"><?php if ($_helper->checkCustomerGroupAccess($item)) { ?>
+                                            <span class="icon padlock unlocked">unlock</span>
+                                            <?php } else { ?>
+                                                <a href="javascript:void(0)" class="popup-login-trigger"><span class="icon padlock">lock</span></a>
+                                            <?php } ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="pdf-icon">
+                                            <span><?php echo $_helper->getIcon($item) ?></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="filename">
+                                            <?php $fileName = $item->getName() ?>
+                                                <?php if ($_helper->checkCustomerGroupAccess($item)) { ?>
+                                                    <?php if ($item->getEmbedCode() != ''): ?>
+                                                        <a href="#" data-layer="<?php echo $_helper->htmlEscape($fileName) ?>" onclick="ga('send', 'event', 'download-pdf', 'Download', 'Pdf-download');" downloads.open('<?php echo $_helper->getEmbedLink($item) ?>', '<?php echo $item->getName() ?>'); return false;" title="<?php echo $_helper->htmlEscape($fileName) ?>"><?php echo $fileName ?></a>
+                                                    <?php else: ?>
+                                                        <a href="<?php echo $item->getUrl() != '' ? $item->getUrl() : $_helper->getDownloadLink($item) ?>" <?php if ($item->getUrl() != '' || $item->getType() == 'pdf'):?>target="_blank"<?php endif;?>  data-layer="<?php echo $_helper->htmlEscape($fileName) ?>" onclick="ga('send', 'event', 'download-pdf', 'Download', 'Pdf-download');" downloads.updateDownloads('<?php echo Mage::getUrl('downloads/dl/updateDownloads', array('id' => $item->getId())) ?>', '<?php echo $item->getUrl() != '' ? $item->getUrl() : $_helper->getDownloadLink($item) ?>'); return false;" title="<?php echo $_helper->htmlEscape($fileName) ?>"><?php echo $this->getType() == 'downloads/product_link' && Mage::app()->getRequest()->getParam('mode') != 'list' && strlen($fileName) > Mage::helper('downloads')->getNameSize() ? (substr($fileName, 0, Mage::helper('downloads')->getNameSize()) . '...') : $fileName?></a>
+                                                    <?php endif; ?>
+                                                <?php } else { ?>
+                                                <?php echo $fileName ?>
+                                                <?php } ?>
+                                            <?php if ($this->getType() != 'downloads/product_link' && $_helper->isDisplaySize() && $item->getUrl() == ''): ?>
+                                                (<?php echo $_helper->__('Size') ?>: <?php echo $_helper->prepareFileSize($item->getSize()) ?>)
+                                            <?php endif; ?>
+                                                <?php if (!$_helper->checkCustomerGroupAccess($item)) { $showMessage = true; ?>
+                                                <span></span>
+                                                <?php } ?>
+                                            <?php if ($_helper->isDisplayDownloads() && !$this->getIsCategory() && $item->getUrl()==''): ?>
+                                                <?php echo $_helper->__('Downloads') ?>: <?php echo $item->getDownloads() ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+                                    <?php if ($this->getType() != 'downloads/product_link' && $item->getFileDescription()): ?>
+                                    <!--<tr>
+                                        <td>&nbsp;</td>
+                                        <td><?php echo $item->getFileDescription() ?></td>
+                                    </tr>-->
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+                     
+    <!--</div>-->
+    <?php endif; ?>
+<?php endif; ?>

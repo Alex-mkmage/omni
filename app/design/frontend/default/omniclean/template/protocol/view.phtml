@@ -1,0 +1,280 @@
+<?php $document = $this->getDocument(); ?>
+<?php $products = $this->getProductCollection(); ?>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="application-header-image">
+    <img src="/skin/frontend/default/omniclean/images/Protocol%20Database.png" alt="Omni's Protocol Database header image">
+</div>
+<div id="nav-block">
+    <a href="/protocol/application#application-search-form" class="btn btn-outline"><i class="fas fa-angle-double-left"></i>Back to Search</a>
+    <?php $files = $document->getFiles(); ?>
+        <?php if($files->getSize()): ?>
+          <?php if(Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+            <?php if(!$this->isAllowToDownload()): ?>
+              <p>Exceed download limit per day.</p>
+            <?php else: ?>
+            <?php $files = $document->getFiles(); ?>
+                <ul>
+                    <?php foreach($files as $file): ?>
+                        <li>
+                            <div class="download-pdf">
+                                <a class="button btn btn-solid btn-pdf application_download_link goodToDownload" 
+                                    href="javascript:void(0)" 
+                                    data-url="<?php echo $this->getDownloadLink($file) ?>"
+                                    title="<?php echo $file->getName() ?>"
+                                    target="_blank">
+                                    Download Application
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+            <?php else: ?>
+              <div class="download-pdf open-forms">
+                <div style="cursor: pointer;" class="icon">
+                    <a class="button btn btn-solid btn-pdf application_download_link" href="javascript:void(0)" target="_blank">
+                    Download Application
+                    <i class="fas fa-download"></i>
+                </a>
+                </div>
+              </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    <a href="/contacts/" class="btn btn-solid contact-us">Contact an Expert</a>
+</div>
+<!-- END OF NAV-BLOCK -->
+<div class="app-database tab-content-cms">
+    <div class="header">
+        <div class="left-header-info">
+            <div class="inner-wrapper">
+                <?php $appTitle = htmlspecialchars_decode($document->getName()); ?>
+                <h1><span class="title"><?php echo $appTitle; ?></span></h1>
+                <p>Sample amount: <span><?php echo $document->getSampleAmount(); ?></span></p>
+            </div>
+        </div>
+        <div class="right-header-info">
+        <div class="inner-wrapper">
+            <div class="sample-type <?php echo strtolower($document->getSampleType()->getName()); ?>">
+                <?php echo $document->getSampleType()->getName(); ?>
+            </div>
+            <?php $files = $document->getFiles(); ?>
+            <?php if($files->getSize()): ?>
+                <div class="pdf"><i class="fas fa-file-pdf fa-2x"></i></div>
+            <?php endif; ?>
+        </div>
+        </div><!-- END OF right-header-info -->
+    </div>
+    <!-- END OF HEADER -->
+    <div class="col-wrap">
+        <div class="left-col col">
+        <h2>Application Info</h2>
+      <div class="inner-wrap">
+        <?php $description = $document->getProcedure(); ?>
+        <?php if($description): ?>
+        <div class="description">
+            <h3>Procedure:</h3>
+            <?php $appDesc = htmlspecialchars_decode($document->getProcedure()); ?>
+            <p><?php echo $appDesc; ?></p>
+        </div>
+        <?php endif; ?>
+        <?php $goal = $document->getAnalyte(); ?>
+        <?php if($goal): ?>
+        <div class="goal">
+          <h3>Analyte:</h3>
+          <p>
+            <?php echo $goal; ?>
+          </p>
+        </div>
+        <?php endif; ?>
+        <?php if ($document->getImage()): ?>
+        <div class="image">
+            <img src="<?php echo $document->getImage(); ?>" alt="<?php echo $document->getName(); ?>">
+        </div>
+        <?php endif; ?>
+        <div class="scope-info">
+            <div class="sample">
+                <h4>Sample Type:</h4>
+                <span><?php echo $document->getSampleType()->getName(); ?></span>
+            </div>
+            <div class="tags">
+                <h4>Tags:</h4>
+                <?php $tags = $document->getTags(); ?>
+                <ul>
+                    <?php foreach($tags as $tag): ?>
+                    <li><?php echo $tag->getName() ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="created"><h4>Created On:</h4>
+                <p><?php echo date('Y-m-d', strtotime($document->getCreatedAt())); ?></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- END OF LEFT-COL -->
+    <div class="right-col col">
+      <h2>Product used</h2>
+      <div class="inner-wrap">
+        <div class="application-upsell">
+            <?php echo $this->getChildHtml('application_view_upsell'); ?>
+        </div>
+      </div>
+    </div>
+    <!-- END OF RIGHT-COL -->
+    <div class="download-form">
+      <span class="close-pdf">&times;</span>
+      <div class="inner-wrap">
+        <h3>To download this PDF, you must be logged into your Omni account.</h3>
+        <div class="no-account">
+          <p>Don't have an account?</p>
+          <button class="createAccount-btn btn" type="button">Click here to create an account</button>
+        </div>
+        <div class="have-account">
+          <p>Already have an account?</p>
+          <button class="haveAccount-btn" type="button">Click here to login in now</button>
+        </div>
+        <form id="app-pdf-download" method="post"
+              action="<?php echo $this->getUrl('application/application/login') ?>">
+          <div class="input-group">
+            <label for="first-name">First Name</label>
+            <input type="text" name="customer_data[first_name]" placeholder="First Name" required />
+          </div>
+          <div class="input-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" name="customer_data[last_name]" placeholder="Last Name" required />
+          </div>
+          <div class="input-group">
+            <label for="company">Company</label>
+            <input type="text" name="customer_data[company]" placeholder="Company" required />
+          </div>
+          <div class="input-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="customer_data[phone]" placeholder="Phone" required />
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" name="customer_data[email]" placeholder="Email" required />
+          </div>
+            <div class="input-group">
+                <label for="email">Password</label>
+                <input type="password" name="customer_data[password]" placeholder="Password" required />
+            </div>
+          <div class="input-group submit">
+            <button href="#" class="button btn">Submit</button>
+          </div>
+        </form>
+        <form id="app-pdf-download-login" method="post"
+              action="<?php echo $this->getUrl('application/application/login') ?>">
+              <div class="input-group">
+                  <label for="email">Email</label>
+                  <input type="text" name="customer_data[email]" placeholder="Email" required />
+                  <input type="hidden" name="customer_data[login]" value="1">
+              </div>
+              <div class="input-group">
+                  <label for="email">Password</label>
+                  <input type="password" name="customer_data[password]" placeholder="Password" required />
+              </div>
+              <div class="input-group submit">
+                  <button href="#" class="button btn">Login</button>
+              </div>
+        </form>
+        <script type="text/javascript">
+            //< ![CDATA[
+            var customForm = new VarienForm('register-form');
+            //]]>
+        </script>
+      </div>
+    </div>
+    <div class="overlay-bg"></div>
+  </div>
+  <!-- END OF COL-WRAP -->
+</div>
+<!-- END OF APP-DATABASE -->
+<script type="text/javascript">
+
+    jQuery(function ($) {
+
+      var createAccount = $('#app-pdf-download');
+      var haveAccount = $('#app-pdf-download-login');
+      var createAccountBtn = $('.no-account');
+      var haveAccountBtn = $('.have-account');
+      var overlay = $('.overlay-bg');
+
+      createAccount.addClass('hidden');
+      haveAccountBtn.addClass('hidden');
+
+      createAccountBtn.find('.createAccount-btn').on('click', function(e){
+        e.preventDefault();
+        console.log('createAccount');
+        haveAccountBtn.removeClass('hidden');
+        createAccountBtn.addClass('hidden');
+        createAccount.removeClass('hidden');
+        if(!haveAccount.hasClass('hidden')){
+          haveAccount.addClass('hidden');
+        }
+      });
+
+      haveAccountBtn.find('.haveAccount-btn').on('click', function(e){
+        e.preventDefault();
+        console.log('haveAccount');
+        haveAccountBtn.addClass('hidden');
+        createAccountBtn.removeClass('hidden');
+        haveAccount.removeClass('hidden');
+        if(!createAccount.hasClass('hidden')){
+          createAccount.addClass('hidden');
+        }
+      });
+
+
+
+
+
+        $('.application_download_link').click(function(e){
+            e.preventDefault();
+            var get_url = '<?php echo $this->getCustomerLogUrl(); ?>',
+                get_data = {application: '<?php echo $document->getId(); ?>'},
+                downloadUrl = $(this).data('url');
+
+            $.ajax({
+                type: 'GET',
+                url: get_url,
+                data: get_data,
+                success: function (data) {
+                    data = $.parseJSON(data);
+                    if(data.success){
+                        window.location.replace(downloadUrl);
+                    }
+                    console.log(data);
+                    //console.log(data);
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            });
+        });
+        var readmore = $('.read-more');
+        readmore.on('click', function(event){
+            $(this).parent().css({maxHeight: '100%'});
+            $(this).fadeOut('fast');
+        });
+
+
+        if($('.download-pdf.open-forms').length){
+            $('.download-pdf.open-forms').click(function(){
+                if($('.download-form').hasClass('open')){
+                    $('.download-form').removeClass('open');
+                } else{
+                    $('.download-form').addClass('open');
+                    overlay.addClass('show');
+                }
+            });
+        }
+
+        $('.close-pdf').on('click', function(event){
+            $('.overlay-bg').removeClass('show');
+           $('.download-form').removeClass('open');
+        });
+    });
+</script>

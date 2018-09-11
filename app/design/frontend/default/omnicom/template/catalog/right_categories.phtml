@@ -1,0 +1,10 @@
+<?php 
+$root = Mage::app()->getStore()->getRootCategoryId();
+$categories = Mage::getModel('catalog/category')->getCollection()
+    ->addAttributeToSelect('*')
+    ->addAttributeToFilter('is_active', 1) //only active categories
+    ->setOrder('position', 'ASC');
+?>
+<?php foreach ($categories as $category) :?>
+    <a href="<?php echo $category->getUrl();?>"><?php echo $category->getName();?></a>
+<?php endforeach;?>

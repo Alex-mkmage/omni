@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    	<reference name="header">
+            <block type="qquoteadv/checkout_miniquote_miniquote" name="miniquote_head" template="qquoteadv/checkout/quote/miniquotehead.phtml" before="minicart_head" />
+            <block type="qquoteadv/checkout_miniquote_miniquote" name="miniquote_content" template="qquoteadv/checkout/quote/miniquote/miniquoteitems.phtml"  after="minicart_head">
+                <action method="addItemRender"><type>default</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>simple</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+            </block>
+            <block type="qquoteadv/sidebar" name="quote_link" template="qquoteadv/top-link.phtml" after="cart_sidebar"/>
+        </reference>
+		<reference name="head">
+			<action ifconfig="qquoteadv/general/enabled" method="addCss">                
+				<link>css/qquoteadv.css</link>
+			</action>
+			<action method="addItem">
+                <type>skin_js</type>
+                <name>js/miniquote.js</name>
+            </action>
+		</reference>
+    </default>
+    <checkout_cart_index>
+        <reference name="content">
+            <block type="qquoteadv/checkoutquotebtn" name="qquoteadv.checkoutquotebtn" as="qquoteadv.checkoutquotebtn" template="qquoteadv/checkout_quotebtn.phtml"/>
+        </reference> 
+    </checkout_cart_index>
+    <catalogsearch_result_index>
+    	<reference name="head">
+            <remove name="ajaxpro.head"/>
+            <action method="setTitle">
+                <title>Quote List</title>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv.js</name>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+    <qquoteadv_index_index>
+        <remove name="right"/>
+        <remove name="left"/>
+        <reference name="head">
+            <remove name="ajaxpro.head"/>
+            <action method="setTitle">
+                <title>Quote List</title>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv_createquote.js</name>
+            </action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="top.links">
+            <block type="qquoteadv/links" name="qquoteadv_links">
+                <action ifconfig="qquoteadv_quote_frontend/shoppingcart_quotelist/show_admin_login" method="addAdminLink"/>
+            </block>
+        </reference>
+		<reference name="breadcrumbs">
+			<action method="addCrumb"><crumbName>home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo><cssClass>home</cssClass></action>
+			<action method="addCrumb"><crumbName>quote-list</crumbName><crumbInfo><label>Quote List</label><title>Quote List</title></crumbInfo></action>
+		</reference>        
+        <reference name="content">
+            <block type="qquoteadv/qquote" name="qquote" template="qquoteadv/quote.phtml">
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>qquoteadv/item_renderer_bundle</block>
+                    <template>qquoteadv/item/bundle.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>qquoteadv/item_renderer_configurable</block>
+                    <template>qquoteadv/item/configurable.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>virtual</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/item/default.phtml</template>
+                </action>
+                <block type="qquoteadv/qquoteaddress" name="qquote.address" as="qquote.address" template="qquoteadv/quote_address.phtml">
+                    <block type="qquoteadv/form_extrafields" name="qquote.extrafields" as="qquote.extrafields" template="qquoteadv/form/extra_fields.phtml"/>
+                    <block type="qquoteadv/form_address" name="qquote.address.billing" as="qquote.address.billing" template="qquoteadv/form/address.phtml">
+                        <action method="setData">
+                            <name>address_type</name>
+                            <value>billing</value>
+                        </action>
+                    </block>
+                    <block type="qquoteadv/form_address" name="qquote.address.shipping" as="qquote.address.shipping" template="qquoteadv/form/address.phtml">
+                        <action method="setData">
+                            <name>address_type</name>
+                            <value>shipping</value>
+                        </action>
+                        <block type="qquoteadv/qquoteaddress" name="qquote.shipping.list" as="qquote.shipping.list" template="qquoteadv/form/shipping/list.phtml"/>
+                        <block type="qquoteadv/qquoteaddress" name="qquote.shipping.request" as="qquote.shipping.request" template="qquoteadv/form/shipping/request.phtml"/>
+                    </block>
+                    <block type="qquoteadv/form_checkbox_address" name="qquote.checkbox.address" as="qquote.checkbox.address" template="qquoteadv/form/checkbox/copy_when_logged_in.phtml"/>
+                    <block type="qquoteadv/form_checkbox_address" name="qquote.checkbox.shipping.requireshippingquote" as="qquote.checkbox.shipping.requireshippingquote" template="qquoteadv/form/checkbox/request_shipping_quote.phtml"/>
+                    <block type="qquoteadv/form_checkbox_address" name="qquote.checkbox.billing.address" as="qquote.checkbox.billing.address" template="qquoteadv/form/checkbox/use_default_address.phtml"/>
+                    <block type="qquoteadv/form_customer" name="qquote.customer" as="qquote.customer" template="qquoteadv/form/customer.phtml"/>
+                    <block type="qquoteadv/form_customer" name="qquote.print.button" template="qquoteadv/form/print_only_button.phtml"/>
+                    <block type="qquoteadv/qquoteaddress" name="qquote.submit.button" template="qquoteadv/form/submit_button.phtml"/>
+                </block>
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <remove name="ajaxpro.before_body_end"/>
+        </reference>
+    </qquoteadv_index_index>
+       
+    <qquoteadv_index_success>
+        <remove name="right"/>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="qquoteadv/qquote" name="qquote.success" template="qquoteadv/success.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="setTitle"><title>Quote List</title></action>
+            <action method="addItem"><type>skin_js</type><name>js/qquoteadv.js</name></action>
+            <action method="addCss"><link>css/qquoteadv.css</link></action>
+        </reference>
+    </qquoteadv_index_success>
+       
+    <qquoteadv_index_quotesuccess>
+        <remove name="right"/>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="qquoteadv/qquote" name="qquote.quotesuccess" template="qquoteadv/quote_success.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="setTitle"><title>Quote List</title></action>
+            <action method="addItem"><type>skin_js</type><name>js/qquoteadv.js</name></action>
+            <action method="addCss"><link>css/qquoteadv.css</link></action>
+        </reference>
+    </qquoteadv_index_quotesuccess>    
+    
+    <qquoteadv_email_qquoteadv_items>
+        <block type="qquoteadv/qquoteadv_email_items" name="qquoteadv_items" template="qquoteadv/email/items.phtml">
+            <block type="qquoteadv/qquoteadv_email_item" name="qquoteadv_item" as="qquoteadv_item"  template="qquoteadv/email/item.phtml">
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>qquoteadv/item_renderer_bundle</block>
+                    <template>qquoteadv/email/items/bundle.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>qquoteadv/item_renderer_configurable</block>
+                    <template>qquoteadv/email/items/configurable.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/email/items/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>qquoteadv/item_renderer</block>
+                    <template>qquoteadv/email/items/default.phtml</template>
+                </action>
+            </block>
+            <block type="qquoteadv/totals" name="quote_totals" template="qquoteadv/sales/order/totals.phtml">
+                <action method="setLabelProperties"><value>colspan="3" align="right" style="padding:3px 9px"</value></action>
+                <action method="setValueProperties"><value>align="right" style="padding:3px 9px"</value></action>
+                <block type="qquoteadv/tax" name="tax" template="tax/order/tax.phtml">
+                    <action method="setIsPlaneMode"><value>1</value></action>
+                </block>
+            </block>
+        </block>
+    </qquoteadv_email_qquoteadv_items>        
+    
+    
+</layout>

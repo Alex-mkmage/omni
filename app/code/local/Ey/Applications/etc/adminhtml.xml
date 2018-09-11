@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <ey_applications translate="title" module="ey_applications">
+            <title>Applications</title>
+            <sort_order>75</sort_order>
+            <children>
+                <application translate="title" module="ey_applications">
+                    <title>Manage Applications</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/application/index</action>
+                </application>
+                <sample_type translate="title" module="ey_applications">
+                    <title>Manage Sample Types</title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/sampletype/index</action>
+                </sample_type>
+                <file translate="title" module="ey_applications">
+                    <title>Manage Files</title>
+                    <sort_order>15</sort_order>
+                    <action>adminhtml/file/index</action>
+                </file>
+            </children>
+        </ey_applications>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <ey_applications translate="title" module="ey_applications">
+                        <title>Applications</title>
+                        <sort_order>75</sort_order>
+                        <children>
+                            <application translate="title" module="ey_applications">
+                                <title>Manage Applications</title>
+                            </application>
+                            <sample_type translate="title" module="ey_applications">
+                                <title>Manage Sample Types</title>
+                            </sample_type>
+                            <file translate="title" module="ey_applications">
+                                <title>Manage Files</title>
+                            </file>
+                        </children>
+                    </ey_applications>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

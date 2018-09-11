@@ -1,0 +1,24 @@
+<div class="webforms-gdpr form-list">
+    <?php if ($this->getShowAgreementText()) { ?>
+        <div class="webforms-gdpr-text">
+            <?php echo $this->getAgreementText() ?>
+        </div>
+    <?php } ?>
+    <?php if ($this->getShowCheckbox()) { ?>
+        <div class="webforms-gdpr-checkbox control">
+            <div class="input-box">
+                <input id="gdpr_<?php echo $this->getUid() ?>" type="checkbox" name="gdpr"
+                       class="checkbox <?php if ($this->getCheckboxRequired()) { ?>required-entry<?php } ?>"
+                       value="1">
+            </div>
+
+            <label for="gdpr_<?php echo $this->getUid() ?>"><?php echo $this->getCheckboxLabel() ?></label>
+            <?php if (strlen($this->getErrorText()) > 0) { ?>
+                <div class="validation-advice" style="display: none"
+                     id="advice-required-entry-gdpr_<?php echo $this->getUid() ?>">
+                    <?php echo $this->getErrorText() ?>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>

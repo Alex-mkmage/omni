@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<config>
+	<menu>
+	<distributor translate="title" module="distributor">
+		<title>Distributor</title>
+		<sort_order>80</sort_order>
+		<children>		
+ 			<list module="distributor">
+				<title>Distributor List</title>
+				<sort_order>0</sort_order>
+				<action>adminhtml/distributor/</action>
+			</list>
+			<upload module="distributor">
+				<title>Upload Distributor</title>
+				<sort_order>1</sort_order>
+				<action>adminhtml/distributor/upload</action>
+			</upload>
+
+<!-- 			<list module="distributor">
+				<title>Download Distributor</title>
+				<sort_order>1</sort_order>
+				<action>adminhtml/distributor/grid</action>
+			</list> -->
+		</children>
+	</distributor>
+	</menu>
+
+<!--     <acl>
+        <resources>
+            <admin>
+                <children>                
+					<distributor translate="title" module="distributor">
+						<title>Distributor</title>
+						<sort_order>80</sort_order>
+						<children>		
+							<upload module="distributor">
+								<title>Upload Distributor</title>
+								<sort_order>0</sort_order>
+								<action>adminhtml/distributor</action>
+							</upload>
+							<download module="distributor">
+								<title>Download Distributor</title>
+								<sort_order>1</sort_order>
+								<action>adminhtml/distributor/grid</action>
+							</download>
+						</children>
+					</distributor>
+                </children>
+            </admin>
+        </resources>
+    </acl>	
+ -->
+</config>

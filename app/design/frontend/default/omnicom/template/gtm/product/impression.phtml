@@ -1,0 +1,25 @@
+<?php /** @var $this Ey_GTM_Block_Product_List_Impression */ ?>
+<?php $products = $this->getLoadedProductCollection() ?>
+<?php if($products && $products->getSize()): $position = 1; ?>
+<script type="text/javascript">
+    dataLayer.push({
+        'ecommerce': {
+            'currencyCode': 'USD',
+            'impressions': [
+                <?php foreach ($products as $product): ?>
+                {
+                    'name': '<?php echo $product->getName() ?>',
+                    'id': '<?php echo $product->getSku() ?>',
+                    'price': '<?php echo number_format($product->getFinalPrice(), 2) ?>',
+                    <?php if($this->getCategory()->getId() && $this->getCategory()->getId() != 3): ?>
+                        'category': '<?php echo $this->getCategory()->getName() ?>',
+                    <?php endif; ?>
+                    'list': '<?php echo $this->getListType() ? $this->getListType():'Category'; ?>',
+                    'position': <?php echo $position++; ?>
+                },
+                <?php endforeach; ?>
+            ]
+        }
+    });
+</script>
+<?php endif; ?>

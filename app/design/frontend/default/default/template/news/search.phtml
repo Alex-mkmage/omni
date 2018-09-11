@@ -1,0 +1,24 @@
+<?php if(Mage::getStoreConfig('news/settings/news_show') == '1'): ?>
+<div class="block block-news">
+	<div class="block-title">
+		<strong><span><?php echo $this->__('Search News') ?></span></strong>
+	</div>
+	<form name="newssearch" id="newssearch" method="get" action="<?php echo $this->getUrl('news')?>">
+		<?php $query = $this->getRequest()->getParam('keyword'); ?>
+		<div class="block-title block-content">
+			<div class="input-box">
+				<label for="keyword"><?php echo $this->__('Enter your keyword:') ?></label>
+				<input class="input-text required-entry" type="text" value="<?php echo $query; ?>" title="<?php echo $this->__('Enter your keyword:'); ?>" id="keyword" name="keyword">
+			</div>
+			<div class="actions11">
+				<button class="button" title="<?php echo $this->__('Search') ?>" type="submit"><span><span><?php echo $this->__('Search') ?></span></span></button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newssearch');
+    //]]>
+    </script>
+</div>
+<?php endif;?>

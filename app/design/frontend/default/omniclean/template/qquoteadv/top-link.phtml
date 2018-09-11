@@ -1,0 +1,8 @@
+<?php $_quoteQty = $this->getQuoteQty() ?>
+<div class="quote">
+	<a href="<?php echo $this->getUrl('qquoteadv/index/') ?>">
+		<img class="mobile-show" src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/quote.svg' ?>">
+		<p class="label mobile-hide">Quote</p>
+		<span class="qty"><?php echo $_quoteQty ?></span>
+	</a>
+</div>

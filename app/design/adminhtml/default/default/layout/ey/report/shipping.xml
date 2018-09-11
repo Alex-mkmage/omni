@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_report_shipping>
+        <reference name="content">
+            <block type="ey_report/adminhtml_shipping" template="report/grid/container.phtml"
+                   name="products.report.grid.container">
+                <block type="ey_report/adminhtml_filter" name="grid.filter.form" />
+            </block>
+        </reference>
+    </adminhtml_report_shipping>
+</layout>

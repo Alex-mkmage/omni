@@ -1,0 +1,118 @@
+/** Cart **/
+.cart-main{width: calc(100% - 300px);float: left;}
+.cart-2columns.cart .cart-collaterals{width: 280px;float: right;padding-top: 0;}
+.cart-main-bottom{margin: 20px 0;}
+.cart.cart-2columns .cart-collaterals .totals{width: 100%;float: none;border: 0;padding: 0;margin-bottom: 0;min-width: 0;}
+.cart.cart-2columns .totals .checkout-types{padding-left: 0;padding-right: 0;}
+.cart.cart-2columns .checkout-types button.button{width: 100%;margin: 5px 0 !important;}
+.cart div.shipping{border: 0;background: none;padding: 0;display: block;float: none;margin-bottom: 20px;}
+.cart-2columns #parrentSection{border: 1px solid #d0cbc1;background: #fff url(../../images/bkg_block-title.gif) 0 0 repeat-x;padding: 12px 15px;margin-bottom: 20px;}
+.cart .shipping h2{background: none;padding-left: 0;text-transform: capitalize;cursor: pointer;}
+.cart .shipping h2 span{position: relative;padding-right: 20px;}
+.cart .shipping h2 span:after{
+    position: absolute;
+    top: 5px;
+    content: '';
+    right: -20px;
+    display: block;
+    background: url(../../images/omni8.png);
+    width: 16px;
+    height: 8px;
+    background-position-x: -201px;
+    background-position-y: -73px;
+}
+.cart .shipping.expand h2 span:after{
+    background-position-x: -201px;
+    background-position-y: -73px;}
+.cart .shipping:not(.expand) .shipping-form{display: none;}
+.shipping-form .form-list select, .shipping-form .form-list input.input-text{width: 100%;}
+.cart.cart-2columns .totals .checkout-types li{text-align: center;}
+
+.spinner .add-on{display: none;}
+.ajaxUpdateQtyLoading:not(.open){display: none;}
+.ajaxUpdateQtyLoading.open{display: block;position: fixed;top:0;left:0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.6);z-index: 9999;}
+.ajaxUpdateQtyLoading .inner{width: 60px;height: 60px;background-color: rgba(255,255,255,0.6);position: absolute;top: calc(50% - 30px);left: calc(50% - 30px);text-align: center;}
+.ajaxUpdateQtyLoading .inner i{font-size: 24px;line-height: 60px;}
+
+.cart-recently-viewed-title{padding: 0 20px 20px;margin-top: 20px;}
+.cart-recently-viewed{padding: 0 40px;text-align: center;position: relative;width: calc(100% - 80px) !important;margin-bottom: 20px;}
+.contentsDiv{padding: 0 10px;margin-bottom: 20px;}
+.contentsImg, .contentsName{margin-bottom: 10px;}
+.contentsAction .button{width: 100%;}
+.owl-buttons > div{position: absolute;top: 30%;}
+.owl-buttons .owl-prev{left: 10px;}
+.owl-buttons .owl-next{right: 10px;}
+.owl-buttons i.fa{font-size: 60px;}
+
+#shopping-cart-table th span.subtotal, #shopping-cart-table tbody .td.price.subtotal{display: none !important;}
+.subtotalBelowCart{text-align: center;padding: 12px 0;}
+
+@media only screen and (min-width: 668px){
+    #shopping-cart-table tbody div.td.desc{width: 49%;}
+    #shopping-cart-table th span.product-name:first-child{width: 62%;}
+    .btnBelowCart{overflow: hidden;width: calc(100% - 220px);float: left;}
+    .subtotalBelowCart{width: 220px;float: right;text-align: right;}
+}
+@media only screen and (min-width: 600px){
+    .spinner{border: 1px solid #b6b6b6;padding: 2px 5px;width: 50px;position: relative;margin: 0 auto;background-color: #fff;}
+    .spinner input.qty{border: 0 !important;width: 80% !important;margin: 0!important;}
+    .spinner .add-on{display:block;position: absolute;right: 2%;top: -1px;}
+    .spinner .add-on > a{display: block;text-align: center;width: 20%; height: 10px;}
+}
+@media only screen and (max-width: 978px) {
+    .cart-main, .cart-2columns.cart .cart-collaterals, .cart.cart-2columns .discount{width: 100%;float: none;}
+    .cart-2columns.cart .cart-collaterals{margin-top: 20px;}
+    .spinner .add-on{top: 1px;}
+}
+
+/** IP **/
+.label-radio-configurable{margin-right: 10px;}
+
+
+/** IP **/
+.label-radio-configurable{margin-right: 10px;margin-bottom: 10px;display: block;}
+#product_addtocart_form .options-block div.product-options:before{display: none;}
+
+/** Cart **/
+body.checkout-cart-index .cart > #lightbox1.leightbox{display: none;}
+
+/** Search */
+form.searchautocomplete{position: relative;top: 0;height: auto;background: none;width: 100%;border-radius:0;clear: both;}
+form.searchautocomplete .nav{width: 340px;background: #fff;}
+form.searchautocomplete .nav-submit-button{background: #fff;}
+form.searchautocomplete .nav .nav-search-in .category-fake, form.searchautocomplete .nav-submit-button .button{border-radius:0;}
+form.searchautocomplete .nav-submit-button .button > span{
+    position: relative;
+    width: 21px;
+    height: 20px;
+    overflow: hidden;
+    background: none;
+    border: none;
+    margin: 0 auto;
+    padding: 0;
+}
+form.searchautocomplete .searchautocomplete-placeholder:before{display: none;}
+form.searchautocomplete .searchautocomplete-placeholder{right: -3px;}
+
+@media only screen and (max-width: 1200px) {
+    form.searchautocomplete .searchautocomplete-placeholder{right: 14px;}
+}
+@media only screen and (max-width: 1024px){
+    #header, #header .cell{overflow: visible;}
+}
+@media only screen and (max-width: 668px){
+    .searchautocomplete .searchautocomplete-placeholder{display: none !important;}
+    form.searchautocomplete .nav{width: calc(100% - 64px);}
+}
+
+
+/**New Product Page**/
+.prodLeft {
+    max-width: 70%;
+}
+
+.product-image .product-other-images{display: none;}
+.product-image.open .product-other-images{display: block;}
+.product-image.open > iframe{display: none;}
+.more-views .inset-360 a{width: 100px;height: 77px;display: inline-block;background: url(/skin/frontend/default/omnicom/images/360-logo.png) no-repeat center center;background-size: 100px auto;}
+.more-views .inset-360 a img{display: none;}

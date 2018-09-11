@@ -1,0 +1,34 @@
+<?php if ($_options = $this->getConfigurableOptions()):?>
+<?php  if( is_array($_options) ) : ?>
+	<dl style="margin:0; padding:0;">
+				<?php foreach ($_options as $_option) : ?>			
+				<?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
+				<dt style="margin-top:6px;">
+					<strong>
+						<?php echo $this->htmlEscape($_option['label']) ?>:
+						<?php if( isset($_option['print_value']) ) : ?>
+							<?php echo $this->htmlEscape($_option['print_value']) ?>
+						<?php else: ?>
+							<?php echo $_formatedOptionValue['value'] ?>
+							<?php if (isset($_formatedOptionValue['full_view'])): ?>
+								<div>
+									<dl style="margin:0; padding:0;">
+										<dt><strong><em><?php echo $this->htmlEscape($_option['label']) ?></em></strong></dt>
+										<dd style="margin:0; padding:0 0 0 9px;"><?php echo $_formatedOptionValue['full_view'] ?></dd>
+									</dl>
+								</div>
+							<?php endif; ?>
+						<?php endif; ?>
+					</strong>
+				</dt>
+				<?php endforeach; ?>
+	</dl>
+<?php endif;?>
+<?php endif;?>
+<?php if ($_options = $this->getCustomOptions()):?>
+<?php  if( is_array($_options) ) : ?>
+	<?php Mage::register('custom_options', $_options); ?>
+<?php endif;?>
+<?php endif;?>
+
+

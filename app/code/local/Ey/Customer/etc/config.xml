@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ey_Customer>
+            <version>0.0.1</version>
+        </Ey_Customer>
+    </modules>
+    <global>
+        <models>
+            <ey_customer>
+                <class>Ey_Customer_Model</class>
+            </ey_customer>
+            <customer>
+                <rewrite>
+                    <customer>Ey_Customer_Model_Customer</customer>
+                </rewrite>
+            </customer>
+        </models>
+    </global>
+    <frontend>
+        <events>
+            <controller_action_postdispatch_customer_account_logout>
+                <observers>
+                    <ey_customer_logout_after>
+                        <type>model</type>
+                        <class>Ey_Customer_Model_Observer</class>
+                        <method>logoutRedirect</method>
+                    </ey_customer_logout_after>
+                </observers>
+            </controller_action_postdispatch_customer_account_logout>
+        </events>
+    </frontend>
+</config>

@@ -1,0 +1,25 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+
+<div class="sales-page-title page-title">
+	<h1>Omni News</h1>
+</div>
+<div class="container">
+	<!-- <div class="page-title blog-title test <?php if (!$this->isFirstPage()): ?>not-<?php endif; ?>first-page<?php if ($this->isFirstPage() && $this->getTagLine()): ?> with-tagline<?php endif; ?>">
+		<h1><?php echo $this->escapeHtml($this->getBlogTitle()) ?></h1>
+	</div> -->
+	<div class="archive"><span>Archive:</span><a href="/news/2017">2017</a> / <a href="/news/2016">2016</a> / <a href="/news/2015">2015</a> / <a href="/news/2014">2014</a> / <a href="/news/2013">2013</a></div>
+	<?php if ($this->isFirstPage() && $this->getTagLine()): ?>
+		<p class="blog-desc blog-tag-line"><?php echo $this->escapeHtml($this->getTagLine()) ?></p>
+	<?php endif; ?>
+	<div class="blog-home">
+		<?php echo $this->getPostListHtml() ?>
+	</div>
+</div>
+

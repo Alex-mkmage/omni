@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <catalog_category_view>
+        <reference name="before_body_end">
+            <block type="ey_gtm/product_list_impression" name="category.product.impression"
+                   template="gtm/product/impression.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Category</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_list_productClick" name="category.product.click"
+                   template="gtm/product/click.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Category</value>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_view>
+    <catalog_product_view>
+        <reference name="before_body_end">
+            <block type="ey_gtm/product_list_related_impression" name="category.product.impression"
+                   template="gtm/product/related/impression.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Accessories</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_list_related_productClick" name="category.product.click"
+                   template="gtm/product/related/click.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Accessories</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_view_details" name="category.product.details"
+                   template="gtm/product/view/details.phtml" />
+        </reference>
+    </catalog_product_view>
+    <catalogsearch_result_index>
+        <reference name="before_body_end">
+            <block type="ey_gtm/product_list_impression" name="category.product.impression"
+                   template="gtm/product/impression.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Search Results</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_list_productClick" name="category.product.click"
+                   template="gtm/product/click.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Search Results</value>
+                </action>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+    <checkout_cart_index>
+        <reference name="before_body_end">
+            <block type="ey_gtm/product_list_recentlyViewed_impression" name="category.product.impression"
+                   template="gtm/product/related/impression.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Cart</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_list_recentlyViewed_productClick" name="category.product.click"
+                   template="gtm/product/related/click.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Cart</value>
+                </action>
+            </block>
+            <block type="ey_gtm/checkout_cart" name="checkout.cart.addtocart"
+                   template="gtm/checkout/addtocart.phtml" />
+            <block type="ey_gtm/checkout_cart" name="checkout.cart.removefromcart"
+                   template="gtm/checkout/removefromcart.phtml" />
+            <block type="core/template" name="checkout.cart.steps"
+                   template="gtm/checkout/cart/checkout_steps.phtml" />
+        </reference>
+    </checkout_cart_index>
+    <checkout_onepage_index>
+        <reference name="before_body_end">
+            <block type="core/template" name="checkout.onepage.steps"
+                   template="gtm/checkout/onepage/checkout_steps.phtml" />
+        </reference>
+    </checkout_onepage_index>
+    <ey_applications_application_document>
+        <reference name="before_body_end">
+            <block type="ey_gtm/product_list_application_impression" name="category.product.impression"
+                   template="gtm/product/related/impression.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Application Guides</value>
+                </action>
+            </block>
+            <block type="ey_gtm/product_list_application_productClick" name="category.product.click"
+                   template="gtm/product/related/click.phtml">
+                <action method="setData">
+                    <name>list_type</name>
+                    <value>Application Guides</value>
+                </action>
+            </block>
+        </reference>
+    </ey_applications_application_document>
+</layout>

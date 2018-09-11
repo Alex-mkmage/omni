@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_papplication_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadTinyMce"><flag>1</flag></action>
+            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+            <action method="addJs"><script>lib/flex.js</script></action>
+            <action method="addJs"><script>lib/FABridge.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addJs"><script>prototype/prototype.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="setData">
+                <name>can_load_tiny_mce</name>
+                <value>true</value>
+            </action>
+            <action method="addJs"><script>jquery/jquery-1.11.2.min.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui-1.11.0.js</script></action>
+            <action method="addJs"><script>tagsinput/jquery.tagsinput.js</script></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery-ui-1.8.13.css</name></action>
+            <action method="addItem"><type>js_css</type><name>tagsinput/jquery.tagsinput.min.css</name></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="adminhtml/template" name="tag.it" template="ey/protocol/tagit.phtml" />
+        </reference>
+        <reference name="left">
+            <block type="ey_protocol/adminhtml_application_edit_tabs" name="application_edit_tabs" />
+        </reference>
+    </adminhtml_papplication_edit>
+    <adminhtml_papplication_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ey_protocol/adminhtml_application_grid" name="application_grid" />
+        </block>
+    </adminhtml_papplication_grid>
+    <adminhtml_papplication_file>
+        <block type="core/text_list" name="root">
+            <block type="ey_protocol/adminhtml_application_edit_tab_files" name="application_edit_tab_files" />
+            <block type="adminhtml/widget_grid_serializer" name="file_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>application_edit_tab_files</grid_block_name>
+                    <data_callback>getSelectedItem</data_callback>
+                    <hidden_input_name>selected_files</hidden_input_name>
+                    <reload_param_name>files</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>order</input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_papplication_file>
+    <adminhtml_papplication_filegrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ey_protocol/adminhtml_application_edit_tab_files" name="application_edit_tab_files" />
+        </block>
+    </adminhtml_papplication_filegrid>
+    <adminhtml_pfile_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ey_protocol/adminhtml_file_grid" name="file_grid" />
+        </block>
+    </adminhtml_pfile_grid>
+</layout>

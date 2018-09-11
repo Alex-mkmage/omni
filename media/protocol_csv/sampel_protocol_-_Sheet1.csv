@@ -1,0 +1,3 @@
+entity_id,name,created_at,procedure,sample_type,visibility,sample_amount,analyte,image_name,document_type,website,year,is_featured,product_used,tag
+,Rattus norvegicus Adipose,12/19/16,500mg of adipose tissue was placed in a 7 mL tube containting 2.8mm ceramic beads and 3 mL of water. Sample was processed on the Bead Ruptor 24 at 6 m/s for 30 seconds.,Test,Hidden,,,filename.jpg,,,,No,"03-604-XXL,03-604-XL,03-604-L","test1,test2"
+,Bos taurus amniotic membrane,12/19/16,500mg of adipose tissue was placed in a 7 mL tube containting 2.8mm ceramic beads and 3 mL of water. Sample was processed on the Bead Ruptor 24 at 6 m/s for 30 seconds.,Test,Visible,,,filename2.jpg,,,,Yes,"TH115,19-622D,19-620D","tag1,tag2"

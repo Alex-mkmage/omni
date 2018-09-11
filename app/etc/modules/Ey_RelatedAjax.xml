@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Ey_RelatedAjax>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ey_RelatedAjax>
+    </modules>
+</config>

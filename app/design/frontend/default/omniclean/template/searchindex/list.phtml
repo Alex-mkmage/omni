@@ -1,0 +1,205 @@
+<script>
+window.dataLayer = window.dataLayer || [];
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+
+$currentCountry = Mage::getModel('core/session')->getData('current_country');
+$countryCode = $currentCountry['code'];
+
+
+if(in_array($countryCode, array('US','CA'))){
+    $showPrice = true;
+}else{
+    $showPrice = false;
+}
+
+
+?>
+<?php if(!$_productCollection->count()): ?>
+	<?php /* ?>
+	<?php 
+		$category = Mage::registry('current_category');
+		$currentCatId = $category->getId();
+		$childrenCategories = '';
+		$childrenCategories = Mage::getModel('catalog/category')->load($currentCatId)->getChildren();
+   ?>
+	<?php if (!empty($childrenCategories)): ?>
+		<div class="container category-product-list grid-view categories">
+			<?php 
+			$i=0;
+			$catAsArray = explode(',', $childrenCategories);
+			foreach ($catAsArray as $cat): ?>
+				<?php 
+					$category = Mage::getModel('catalog/category')->load($cat); 
+					$imageUrl = $category->getImage();
+					if (empty($imageUrl)) {
+						$imageUrl = 'gray-image.jpg';
+					}
+				?>
+					<?php if (($i % 3) == 0): ?><div class="row"><?php endif; ?>
+						<div class="col-lg-4 product">
+							<div class="view view-1">
+								<h2 class="product-name"><a href="<?php echo $category->getUrl(); ?>"><?php echo $category->getName(); ?></a></h2>
+								<a href="<?php echo $category->getUrl(); ?>" class="img">
+									<img src="<?php echo '/media/catalog/category/'.$imageUrl; ?>" class="category-image">
+								</a>
+								<span class="category-description"><?php echo $category->getDescription(); ?></span>
+							</div>		
+						</div>	                        	                
+					<?php if (($i % 3) == 2): ?></div><?php endif; $i++; ?>                 	
+			<?php endforeach; ?>
+		</div>
+	<?php else: ?>
+    	<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <?php endif; ?>
+    <?php */ ?>
+    <p class="note-msg"><?php echo $this->__('Sorry no results found.') ?></p>
+<?php else: ?>
+    <?php $routeName = Mage::app()->getRequest()->getRouteName(); if($routeName == 'catalogsearch'): ?>
+        <?php echo $this->getToolbarHtml() ?>
+    <?php endif; ?>
+
+    <div class="col-main">
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php $_columnCount = $this->getcolumnscount();  if(empty($_columnCount)) { $_columnCount = 3;} ?>
+        <ol class="category-product-list list-view">
+            <?php $i=0; foreach ($_productCollection as $_product): ?>
+                <li class="col-lg-12 ol-element" itemscope itemtype="http://schema.org/Product">
+                	<div class="search-view">
+                		<a itemprop="url" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" data-sku="<?php echo $_product->getSku() ?>" class="img">
+							<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150,127); ?>" width="150" height="127" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+						</a>
+						<div class="right-search">
+							<h2 class="product-name" itemprop="name"><a href="<?php echo $_product->getProductUrl() ?>" data-sku="<?php echo $_product->getSku() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+							<div class="description"><?php echo $_product->getShortDescription(); ?></div>
+							<p class="product-sku">
+								<?php echo 'SKU: <span>'.$_product->getSku().'</span>'; ?>
+							</p>
+							<?php if($_product->_data['price'] != 0): ?>
+								<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+									<meta itemprop="priceCurrency" content="USD"/>
+									<meta itemprop="price" content="<?php echo $_product->getFinalPrice() ?>" />
+									<meta itemprop="itemCondition" href="http://schema.org/NewCondition" content="New" />
+								</span>
+								<div class="price-wrapper">
+									Price: <span>$<?php echo number_format($_product->getFinalPrice(),2) ?></span>
+								</div>
+							<?php else: ?>
+								<div class="price-wrapper">
+									&nbsp;
+								</div>						
+							<?php endif; ?>
+							<?php
+								$currentCountry = Mage::getSingleton('core/session')->getData('current_country');
+								$hideCartBtn = !is_null($currentCountry) && !empty($currentCountry) && $currentCountry['code'] != 'US' && $currentCountry['code'] != 'CA' ? true : false;
+							?>
+							
+							<div class="button-group">
+								<?php if ($_product->isConfigurable()):?>
+									<a href="<?php echo $_product->getProductUrl() ?>" class="configurable-button">View Product</a> 
+								<?php else: ?>
+									<?php if(!$hideCartBtn): ?>
+										<a href="<?php echo Mage::getUrl('checkout/cart/add', array('product'=>$_product->getId(),'qty'=>1, 'form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>" data-productid="<?php echo $_product->getId(); ?>" class="right-button add-to">
+											<span class="search_name" ><?php echo $this->__('Add to Cart') ?></span>
+										</a>
+									<?php endif; ?>
+								<?php endif; ?>
+								<?php //$action = $this->helper('qquoteadv/catalog_product_data')->getAddToQuoteAction($_product->getId()); ?>
+								<a href="<?php echo Mage::getUrl('qquoteadv/index/addItem/product', array('product'=>$_product->getId(),'qty'=>1, 'form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>" class="right-button" >
+									<span class="search_name" ><?php echo $this->__('Add to Quote') ?></span>
+								</a>
+								<div class="loadingicon" style="display: none;"><svg class="svg-inline--fa fa-spinner fa-w-16 fa-spin" aria-hidden="true" data-prefix="fa" data-icon="spinner" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"></path></svg><!-- <i class="fa fa-spinner fa-spin"></i> --></div>
+							</div>
+						</div>
+					</div>			
+                </li>
+            <?php endforeach ?>
+        </ol>
+        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+    </div>
+<?php endif; ?>
+<script>
+(function($){
+$(document).ready(function(){
+	$(document).on('click','.category-product-list #quick-info', function(e) {
+		e.preventDefault();
+		$(this).parents('.product').find('.view-2').addClass('active');
+	});
+	$(document).on('click','.category-product-list .close', function() {
+		$(this).parents('.product').find('.view-2').removeClass('active');
+	});
+});
+})(jQuery);
+
+(function($){
+$(document).on('click','.add-to',function(event){
+	var el = jQuery(this);
+	event.preventDefault();
+	var productID = jQuery(this).attr('data-productid');
+	var formKey = "<?php echo Mage::getSingleton('core/session')->getFormKey() ?>";
+	var obj = {
+		product: productID,
+		form_key: formKey, 
+		product: productID,
+		qty: 1
+	}; 
+	console.log(obj);
+	var product = $(this);
+	var url = '/amcart/ajax/index/';
+	var request = $.ajax({ 
+		url: url,
+		data: obj, 
+		type: 'POST',
+		beforeSend: function(){ el.parents('.button-group').find(".loadingicon").css("display","block"); },
+		dataType: 'html'
+	});
+	
+	request.done(function(data){
+		var objData = JSON.parse(data);
+		$('.cart-link .qty').first().text(objData.count.replace(/[()\s+]/g,'').replace('items','').replace('item',''));
+		var miniRequest = $.ajax({
+			url : '/amcart/ajax/mcart',
+			type : 'GET'				
+		});
+		miniRequest.done(function(result){
+			$('#header-cart').replaceWith(result);
+		});
+		window.counter = 5;
+		window.myInterval = setInterval(function() {
+			window.counter--;
+			if (window.counter >= 0) {
+			  var span = document.getElementById("counter-down");
+			  if ($(span).length) 
+				  span.innerHTML = window.counter;
+			}
+			if (window.counter === 0) {
+				$('#confirmOverlay').remove();
+				clearInterval(window.counter);
+			}
+		}, 1000);
+		
+		el.parents('.button-group').find(".loadingicon").css("display","none");
+		//console.log(data);
+		window.ajaxmsg = data;		
+		//console.log(objData.message);
+		var html = '<div id="confirmOverlay" style=""><div class="amcart-hide"></div><div id="confirmBox" class="am-center"><span class="cross">×</span><div id="messageBox">';
+		html += objData.message;
+		html += '<div id="confirmButtons"><button href="#" class="button am-btn-left" title="Continue">Continue <span id="ss-span">(<span id="counter-down">5</span>)</span></button><button onclick="window.location.href=\'/checkout/cart/\'" class="button am-btn-right" title="View Cart">View Cart</button></div></div></div></div>';
+		$('body').append(html);
+		
+		AmQtyObj = new AmQty(1);
+	});
+	
+	$(document).on('click','#confirmBox .cross, button.am-btn-left',function(){
+		$('#confirmOverlay').hide();
+		$('#confirmOverlay').remove();
+	});
+	
+});
+})(jQuery);
+
+
+</script>

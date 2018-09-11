@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <ey_core translate="label" module="ey_core">
+            <label>EYStudios</label>
+            <sort_order>100</sort_order>
+        </ey_core>
+    </tabs>
+    <sections>
+        <ey_core translate="label" module="ey_core">
+            <label>Site Settings</label>
+            <tab>ey_core</tab>
+            <sort_order>2</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <cart translate="label" module="ey_core">
+                    <label>Cart</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <promos translate="label" module="ey_core">
+                            <label>Messages/Promos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ey_core/system_config_source_cms_block</source_model>
+                        </promos>
+                        <return translate="label" module="ey_core">
+                            <label>Return Policy</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ey_core/system_config_source_cms_block</source_model>
+                        </return>
+                    </fields>
+                </cart>
+            </groups>
+        </ey_core>
+    </sections>
+</config>

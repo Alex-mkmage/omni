@@ -1,0 +1,181 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+<div class="page-title">
+    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+</div>
+
+<div class="banner">
+<?php echo $this->getChildHtml('contact.header') ?>
+</div>
+
+<form id="contactForm" method="post">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <div class="input-box">
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <div class="input-box">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="telephone" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+                    <div class="input-box">
+                        <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text required-entry validate-number" type="text" />
+                        <small style="font-size: 12px;">No dashes or spaces. For example: 18004562222</small>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="service-requested" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Service Requested') ?></label>
+                    <div class="input-box">
+                        <select name="service-requested" id="service-requested" title="<?php echo Mage::helper('contacts')->__('Service Requested') ?>" class="input-text required-entry validate-select">
+                            <option value=""><?php echo $this->__("Please select service");?></option>
+                            <option value="product sample request">Product Sample Request</option>
+                            <option value="Product Demo Request">Product Demo Request</option>
+                            <option value="customer service">Customer Service</option>
+                            <option value="sales">Sales</option>
+                            <option value="human resources">Human Resources</option>
+                            <option value="accounts payable">Accounts Payable</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <label for="company-institute" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Company | Institute') ?></label>
+                <div class="input-box">
+                    <input name="company-institute" id="company-institute" title="<?php echo Mage::helper('contacts')->__('Company | Institute') ?>" value="" class="input-text required-entry" type="text" />
+                </div>
+            </li>
+            <li class="wide" >
+                <div class="field" style="float:left;">
+                    <label for="find" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('How did you find us?') ?></label>
+                    <div class="input-box">
+                        <select name="find" id="find" title="<?php echo Mage::helper('contacts')->__('find') ?>" class="input-text required-entry validate-select">
+                            <option value=""><?php echo $this->__("How did you find us?");?></option>
+                            <option value="Tradeshow">Tradeshow</option>
+                            <option value="Referring-Website">Referring Website</option>
+                            <option value="Google">Search engine – Google</option>
+                            <option value="Search-engine-other">Search engine – Other</option>
+                            <option value="Omni-Customer">Omni Customer</option>
+                            <option value="Catalog">Catalog</option>
+                            <option value="Journal-Article">Journal Article</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <label for="comment"><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+                <div class="input-box">
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+        <button title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button contact-submit"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<div class="formLoader" style="display:none">
+    <span class="remove-frete" style="display: block; margin: 0 auto; width: 20px;" id="login-please-wait"><img src="http://sites.xpd.com.br/cpaps/skin/frontend/xpd/default/images/opc-ajax-loader.gif" class="v-middle" alt=""/></span>
+</div>
+<div id="formSuccess" style="display:none;">&nbsp;</div>
+<script type="text/javascript">
+//<![CDATA[
+    var formId  = 'contactForm';
+    var postUrl = '<?php echo Mage::getBaseUrl() ?>contactus/index/post/';
+
+    function showMessage(txt, type) {
+        var html = '<ul class="messages"><li class="'+type+'-msg"><ul><li>' + txt + '</li></ul></li></ul>';
+        $j('#formSuccess').html(html);
+        $j('#formSuccess').show();
+    }
+
+    function doAjax(){
+        var _name   = Validation.validate(document.getElementById('name'));
+        var _email  = Validation.validate(document.getElementById('email'));
+        var _tlpn   = Validation.validate(document.getElementById('telephone'));
+        var _company    = Validation.validate(document.getElementById('company-institute'));
+        var _srvice    = Validation.validate(document.getElementById('service-requested'));
+
+
+        if(_name && _email && _tlpn && _srvice && _company){
+            new Ajax.Updater(
+                    {success:'formSuccess'}, 
+                    postUrl,{
+                        method : 'post',
+                        asynchronous : true,
+                        evalScripts:false,
+                        onComplete:function(request, json){
+                            $j('.formLoader').hide();
+
+                            var respon = JSON.parse(request['responseText']);
+                            if(respon['err']){
+                                showMessage(respon['msg'],'error');
+                            }else{
+                                showMessage(respon['msg'],'success');
+                                ga('send', 'event', { eventCategory: 'contact-form', eventAction: 'submit-form', eventLabel: 'contact-form-submitted', eventValue: 1});
+                                dataLayer.push({
+                                  'event' : 'contact-form-submitted',
+                                  'name' : $j('#name').val(),
+                                  'email' : $j('#email').val(),
+                                  'service' : $j('#service-requested').val(),
+                                  'find' : $j('#find').val()
+                                });
+                                console.log('hi again ajax');
+                            }
+                        },
+                        onLoading:function(request,json){
+                            $j('#contactForm').hide();
+                            $j('.formLoader').show();
+                        },
+                        parameters: $j('#contactForm').serialize(true),
+                    }
+            );
+        }
+    }
+
+    new Event.observe(formId,'submit',function(e){
+        console.log(e);
+        e.stop();
+        doAjax();
+    });
+//]]>
+</script>

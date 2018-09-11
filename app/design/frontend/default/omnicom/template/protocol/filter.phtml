@@ -1,0 +1,528 @@
+<!-- 
+Emulsion Icon: Created by Evan MacDonald
+Human Icon: Created by Lemon Liu
+Cell Icon: Created by Sergey Demushkin
+Plant Icon: Created by Pham Thi Dieu Linh
+Animal Icon: Created by Francisca Arévalo
+Calendar Icon: Created by Joris Hoogendoorn
+Pdf Icon: Created by Graham Dragonborn Wilsdon 
+-->
+<?php $searchCriteria = $this->getInitSearchCriteria(); ?>
+<?php
+$productShortNames = array(
+    'GLH-115' => 'Omni GLH',
+    'UHB-115' => 'Omni Micro',
+    '17105' => 'Omni Mixer',
+    '06-021' => 'Omni Prep',
+    'TH115' => 'Omni TH',
+    '12-500' => 'Omni THQ',
+    'TM125-115' => 'Omni Tissue Master',
+    '25-010' => 'Bead Ruptor 4',
+    '19-050' => 'Bead Ruptor 12',
+    '19-040' => 'Bead Ruptor 24 Elite',
+    '27-000' => 'Bead Ruptor 96',
+    'OR4000-115' => 'Sonic Ruptor 4000',
+    '18-000-115' => 'Sonic Ruptor 400'
+);
+Mage::register('protocol_product_short_names', $productShortNames);
+?>
+<div class="application-left">
+    <div class="application-filter open">
+        <ul id="extraButtons">
+            <li>
+                <div class="showFeat btn-checkbox" value="">Show Features</div>
+            </li>
+            <li>
+                <div class="clearSearch btn-checkbox" value="">Clear Search</div>
+            </li>
+        </ul>
+        <div class="application-filter-elements">
+            <ul>
+                <li class="filters">
+                    <label for="sampleTypes">Filter by: Sample Type</label>
+                    <div class="content">
+                        <ul id="sampleTypes">
+                            <?php foreach ($this->getSampleTypes() as $type): ?>
+                                <?php if(isset($searchCriteria['sampletype_id'])): ?>
+                                    <?php $key = array_search($type->getId(), $searchCriteria['sampletype_id']); ?>
+                                <?php else: ?>
+                                    <?php $key = false; ?>
+                                <?php endif; ?>
+                                <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                    <button class="sampleType btn-checkbox" value="<?php echo $type->getId() ?>" data-value="<?php echo $type->getName() ?>"><span class="check">&check;</span><span class="x">&times;</span></button><span><?php echo $type->getName() ?></span>
+                                    <input type="hidden"
+                                           name="filter[sampletype_id][]"
+                                           value="<?php echo $key !== false ? $type->getId() : ''; ?>"
+                                           class="sampleInput" />
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </li>
+                <li class="filters">
+                    <label for="productUsed">Filter by: Product Type</label>
+                    <div class="content">
+                        <ul id="productUsed">
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('GLH-115', $searchCriteria['product_id']) : false; ?>
+                            <!-- <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="GLH-115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni GLH
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? 'GLH-115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('UHB-115', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="UHB-115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni Micro
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? 'UHB-115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('17105', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="17105"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni Mixer
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '17105' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('06-021', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="06-021"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni Prep
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '06-021' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('TH115', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="TH115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni TH
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? 'TH115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('12-500', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="12-500"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni THQ
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '12-500' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('TM125-115', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="TM125-115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Omni Tissue Master
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? 'TM125-115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li> -->
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('25-010', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="25-010"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Bead Ruptor 4
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '25-010' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('19-050', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="19-050"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Bead Ruptor 12
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '19-050' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('19-040', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="19-040"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Bead Ruptor 24 Elite
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '19-040' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('27-000', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="27-000"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Bead Ruptor 96
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '27-000' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <!-- <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('OR4000-115', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="OR4000-115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Sonic Ruptor 4000
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? 'OR4000-115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li>
+                            <?php $key = isset($searchCriteria['product_id']) ?
+                                array_search('18-000-115', $searchCriteria['product_id']) : false; ?>
+                            <li <?php echo $key !== false ? 'class="checked"' : ''; ?>>
+                                <button class="productType btn-checkbox" data-value="18-000-115"><span class="check">&check;</span><span class="x">&times;</span></button>
+                                <span class="product-name">
+                                    Sonic Ruptor 400
+                                    <input type="hidden"
+                                           value="<?php echo $key !== false ? '18-000-115' : ''; ?>"
+                                           name="filter[product_id][]"
+                                           class="productInput" />
+                                </span>
+                            </li> -->
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('.tagItProduct').tagsInput({
+            autocomplete_url: '<?php echo Mage::getUrl("protocol/application/products"); ?>',
+            'height':'200px',
+            'width':'100%'
+        });
+        var filters = $('.application-filter-elements').find('.filters');
+        if ($(window).innerWidth() < 979) {
+            $('.application-filter-elements').addClass('minimize');
+            filters = $('.application-filter-elements.minimize').find('.filters');
+        }
+        else {
+            if($('.application-filter-elements').hasClass('minimize')){
+                $('.application-filter-elements').removeClass('minimize');
+            }
+        };
+        $(window).resize(function() {
+            if ($(window).innerWidth() < 979) {
+                $('.application-filter-elements').addClass('minimize');
+                filters = $('.application-filter-elements.minimize').find('.filters');
+                $('.application-filter-elements').find('.content').css('display', 'none');
+            }
+            else {
+                $('.application-filter-elements').find('.content').css('display', 'block');
+                if($('.application-filter-elements').hasClass('minimize')){
+                    $('.application-filter-elements').removeClass('minimize');
+                }
+            }
+        });
+        filters.on('click', function(e){
+            if($(this).parent().parent().hasClass('minimize')){
+                $('.application-filter-elements').find('.content').css('display', 'none');
+                if($(this).hasClass('open')){
+                    $(this).removeClass('open');
+                }else {
+                    $(this).addClass('open');
+                    $(this).find('.content').css('display', 'block');
+                }
+            }
+        });
+        var productArray = [];
+        var productArrayLabel = [];
+        var productItem = $('.productType').parent();
+        <?php if(isset($searchCriteria['product_id'])): ?>
+        <?php foreach($searchCriteria['product_id'] as $searchProduct): ?>
+        productArray.push(
+            [
+                '<?php echo $searchProduct ?>',
+                '<?php echo $productShortNames[$searchProduct] ?>'
+            ]
+        );
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+        $('.clearSearch').click(function(){
+            $.each($('#productUsed > .checked'), function(){
+                var checkbox = $(this).children();
+                var valueLabel = checkbox.attr('data-value');
+                var productName = $.trim($(this).find('.product-name').text());
+
+                var removeItem = productName;
+                var filtered = productArray.filter(function(item) {
+                    return item[1] !== $.trim(removeItem);
+                });
+                productArray = filtered;
+                function seperateName(arr){
+                    arr.map( function(element, index) {
+                        if($.inArray(arr[index][1], productArrayLabel)){
+                            productArrayLabel.push(arr[index][1]);
+                        }
+                    });
+                }
+                seperateName(productArray);
+                var productsUsedName = productArrayLabel.join(",");
+                if(productsUsedName.length < 1){
+                    $('.product-type').removeClass('show');
+                    $('.product-type').find('.value').removeClass('open');
+                }
+                $(this).find('.productInput').val('');
+                $(this).find('.productInput').removeAttr('name', 'filter[product_id][]');
+                $('.product-type').find('.value').text(productsUsedName);
+                $(this).removeClass('checked');
+                productArrayLabel = [];
+            });
+
+            $.each($('#sampleTypes > .checked'), function(){
+                var checkbox = $(this).children();
+                var valueLabel = checkbox.attr('data-value');
+                var formData = checkbox.attr('value');
+                var removeItem = sampleArray.indexOf(valueLabel);
+                if(removeItem != -1) {
+                    sampleArray.splice(removeItem, 1);
+                }
+                var samplesUsed = sampleArray.join(", ");
+                if(samplesUsed.length < 1){
+                    $('.sample-type').removeClass('show');
+                    $('.sample-type').find('.value').removeClass('open');
+                }
+                $(this).find('.sampleInput').val('');
+                $(this).find('.sampleInput').removeAttr('name');
+                $('.sample-type').find('.value').text(samplesUsed);
+                $(this).removeClass('checked');
+            });
+
+            $('#application-search-results').addClass('hidden');
+            $('#featuredApp').removeClass('hideFeatured');
+            $('.search-term').removeClass('show');
+            $('.no-results').fadeOut();
+            $('.application-result-title').find('.header-value').text('Featured Applications:');
+            submitSearchBG();
+        });
+
+        function submitSearchBG(){
+            var $this = $('#application-search-form'),
+                target = $('#application-search-results'),
+                searchLoader = 'application-loader',
+                ajaxResult = '#application-list',
+                searchQuery = $('.application-result-title'),
+                formKey = '<?php echo $this->getFormKey(); ?>',
+                get_url = '<?php echo $this->getAction(); ?>',
+                get_data = $this.serialize();
+                //console.log(get_url);
+            if(formKey == $this.find('input[name="formkey"]').val()) {
+                var AjaxBG = {
+                    call: function () {
+                        var self = this;
+                        $.ajax({
+                            type: 'GET',
+                            url: get_url,
+                            data: get_data,
+                            success: function (data) {
+                                console.log(data);
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                console.log(xhr.responseText);
+                                console.log(thrownError);
+                            }
+                        });
+                    }
+                };
+                AjaxBG.call();
+            }
+            return false;
+        }
+
+        $('.showFeat').click(function(){
+            if($('#featuredApp').hasClass('hideFeatured') || $(this).text() == 'Show Features'){
+                $('#featuredApp').removeClass('hideFeatured');
+                $(this).text('Hide Features');
+                $('.application-result').addClass('hidden');
+            } else{
+                $('#featuredApp').addClass('hideFeatured');
+                $(this).text('Show Features');
+                $('.application-result').removeClass('hidden');
+            }
+        });
+        
+        productItem.on('click', function(event){
+            $('.application-result').removeClass('hidden');
+            if($(this).hasClass('disable')){
+                var msg = document.createElement('div');
+                $(msg).addClass('message');
+                $(msg).text('Please wait for applications to load before adding new filter');
+                $('#application-search-results').prepend(msg);
+                return false;
+            }else{
+                event.preventDefault();
+                var checkbox = $(this).children();
+                var valueLabel = checkbox.attr('data-value');
+                var productName = $.trim($(this).find('.product-name').text());
+
+                if($(this).hasClass('checked')){
+                    var removeItem = productName;
+                    var filtered = productArray.filter(function(item) {
+                        return item[1] !== $.trim(removeItem);
+                    });
+                    productArray = filtered;
+                    function seperateName(arr){
+                        arr.map( function(element, index) {
+                            if($.inArray(arr[index][1], productArrayLabel)){
+                                productArrayLabel.push(arr[index][1]);
+                            }
+                        });
+                    }
+                    seperateName(productArray);
+                    var productsUsedName = productArrayLabel.join(",");
+                    if(productsUsedName.length < 1){
+                        $('.product-type').removeClass('show');
+                        $('.product-type').find('.value').removeClass('open');
+                    }
+                    $(this).find('.productInput').val('');
+                    $(this).find('.productInput').removeAttr('name', 'filter[product_id][]');
+                    $('.product-type').find('.value').text(productsUsedName);
+                    $(this).removeClass('checked');
+                    productArrayLabel = [];
+                }else {
+                    if($('.product-type').hasClass('show') === false){
+                        $('.product-type').addClass('show');
+                    }
+                    productArray.push([valueLabel, productName]);
+                    function seperateName(arr){
+                        arr.map( function(element, index) {
+                            if($.inArray(arr[index][1], productArrayLabel)){
+                                productArrayLabel.push(arr[index][1]);
+                            }
+                        });
+                    }
+                    seperateName(productArray);
+                    var productsUsedName = productArrayLabel.join(",");
+
+                    $('.product-type').find('.value').addClass('open').text(productsUsedName);
+                    $(this).find('.productInput').val(valueLabel);
+                    $(this).find('.productInput').attr('name', 'filter[product_id][]');
+                    $(this).addClass('checked');
+                    productArrayLabel = [];
+                }
+                if(sampleArray.length < 1 && productArray.length < 1){
+                    console.log('no filters');
+                    $('.application-search-btn').click();
+                    $('#application-search-results').addClass('hidden');
+                    $('#featuredApp').removeClass('hideFeatured');
+                    $('.application-result-title').removeClass('show');
+                    $('.no-results').fadeOut();
+                    $('.application-result-title').find('.header-value').text('Featured Applications:');
+                    //$('.application-search-btn').click();
+                    $('.application-result-title').removeClass('show');
+                    $('.showFeat').text('Hide Features');
+                }
+                else {
+                    $('.application-search-btn').click();
+                    $('.showFeat').text('Show Features');
+                }
+            }
+        });
+        var sampleArray = [];
+        var currentSamepleType = $('.sample-type').find('.value').text();
+        currentSamepleType = $.trim(currentSamepleType);
+        if(currentSamepleType != '' && currentSamepleType != '...'){
+            sampleArray = currentSamepleType.split(",");
+        }
+        var sampleItem = $('.sampleType').parent();
+        sampleItem.on('click', function(event){
+            $('.application-result').removeClass('hidden');
+            if($(this).hasClass('disable')){
+                console.log('has class disable');
+                var msg = document.createElement('div');
+                $(msg).addClass('message');
+                $(msg).text('Please wait for applications to load before adding new filter');
+                $('#application-search-results').prepend(msg);
+                return false;
+            }else{
+                console.log('does not have class disable');
+                event.preventDefault();
+                var checkbox = $(this).children();
+                var valueLabel = checkbox.attr('data-value');
+                var formData = checkbox.attr('value');
+                if($(this).hasClass('checked')){
+                    var removeItem = sampleArray.indexOf(valueLabel);
+                    if(removeItem != -1) {
+                        sampleArray.splice(removeItem, 1);
+                    }
+                    var samplesUsed = sampleArray.join(", ");
+                    if(samplesUsed.length < 1){
+                        $('.sample-type').removeClass('show');
+                        $('.sample-type').find('.value').removeClass('open');
+                    }
+                    $(this).find('.sampleInput').val('');
+                    $(this).find('.sampleInput').removeAttr('name');
+                    $('.sample-type').find('.value').text(samplesUsed);
+                    $(this).removeClass('checked');
+                }else {
+                    if($('.sample-type').hasClass('show') === false){
+                        $('.sample-type').addClass('show');
+                    }
+                    sampleArray.push(valueLabel);
+                    var samplesUsed = sampleArray.join(", ");
+                    $('.sample-type').find('.value').addClass('open').text(samplesUsed);
+                    $(this).find('.sampleInput').val(formData);
+                    $(this).find('.sampleInput').attr('name','filter[sampletype_id][]');
+                    $(this).addClass('checked');
+                }
+                if(sampleArray.length < 1 && productArray.length < 1){
+                    $('.application-search-btn').click();
+                    $('#application-search-results').addClass('hidden');
+                    $('#featuredApp').removeClass('hideFeatured');
+                    $('.application-result-title').removeClass('show');
+                    $('.no-results').fadeOut();
+                    $('.application-result-title').find('.header-value').text('Featured Applications:');
+                    //$('.application-search-btn').click();
+                    $('.showFeat').text('Hide Features');
+                }
+                else {
+                    $('.application-search-btn').click();
+                    $('.showFeat').text('Show Features');
+                }
+            }
+        });
+    });
+</script>

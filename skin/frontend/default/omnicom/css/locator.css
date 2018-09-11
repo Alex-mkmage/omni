@@ -1,0 +1,143 @@
+.col-main {max-height: none !important;}
+.col2-right-layout .col-main {max-height: none !important;}
+.col-main .storelocator {max-height: none !important; margin-top: 0;}
+.col-main .storelocator .page-title h1 {
+    font-size: 28px;
+    font-weight: 300;
+    font-family:'Open Sans', Arial, Helvetica, sans-serif;
+    line-height: 40px;
+    color: #717376;
+}
+.col-main .storelocator .cms-block {margin-bottom: 0; display: none;}
+.col-main .storelocator .map-container {margin-bottom: 10px;}
+.col-main .storelocator .map-wrapper {position: relative;width: auto;padding-top: 0px;display:none;}
+.col-main .storelocator .map-wrapper .filter {top:-90px;margin:10px 0;border: none;}
+.col-main .storelocator .field.country-input {display: block;float: none;margin-bottom: 10px}
+.col-main .storelocator .field.addres-input {display: none;}
+.col-main .storelocator .field.addres-input + .button {clear: both;}
+.col-main .storelocator .row {max-height: none;overflow: none;}
+.filter form {width: auto;}
+.filter .form-list {padding-bottom: 0;}
+.filter .form-list li {margin-bottom: 0;}
+.col-main .storelocator .map-container {margin-left: 0;margin-top: 0;}
+#storelocator-search button.button span span:before,
+#storelocator-search button.button span span:after {background: none;}
+.col-main .storelocator .search-result {width: auto;max-height: none;}
+.col-main .storelocator .result-header {
+    background-color: #444;
+    padding: 10px;
+    margin: 0 3% 20px 0;
+}
+.col-main .storelocator .result-header h3 {font-size: 20px;text-transform: uppercase; color: white;}
+.col-main .storelocator .search-result .row .item {
+    position: relative;
+    display:inline-block;
+    box-sizing: border-box;
+    width: 47%;
+    margin: 0 3% 0 0;
+    padding:0;
+    border-right: none;
+    border-left: none;
+    height: auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 40px;
+    overflow: visible;
+    background-color: #cecece;
+}
+.col-main .storelocator .back-to-top {
+    height: auto;
+}
+.col-main .storelocator .back-to-top a {
+    position: relative;
+    display: block;
+    color: white;
+    background-color: #007b33;
+    padding: 10px;
+}
+
+.col-main .storelocator .back-to-top:hover a:before {
+    color: white;
+}
+.col-main .storelocator .back-to-top:hover a:after {
+    color: white;
+}
+
+.col-main .storelocator .search-result .item .image {display: none;}
+.col-main .storelocator .item div {font-size: 12px;}
+.col-main .storelocator .row .item h4 {font-size: 16px;line-height: 20px;height: auto; padding: 10px; color: white; background-color: #013c75;}
+.col-main .storelocator .row .item h4 span {text-transform: uppercase;}
+.col-main .storelocator .store-address, .col-main .storelocator .phone {position: relative; padding: 0 0 0 20px;margin-bottom: 10px;}
+.col-main .storelocator .phone:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    background: url('https://www.omni-inc.com/skin/frontend/default/omnicom/images/omni2.png');
+    width: 21px;
+    min-height: 20px;
+    background-position-x: 21px;
+    background-position-y: 20px;
+}
+.col-main .storelocator .store-address:before {
+     content: '';
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    background: url('https://www.omni-inc.com/skin/frontend/default/omnicom/images/omni2.png');
+    width: 21px;
+    min-height: 20px;
+    background-position-x: 47px;
+    background-position-y: 20px;
+}
+.col-main .storelocator .phone a, .col-main .storelocator .store-address address {
+    color: #000;
+    padding-left: 15px;
+}
+.col-main .storelocator .extend-link {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: block;
+}
+.col-main .storelocator .extend-link a {display: inline-block;font-size: 12px;}
+.col-main .storelocator .extend-link a.website {float: left;margin-right: 0; margin-top: 10px; color: #000;}
+.col-main .storelocator .extend-link a.get-direction {float: right;}
+.col-main .storelocator .divider {display: none;}
+
+.col-main .storelocator .button span span {
+    padding: 0 12px 0 41px;
+    text-shadow: 0 1px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+@media only screen and (max-width: 1279px) {
+    .col-main .storelocator .map-container {margin-top: 0;}
+}
+@media only screen and (max-width: 978px) {
+    .main {width: 768px;}
+    .col-main .storelocator .page-title h1 {width: 725px;}
+    .col2-right-layout .col-main {float:left;width: 60%;margin-left: 3%;}
+    .col2-right-layout .sidebar {float:right;width: 30%;margin-right: 3%;}
+    .col-main .storelocator .row .item h4 {height: 45px;line-height: normal;}
+    .store-address {height: 80px;line-height: normal;}
+}
+@media only screen and (max-width: 767px) {
+    .main, .col-main .storelocator .page-title h1 {width: auto;padding: 0 3%;}
+    .col2-right-layout .col-main, .col2-right-layout .sidebar {width: auto;float: none;margin: 0 3%;}
+    .col-main .storelocator .page-title h1 {text-align: left;}
+    .col-main .storelocator {width: 100%;}
+    .col-main .storelocator .country-input,.col-main .storelocator .addres-input {width: auto;}
+    .col-main .storelocator .search-result {width: auto;}
+    .col-main .storelocator .search-result .item {margin:0 1%;width: 45%;}
+    
+}
+@media only screen and (max-width: 480px) {
+    .col-main .storelocator .field {float: none;margin-right: 0;width: 100%;}
+    .col-main .storelocator select#country, .col-main .storelocator input[type="text"] {width: 100%;}
+    .col-main .storelocator .search-result .item {display:block;width: 100%;margin: 0;}
+    .store-address {height: auto;}
+    .col-main .storelocator .search-result .item .divider {width: 100%;}
+}

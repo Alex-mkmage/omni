@@ -1,0 +1,158 @@
+<style>.product-gallery .thumbnails li{height: 78px;}.product-gallery .thumbnails a{height: 100%; box-sizing: border-box; display: -webkit-flex; display: flex; -webkit-align-items:center; align-items: center;}</style>
+<?php
+/**
+* One Pica
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to codemaster@onepica.com so we can send you a copy immediately.
+*
+* @category OnePica
+* @package OnePica_ArqSpin
+* @copyright Copyright (c) 2013 One Pica, Inc. (http://www.onepica.com)
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*/
+/**
+* One Pica ArqSpin
+*
+* @category OnePica
+* @package OnePica_ArqSpin
+* @author One Pica Codemaster codemaster@onepica.com
+*/
+?>
+<?php
+    $_product = $this->getProduct();
+	$arqspin = $_product->getArqspin();
+    $_helper = $this->helper('catalog/output');
+    $_nativeZoom = false;
+?>
+
+<?php if ($arqspin && $arqspin['config']['display_type'] == 'primary'): ?>
+	<div class="product-image open" style="position:relative;">
+		<iframe src="" data-src="<?php echo $arqspin['image']['spin_url']; ?>" width="370" height="370" scrolling="no" frameborder="0" id="arqspin-iframe"></iframe>
+		<div class="product-other-images">
+			<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+				<?php list($_imgWidth, $_imgHeight) = $this->helper('catalog/image')->init($_product, 'image')->getOriginalSizeArray(); ?>
+				<?php if ($_imgWidth > 380 || $_imgHeight > 380):?>
+					<div class="product-image-inner image-zoom" style="position:relative;" id="main-image">
+						<?php
+							$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(1020,500).'" height="370" width="370" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+							echo $_helper->productAttribute($_product, $_img, 'image');
+						?>
+					</div>
+				<?php else: ?>            <p class="product-image-inner" style="position:relative;">
+						<?php
+							$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(1020,500).'" height="370" width="370" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+							echo $_helper->productAttribute($_product, $_img, 'image');
+						?>
+					</p>
+				<?php endif; ?>
+			<?php endif; ?>
+		</div>
+	</div>
+<?php else: ?>
+	<?php if (!$_nativeZoom): ?>
+	<?php /* --------- jqZoom --------- */ ?>
+		<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+			<?php list($_imgWidth, $_imgHeight) = $this->helper('catalog/image')->init($_product, 'image')->getOriginalSizeArray(); ?>
+			<?php if ($_imgWidth > 380 || $_imgHeight > 380):?>
+				<div class="product-image image-zoom" style="position:relative;" id="main-image">
+					<?php
+						$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(1020,500).'" height="370" width="370" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+						echo $_helper->productAttribute($_product, $_img, 'image');
+					?>
+				</div>
+			<?php else: ?>            <p class="product-image" style="position:relative;">
+					<?php
+						$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(1020,500).'" height="370" width="370" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+						echo $_helper->productAttribute($_product, $_img, 'image');
+					?>
+				</p>
+			<?php endif; ?>
+
+		<?php else: ?>
+			<p class="product-image" style="position:relative;">
+				<?php
+					$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(1020,500).'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+					echo $_helper->productAttribute($_product, $_img, 'image');
+				?>
+			</p>
+		<?php endif; ?>
+	<?php else: ?>
+
+	<?php /* --------- native magento zoom --------- */ ?>
+
+		<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+			<p class="product-image product-image-zoom" style="position:relative;">
+				<?php
+					$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+					echo $_helper->productAttribute($_product, $_img, 'image');
+				?>
+			</p>
+			<p class="zoom-notice" id="track_hint"><?php echo $this->__('Double click on above image to view full picture') ?></p>
+			<div class="zoom">
+				<img id="zoom_out" src="<?php echo $this->getSkinUrl('images/slider_btn_zoom_out.gif') ?>" alt="<?php echo $this->__('Zoom Out') ?>" title="<?php echo $this->__('Zoom Out') ?>" class="btn-zoom-out" />
+				<div id="track">
+					<div id="handle"></div>
+				</div>
+				<img id="zoom_in" src="<?php echo $this->getSkinUrl('images/slider_btn_zoom_in.gif') ?>" alt="<?php echo $this->__('Zoom In') ?>" title="<?php echo $this->__('Zoom In') ?>" class="btn-zoom-in" />
+			</div>
+			<script type="text/javascript">
+			//<![CDATA[
+				Event.observe(window, 'load', function() {
+					product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+				});
+			//]]>
+			</script>
+		<?php else: ?>
+			<p class="product-image" style="position:relative;">
+				<?php
+					$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(275).'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+					echo $_helper->productAttribute($_product, $_img, 'image');
+				?>
+			</p>
+		<?php endif; ?>
+
+	<?php /* --------- /native magento zoom --------- */ ?>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if (count($this->getGalleryImages()) > 1): ?>
+<div class="more-views test">
+    <h2><?php echo $this->__('') ?></h2>
+    <ul class="thumbnails">
+    	<?php 
+    	$imageArray = $this->getGalleryImages()->toArray();
+    	$firstInset = $imageArray[0]; 
+    	if(isset($firstInset['video']) && isset($imageArray[1])){
+    		$firstInset = $imageArray[1];
+    	} elseif(isset($firstInset['video']) && !isset($imageArray[1])){
+    		$arqspin = null;
+    	}
+    	?>
+	<?php if ($arqspin && $arqspin['config']['display_type'] == 'primary'): ?>
+    	<li style="max-width:100px; margin:0 5px 10px; display:inline-block" class="inset-360">
+            <a href="javascript:void();" title="">
+            	<img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $firstInset['file'])->resize(1020,500); ?>" width="94" height="94" alt="<?php echo $this->htmlEscape($firstInset['label']) ?>" />
+            </a>
+        </li>
+    <?php endif; ?>
+    <?php $i = 0; foreach ($this->getGalleryImages() as $_image): ?>
+    	<li style="max-width:100px; margin:0 5px 10px; display:inline-block">
+            <a href="javascript:void();" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(1020,500); ?>" width="94" height="94" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+<?php if ($arqspin && $arqspin['config']['display_type'] == 'separate'): ?>
+	<div class="product-image">
+		<iframe src="<?php echo $arqspin['image']['spin_url']; ?>" width="370" height="370" scrolling="no" frameborder="0"></iframe>
+	</div>
+<?php endif; ?>

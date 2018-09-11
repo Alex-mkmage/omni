@@ -1,0 +1,44 @@
+<?php $quote = Mage::getSingleton('checkout/session')->getQuote(); ?>
+<?php $items = $quote->getAllItems(); ?>
+
+<?php if ($items && count($items) > 0): ?>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(document).on('click', '.button.btn-proceed-checkout.btn-checkout', function(){
+            dataLayer.push({
+                'event': 'checkout',
+                'ecommerce': {
+                    'checkout': {
+                        'actionField': {'step': 1},
+                        'products': [
+                            <?php foreach ($items as $item): ?>
+                            <?php
+                            $options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct());
+                            $orderOptions = array();
+                            if(isset($options['attributes_info'])){
+                                foreach ($options['attributes_info'] as $option){
+                                    $orderOptions[] = $option['value'];
+                                }
+                            }
+                            if(isset($options['options'])){
+                                foreach ($options['options'] as $option){
+                                    $orderOptions[] = $option['print_value'];
+                                }
+                            }
+                            ?>
+                            {
+                                'name': '<?php echo $item->getName() ?>',
+                                'id': '<?php echo $item->getName() ?>',
+                                'price': '<?php echo $item->getPrice() ?>',
+                                'variant': '<?php echo implode(', ', $orderOptions) ?>',
+                                'quantity': <?php echo $item->getQty() ?>
+                            },
+                            <?php endforeach; ?>
+                        ]
+                    }
+                }
+            });
+        });
+    });
+</script>
+<?php endif; ?>

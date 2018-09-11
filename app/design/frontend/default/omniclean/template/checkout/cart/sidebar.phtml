@@ -1,0 +1,27 @@
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+<div class="cart">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <a href="<?php echo $this->getUrl('checkout/cart'); ?>" class="cart-link">
+        <svg class="data-txt" version="1.1" id="cart" data-txt="Cart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 89.1 70.3" style="enable-background:new 0 0 89.1 70.3;" xml:space="preserve">
+		<path class="st1" d="M31.2,56.5c-3.8,0-6.9,3.1-6.9,6.9s3.1,6.9,6.9,6.9s6.9-3.1,6.9-6.9S35.1,56.5,31.2,56.5z"></path>
+		<path class="st1" d="M67.5,56.5c-3.8,0-6.9,3.1-6.9,6.9s3.1,6.9,6.9,6.9c3.8,0,6.9-3.1,6.9-6.9S71.3,56.5,67.5,56.5z"></path>
+		<polygon class="st1" points="17.4,0 0,0 0,6 12.3,6 21.6,60.4 76.5,60.4 76.5,54.4 26.7,54.4 25.6,48.1 79.1,48.1 89.1,12.5 19.5,12.5 "></polygon>
+		</svg>
+		<?php if ($_cartQty>0): ?>
+			<span class="qty"><?php echo $_cartQty; ?></span>
+		<?php else: ?>
+			<span class="qty">0</span>
+		<?php endif ?>		
+    </a>
+</div>
+<?php endif;?>
+
+<?php /* Set Current URL */
+
+ $currentUrl = $this->helper('core/url')->getCurrentUrl();
+ $currentUrl = (string)$currentUrl;
+
+ if (!strpos($currentUrl, "checkout/cart")) {
+    Mage::getSingleton('core/session')->setLastUrl($currentUrl);
+ }
+

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Icube_Checkout>
+            <version>1.0.0</version>
+        </Icube_Checkout>
+    </modules>
+    <global>
+        <helpers>
+            <icube>
+                <rewrite>
+                    <data>Icube_Checkout_Helper_Data</data>
+                </rewrite>
+            </icube>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <checkout>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Icube_Checkout before="Mage_Checkout">Icube_Checkout</Icube_Checkout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+</config>

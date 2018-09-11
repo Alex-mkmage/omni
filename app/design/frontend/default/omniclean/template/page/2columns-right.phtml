@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+	<container id="after-body-start">
+		<?php echo $this->getChildHtml('global_notices') ?>	
+		<?php echo $this->getChildHtml('after_body_start') ?>
+	</container>
+	<header id="header">
+		<?php echo $this->getChildHtml('header') ?>
+	</header>
+    <main id="main-content">    
+		<?php echo $this->getChildHtml('breadcrumbs') ?>
+		<?php echo $this->getChildHtml('page_title') ?>    
+        <div id="main" class="main-container container col2-right-layout">
+			<div class="col-main col-lg-9">
+				<?php echo $this->getChildHtml('global_messages') ?>
+				<?php echo $this->getChildHtml('content') ?>
+			</div>
+			<div class="col-right sidebar col-lg-3">
+				<?php echo $this->getChildHtml('right') ?>
+				<?php 
+					$class = (trim($this->getBodyClass()));
+					$body_classes = $this->getLayout()->getBlock("root")->getBodyClass();
+					$productManuals = (string)'cms-page-view cms-product-manuals';
+					$productBrochures = (string)'cms-page-view cms-product-brochures';
+					$corporate = (string)'cms-page-view cms-corporate';
+					$repair = (string)'cms-page-view cms-repair-installation-guides';
+					$applicationNotes = (string)'cms-page-view cms-application-notes-files';
+					$warranty = (string)'cms-page-view cms-warranty-registration';
+					$videosProduct = (string)'cms-page-view cms-video-bead-ruptor-12';
+					$videosInstructional = (string)'cms-page-view cms-how-to-videos';
+					$preFilledTubes = (string)'catalog-category-view categorypath-accessories-replacement-parts-accessories-bead-ruptor-24-accessories-pre-filled-bead-tubes-html category-pre-filled-bead-tubes';
+					$distributorLocator = (string)'-index-index';
+					if (stripos($body_classes, "cms-video-") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-videos-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "high-shear-lab") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "bead-mill-cell") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "ultrasonic-cell") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "multi-sample-lab") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "tissue-grinders") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "bead-mill-nucleic") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "omni-tipstm") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "categorypath-accessories-replacement-parts-html") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (stripos($body_classes, "cms-promotions") !== false) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					// if (stripos($body_classes, "cms-product-videos") !== false) {
+					//     echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-videos-sidebar')->toHtml();
+					// }
+					// if (stripos($body_classes, "cms-how-to-videos") !== false) {
+					//     echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-videos-sidebar')->toHtml();
+					// }
+					if (strcmp($class, $productManuals) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-manuals-sidebar')->toHtml();
+					}
+					if (strcmp($class, $preFilledTubes) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('pre-filled-tubes-sidebar')->toHtml();
+					}
+					if (strcmp($class, $productBrochures) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-brochures-sidebar')->toHtml();
+					}
+					if (strcmp($class, $warranty) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('warranty-registration-sidebar')->toHtml();
+					}
+					// if (strcmp($class, $videosProduct) == 0) {
+					//     echo $this->getLayout()->createBlock('cms/block')->setBlockId('product-videos-sidebar')->toHtml();
+					// }
+					if (strcmp($class, $videosInstructional) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('instructional-videos-sidebar')->toHtml();
+					}
+					if (strcmp($class, $distributorLocator) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('distributor-locator-sidebar')->toHtml();
+					}
+					if (strcmp($class, $corporate) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('corporate-sidebar')->toHtml();
+					}
+					if (strcmp($class, $repair) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('repair-sidebar')->toHtml();
+					}
+					if (strcmp($class, $applicationNotes) == 0) {
+						echo $this->getLayout()->createBlock('cms/block')->setBlockId('application-notes-sidebar')->toHtml();
+					}
+				?>
+			</div>
+        </div>
+    </main>
+	<footer id="footer">
+		<?php echo $this->getChildHtml('footer') ?>
+	</footer>
+	<container id="before-body-end">
+		<?php echo $this->getChildHtml('before_body_end') ?>
+		<?php echo $this->getAbsoluteFooter() ?>
+	</container>
+</body>
+</html>

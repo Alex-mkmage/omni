@@ -1,0 +1,79 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php if($this->getItems()->getSize()): ?>
+<div class="block block-related">
+    <div class="block-content">
+        <ul class="mini-products-list" id="block-related">
+        <?php foreach($this->getItems() as $_item): ?>
+        	<?php $_product = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+            <li class="item">
+				<div class="product">
+					<h2 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>" data-sku="<?php echo $_item->getSku() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h2>
+					<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(50) ?>" width="50" height="50" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+					<div class="txt">
+						<strong><label>SKU: </label></strong><?php echo nl2br($_product->getSku()) ?><br>
+						<div class="small-cart-wrapper">
+							<form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>"  method="post" id="product_addtocart_form_<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+								<div class="no-display">
+									<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+									<input type="hidden" name="related_product" id="related-products-field<?php echo $_product->getId(); ?>" value="" />
+								</div>
+								<div class="qty_related">
+									<span class="qty-label">Qty:</span>
+									 <input type="text" name="qty" id="qty<?php echo $_product->getId(); ?>" maxlength="12" value="1" title="<?php echo $this->__('Qty') ?>" class="text qty" />
+								</div>
+								<?php if($_product->_data['price']!=0): ?>
+									<div class="price_related">
+										<?php echo '<p class="p_label">Price: </p>'.$this->getPriceHtml($_item, true, '-related') ?>
+									</div>
+								<?php endif; ?>
+								
+								<div class="add-to-cart">
+									<?php if($_product->_data['price']!=0){ ?>
+										<button class="button btn-cart" title="Add to Cart" onclick="product_addtocart_form_<?php echo $_product->getId() ?>.submit(); ga('send', 'event', 'Add-to-cart', 'Product-added');" type="button"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+									 <?php } ?>
+									<?php if($_product->isSaleable()): ?>
+										<?php $url = $this->helper('qquoteadv/catalog_product_data')->getUrlAdd2Qquoteadv($_product); ?>
+										<?php $actionQuote = "setLocation('".$url."')"; ?>
+										<?php if($_product->getData('allowed_to_quotemode')==1){ ?>
+											<button type="button" title="<?php echo Mage::helper('qquoteadv')->__("Add to Quote");?>" class="button btn-cart btn-quote" onclick="<?php echo $actionQuote;?>"><span><span><?php echo Mage::helper('qquoteadv')->__("Add to Quote");?></span></span></button>
+										<?php }else{ ?>
+											<button type="button" title="<?php echo Mage::helper('qquoteadv')->__("Add to Quote");?>" class="button btn-cart btn-quote" onclick="<?php echo $actionQuote;?>"><span><span><?php echo Mage::helper('qquoteadv')->__("Add to Quote");?></span></span></button>
+										<?php } ?>
+									<?php endif; ?>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</li>
+        <?php endforeach ?>
+        </ul>
+    </div>
+</div>
+<?php endif ?>

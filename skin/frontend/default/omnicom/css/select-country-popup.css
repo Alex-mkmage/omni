@@ -1,0 +1,490 @@
+
+/* --- header link --- */
+.expand ul {
+	height: 100% !important;
+	-webkit-transition: all 300ms;
+	-moz-transition: all 300ms;
+	-ms-transition: all 300ms;
+	 -o-transition: all 300ms;
+	    transition: all 300ms;
+}
+
+#header .changeLocation-wrapper #changeLocation {
+	background-color: #444;
+    color: #fff;
+    padding: 5px;
+    text-transform: uppercase;
+    display: block;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 14px;
+}
+.changeLocation-wrapper {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: block;
+}
+/* --- Loading --- */
+
+.loading {
+	display: none;
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+}
+.loading:before {
+	position: absolute;
+	content: '';
+	background-image: url('../images/omni-logo-spin.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 1;
+	width: 100px;
+	height: 100px;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.loading:after {
+	position: absolute;
+	content: 'Loading Content With Your Distributor Information';
+	z-index: 1;
+	width: 300px;
+	color: white;
+	height: auto;
+	top: 58%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* --- wrapper --- */
+
+.select-country-popup-wrapper .fancybox-skin {
+	background-image: url('../images/world-map-bg.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: #444;
+	color: #fff;
+	padding: 30px 40px !important;
+}
+
+/* --- popup close btn --- */
+
+.select-country-popup-close {
+	background: #f2aa00;
+	color: #454545;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	position: absolute;
+	top: 5px;
+	right: 2px;
+	font-weight: bold;
+}
+
+.select-country-popup-close:hover {
+	background-color: #C48A03;
+	text-decoration: none !important;
+}
+
+.select-country-popup-close:before {
+	content: 'x';
+	text-transform: lowercase;
+	margin-right: 6px;
+	font-size: 14px;
+}
+
+/* --- typography --- */
+
+.select-country-popup-wrapper h3,
+.select-country-popup-wrapper .continent {
+	color: #66cbff;
+	font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.select-country-popup-wrapper .continent {
+	cursor: default;
+}
+
+.select-country-popup-wrapper a {
+	cursor: pointer;
+}
+.select-country-popup-wrapper .content > h3 {
+	font-size: 22px;
+	color: white;
+}
+/* --- title --- */
+
+.select-country-popup-wrapper h3 {
+	margin-bottom: 20px;
+}
+
+/* --- navigation btns --- */
+
+.select-country-popup-wrapper .nav-wrapper {
+	width: 100%;
+	content: '';
+	clear: both;
+	display: table;
+	overflow: hidden;
+}
+
+.select-country-popup-wrapper .nav {
+    background-color: #f2a900;
+    border: none;
+    height: 16px;
+    color: transparent;
+    cursor: pointer;
+    position: relative;
+    margin: 25px 16px 16px 16px;
+    width: 30px;
+}
+
+.select-country-popup-wrapper .nav:hover {
+	background-color: #C48A03;
+}
+
+.select-country-popup-wrapper .btn-next {
+	float: right;
+}
+
+.select-country-popup-wrapper .btn-prev {
+	float: left;
+}
+
+.select-country-popup-wrapper .btn-next:after {
+	content: '';
+    border-top: transparent 16px solid;
+    border-bottom: transparent 16px solid;
+    border-left: #f2a900 16px solid;
+    position: absolute;
+    right: -16px;
+    top: -8px;
+}
+
+.select-country-popup-wrapper .btn-next:hover:after {
+    border-left-color: #C48A03;
+}
+
+.select-country-popup-wrapper .btn-prev:before {
+	content: '';
+    border-top: transparent 16px solid;
+    border-bottom: transparent 16px solid;
+    border-right: #f2a900 16px solid;
+    position: absolute;
+    left: -16px;
+    top: -8px;
+}
+
+.select-country-popup-wrapper .btn-prev:hover:before {
+    border-right-color: #C48A03;
+}
+
+/* --- Country Section --- */
+
+.select-country-popup-wrapper .country {
+	margin-bottom: 15px;
+}
+.select-country-popup-wrapper .col ul {
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+.select-country-popup-wrapper .country a {
+	color: #fff;
+	line-height: 24px;
+}
+.select-country-popup-wrapper .country ul li {
+	position: relative;
+	padding-left: 15px;
+}
+.select-country-popup-wrapper .country ul li:before {
+		position: absolute;
+		content: '\f0da';
+		top: 50%;
+		left: 5px;
+		font-family: fontAwesome;
+		font-size: 16px;
+		color: white;
+		-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
+	}
+.select-country-popup-wrapper .country a.selected {
+	color: #66cbff;
+}
+
+.select-country-popup-wrapper #countrySection:after {
+	content: '';
+	clear: both;
+	display: table;
+	overflow: hidden;
+}
+
+.select-country-popup-wrapper #ddSelectCountry {
+    font-weight: 400;
+    height: 30px;
+    width: 100%;
+}
+
+.select-country-popup-wrapper #ddSelectCountry.selected {
+	border: 2px solid #66cbff;
+}
+
+/* columns */
+
+.select-country-popup-wrapper .col-1 {
+	width: 50%;
+	float: left;
+}
+
+.select-country-popup-wrapper .col-1:after {
+	content: '';
+	clear: both;
+	display: table;
+	overflow: hidden;
+}
+
+.select-country-popup-wrapper .col-1 .left {
+	float: left;
+	width: 50%;
+}
+
+.select-country-popup-wrapper .col-1 .right {
+	float: right;
+	width: 50%;
+}
+
+.select-country-popup-wrapper .col-2,
+.select-country-popup-wrapper .col-3 {
+	width: 25%;
+	float: left;
+}
+
+/* remember me */
+
+.select-country-popup-wrapper .remember-me-wrapper {
+	background-color: #707070;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.select-country-popup-wrapper .remember-me-wrapper #rememberMe {
+	margin-right: 10px;
+}
+
+/* --- distributor Section --- */
+
+.select-country-popup-wrapper #distributorSection h3 {
+	font-size: 28px;
+}
+
+.select-country-popup-wrapper #distributorSection .sub-title {
+	color: #66cbff;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 0 0 15px 0;
+	min-height: 0;
+	padding-bottom: 0;
+}
+
+.select-country-popup-wrapper #distributorSection .distributor-name {
+    color: #fff;
+    font-weight: bold;
+}
+
+.select-country-popup-wrapper #distributorSection .phone {
+	color: #66cbff;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.select-country-popup-wrapper #distributorSection .website-link {
+	color: #b3abaa;
+	font-weight: bold;
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.select-country-popup-wrapper #distributorList {
+	content: '';
+	clear: both;
+	overflow: hidden;
+}
+
+.select-country-popup-wrapper #distributorList li {
+	position: relative;
+	width: 49%;
+	float: left;
+	padding: 10px;
+	-webkit-transition: padding 0.5s ease;
+	-moz-transition: padding 0.5s ease;
+	transition: padding 0.5s ease;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.select-country-popup-wrapper #distributorList li a.distributor-name:before {
+	position: absolute;
+	content: '\f054';
+	top: 50%;
+	left: 5px;
+	font-family: fontAwesome;
+	font-size: 20px;
+	z-index: 1;
+	color: #444;
+	-webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.select-country-popup-wrapper #distributorList li a.distributor-name {
+	position: relative;
+	background-color: #66cbff;
+	color: #444;
+	padding: 5px 10px 5px 25px;
+	display: block;
+	margin-bottom: 10px;
+	text-decoration: none;
+}
+.select-country-popup-wrapper #distributorList li:hover,
+.select-country-popup-wrapper #distributorList li.selected {
+	background: rgba(0,0,0,0.2);
+}
+
+.select-country-popup-wrapper #distributorList li:nth-child(2n) {
+	float: right;
+}
+
+/* --- Responsive --- */
+
+@media only screen and (max-width: 767px) {
+
+	.select-country-popup-wrapper .col-1,
+	.select-country-popup-wrapper .col-2,
+	.select-country-popup-wrapper .col-3 {
+		width: 50%
+	}
+
+	.select-country-popup-wrapper .col-1 .left,
+	.select-country-popup-wrapper .col-1 .right {
+		float: none;
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 667px) {
+	
+	#header .changeLocation-wrapper #changeLocation {
+		display: inline-block;
+	    top: 0;
+	    margin: 0;
+	    right: 0;
+	    padding: 10px;
+	}
+	#header .changeLocation-wrapper:after {
+		content: '';
+		overflow: hidden;;
+		clear: both;
+		display: table;
+	}
+	.select-country-popup-wrapper .col-1,
+	.select-country-popup-wrapper .col-2,
+	.select-country-popup-wrapper .col-3 {
+		width: 100%
+	}
+	.select-country-popup-wrapper #distributorList li {
+		width: 100%;
+		float: none !important;
+	}
+	.select-country-popup-wrapper .continent {
+		position: relative;
+		color: #66cbff;
+		font-weight: bold;
+
+	    text-transform: uppercase;
+		padding: 10px 5px 10px 20px;
+		background-color: rgba(0,0,0,0.4);
+	}
+	.select-country-popup-wrapper .continent:before {
+		position: absolute;
+		content: '\f0da';
+		top: 50%;
+		left: 5px;
+		font-family: fontAwesome;
+		font-size: 14px;
+		color: white;
+		-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
+	}
+	.select-country-popup-wrapper .country.expand .continent:before {
+		content: '\f0d7';
+		color: #66cbff;
+	}
+	.select-country-popup-wrapper #ddSelectCountry {
+	    margin-top: 10px;
+	}
+	.select-country-popup-wrapper .continent {
+		cursor: pointer;
+	}
+	.select-country-popup-wrapper h3 {
+		color: white;
+	}
+	.select-country-popup-wrapper .continent:before {
+		position: absolute;
+		content: '\f0da';
+		top: 50%;
+		left: 5px;
+		font-family: fontAwesome;
+		font-size: 16px;
+		color: white;
+	}
+	.select-country-popup-wrapper .country ul li {
+		position: relative;
+		padding-left: 15px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		width: 33%;
+		display: inline-block;
+		box-sizing: border-box;
+		float: left;
+	}
+	#header .changeLocation-wrapper {
+		margin-right: 0;
+	}
+	.select-country-popup-wrapper .remember-me-wrapper {
+		margin-top: 0;
+	}
+	.loading:after {
+		top: 65%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+	    -ms-transform: translate(-50%, -50%);
+	    transform: translate(-50%, -50%);
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#header .changeLocation-wrapper #changeLocation {
+	    padding: 10px;
+	}
+	#header .changeLocation-wrapper {
+		right: 0;
+		top: -34px;
+	}
+	.select-country-popup-wrapper .country ul li {
+		width: 100%;
+		float: none;
+	}
+}

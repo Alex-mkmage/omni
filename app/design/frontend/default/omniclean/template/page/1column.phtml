@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+<head>
+	<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+	<container id="after-body-start">
+		<?php echo $this->getChildHtml('global_notices') ?>	
+		<?php echo $this->getChildHtml('after_body_start') ?>
+	</container>	
+	<header id="header">
+		<?php echo $this->getChildHtml('header') ?>
+	</header>
+	<main id="main-content">
+		<?php
+			$currenturl = $this->helper('core/url')->getCurrentUrl();
+			$currentcategory = Mage::registry('current_category');
+			$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+			$currentproduct = Mage::registry('current_product');
+		?>
+		<div id="main" class="main-container col1-layout">
+			<?php echo $this->getChildHtml('breadcrumbs') ?>
+			<?php echo $this->getChildHtml('page_title') ?>
+			<?php if($identifier != 'home' && empty($currentcategory) && empty($currentproduct) && strpos($currenturl,'catalogsearch/advanced/result') == false): ?>
+			<div class="col-main">
+			<?php endif; ?>
+			<?php echo $this->getChildHtml('global_messages') ?>
+			<?php echo $this->getChildHtml('content') ?>
+			<?php if($identifier != 'home' && empty($currentcategory) && empty($currentproduct) && strpos($currenturl,'catalogsearch/advanced/result') == false): ?>
+			</div>
+			<?php endif; ?>
+		</div>
+	</main>
+	<footer id="footer">
+		<?php echo $this->getChildHtml('footer') ?>
+	</footer>
+	<container id="before-body-end">
+		<?php echo $this->getChildHtml('before_body_end') ?>
+		<?php echo $this->getAbsoluteFooter() ?>
+	</container>
+</body>
+</html>

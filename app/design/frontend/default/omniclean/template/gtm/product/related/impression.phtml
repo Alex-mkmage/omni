@@ -1,0 +1,43 @@
+<?php /** @var $this Ey_GTM_Block_Product_List_Related_Impression */ ?>
+<?php $products = $this->getLoadedProductCollection() ?>
+<?php if($products && $products->getSize()): $position = 1; ?>
+    <script type="text/javascript">
+
+        var dataLayerFlag = false;
+        for(var i = 0 ; i < dataLayer.length ; i++){
+            if(dataLayer[i].ecommerce){
+                dataLayer[i].ecommerce.currencyCode = 'USD';
+                dataLayer[i].ecommerce.impressions = [
+                    <?php foreach ($products as $product): /** @var Mage_Catalog_Model_Product $product */ ?>
+                    {
+                        'name': '<?php echo $product->getName() ?>',
+                        'id': '<?php echo $product->getSku() ?>',
+                        'list': '<?php echo $this->getListType() ? $this->getListType():'Accessories'; ?>',
+                        'position': <?php echo $position++; ?>
+                    },
+                    <?php endforeach; ?>
+                ];
+                dataLayerFlag = true;
+                break;
+            }
+        }
+        console.log('testing: ',dataLayer.length);
+        if(dataLayerFlag === false){
+            dataLayer.push({
+                'ecommerce': {
+                    'currencyCode': 'USD',
+                    'impressions': [
+                        <?php foreach ($products as $product): /** @var Mage_Catalog_Model_Product $product */ ?>
+                        {
+                            'name': '<?php echo $product->getName() ?>',
+                            'id': '<?php echo $product->getSku() ?>',
+                            'list': '<?php echo $this->getListType() ? $this->getListType():'Accessories'; ?>',
+                            'position': <?php echo $position++; ?>
+                        },
+                        <?php endforeach; ?>
+                    ]
+                }
+            });
+        }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Icube_Contacts>
+            <version>1.6.0.0</version>
+        </Icube_Contacts>
+    </modules>
+    <global>
+        <helpers>
+            <icube>
+                <rewrite>
+                    <data>Icube_Contacts_Helper_Data</data>
+                </rewrite>
+            </icube>
+        </helpers>
+<!--         <rewrite>
+            <icube_contact_contacts_index>
+                <from><![CDATA[#^/contacts/index/#]]></from>
+                <to>/contact/contacts_index/</to>
+            </icube_contact_contacts_index>
+        </rewrite>         -->
+        <template>
+            <email>
+               <custom_template>
+                   <label>Contact Submission Notification</label>
+                   <file>contact_submission_notification.html</file>
+                   <type>html</type>
+               </custom_template>
+            </email>
+        </template>
+        <template>
+            <email>
+               <contacts_sender_notification_email_template translate="label" module="icube">
+                   <label>Contact Sender Notification</label>
+                   <file>contact_sender_notification.html</file>
+                   <type>html</type>
+               </contacts_sender_notification_email_template>
+            </email>
+        </template>    
+    </global>
+     <default>
+        <contacts>
+            <sender_notification>
+                <email_template>contacts_sender_notification_email_template</email_template>
+            </sender_notification>
+        </contacts>
+    </default>
+<!--     <default>
+        <contacts>
+            <sender_notification>
+                <email_template>contact_submission_notification</email_template>
+            </sender_notification>
+        </contacts>
+    </default> -->
+    <frontend>
+        <routers>
+            <contacts>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Icube_Contacts before="Mage_Contacts">Icube_Contacts</Icube_Contacts>
+                    </modules>
+                </args>
+            </contacts>
+        </routers>
+    </frontend>
+</config>

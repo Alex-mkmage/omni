@@ -1,0 +1,105 @@
+<?php $prefix = Mage::getConfig()->getTablePrefix(); ?>
+<?php $bannerenable = $this->isBannerEnable() ?>
+<?php $showdesc = $this->getShowDescription() ?>
+<?php $showsimple = $this->isShowSimple() ?>
+<?php $listStyle = $this->getListStyle() ?>
+<?php $delaytime = $this->getDelayTime() ?>
+<?php $pausetime = $this->getPauseTime() ?>
+<?php $captionopacity = $this->getCaptionOpacity() ?>
+<?php $slices = $this->getSlicesCount()?>
+<?php $boxes = $this->getBoxesCount() ?>
+<?php $pause = $this->getHoverPause() ?>
+<?php $navigationstyle = $this->getNavigationType() ?>
+<?php $captioneffect = $this->getCaptionEffect() ?>
+<?php $imageheight = $this->getImageHeight() ?>
+<?php $imagewidth = $this->getImageWidth() ?>
+
+<?php $connection = Mage::getSingleton('core/resource')->getConnection('core_write'); ?>
+<?php if($bannerenable=='1') { ?>
+<div id="pti-slider">
+
+<style type="text/css">
+#myslider 
+{
+    width:<?php echo $imagewidth; ?>px;height:<?php echo $imageheight; ?>px;/* Make it the same size as your images */
+	background:transparent url(../images/loading.gif) no-repeat 50% 50%;
+	position:relative;
+	margin:0 auto;/*this makes the image slider center-aligned. Remove this line if you want to align the whole slider to the left side*/
+}
+</style> 
+	
+<script type="text/javascript">
+	var sliderOptions=
+{
+	sliderId: "myslider",
+	effect: "<?php echo $listStyle; ?>",
+	pauseTime: <?php echo $pausetime; ?>,
+	transitionTime: <?php echo $delaytime; ?>,
+	captionOpacity: <?php echo $captionopacity; ?>,
+	slices: <?php echo $slices; ?>,
+	boxes: <?php echo $boxes; ?>,
+	hoverPause: <?php echo $pause; ?>,
+	captionEffect: "<?php echo $captioneffect; ?>",
+	effectRandom: true,
+	autoAdvance: true,
+	thumbnailsWrapperId: "thumbs",
+	m: true,
+};
+	
+	</script>
+<script src="<?php echo $this->getSkinUrl('multislider') ?>/multislider.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('multislider') ?>/multislider.css" media="screen"/>
+  
+  <?php 
+				if($prefix=='')
+				{
+				$tablename="multislider";
+				} else {
+				$tablename=$prefix."multislider";
+				}
+				
+			$result = $connection->query("select * from $tablename");
+			$i=1; ?>
+  <div id="sliderFrame">
+    <div id="myslider">
+      <?php while ($row = $result->fetch()) { ?>
+      <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>multislider/<?php echo $row['filename']; ?>" alt="#htmlcaption<?php echo $i ?>" />
+      <?php $i++; } ?>
+    </div>
+	<?php if($navigationstyle =='1') { ?>
+    <div class="group1-Wrapper">
+		 <a onClick="imageSlider.previous()" class="group1-Prev"></a>
+		 <a onClick="imageSlider.next()" class="group1-Next"></a>
+	 </div>
+	 <?php } elseif($navigationstyle =='2') { ?>
+	 
+    <div id="thumbs">
+		 <a onClick="imageSlider.previous()" class="group2-Prev"></a> 
+		 <a id='auto' onClick="switchAutoAdvance()"></a>
+		 <a onClick="imageSlider.next()" class="group2-Next" style="margin-right:30px;"></a> 
+	</div>
+	<?php } elseif($navigationstyle =='3') { ?>
+	 
+	
+	
+	<?php } ?>
+	
+	
+   <?php if($showsimple =='0') { ?>
+	<?php $answer = $connection->query("select * from $tablename"); ?>
+    <?php $p=1; while($row123 = $answer->fetch()) { ?>
+    <div id="htmlcaption<?php echo $p; ?>" style="display: none;">
+      <?php if($showdesc=='1') { ?>
+      <div style="width:190px;height:280px;display:inline-block;background:white no-repeat 0 0;border-radius:4px;"><?php echo $row123['content']; ?></div>
+      <?php } else { ?>
+      <div style="width:190px;height:280px;display:inline-block;background:white url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>multislider/<?php echo $row123['thumbnail']; ?>) no-repeat 0 0;border-radius:4px;"></div>
+      <?php } ?>
+    </div>
+    <?php $p++; } ?>
+	
+	<?php } ?>
+	 
+  </div>
+ 
+</div>
+<?php } ?>

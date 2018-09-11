@@ -1,0 +1,8 @@
+a:4:{i:0;s:50:"Module "Ey_GTM" requires module "Ey_Applications".";i:1;s:870:"#0 /chroot/home/omniinc1/omni3.mkmage.com/html/app/code/core/Mage/Core/Model/Config.php(848): Mage::throwException('Module "Ey_GTM"...')
+#1 /chroot/home/omniinc1/omni3.mkmage.com/html/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#2 /chroot/home/omniinc1/omni3.mkmage.com/html/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#3 /chroot/home/omniinc1/omni3.mkmage.com/html/app/code/core/Mage/Core/Model/App.php(414): Mage_Core_Model_Config->loadModules()
+#4 /chroot/home/omniinc1/omni3.mkmage.com/html/app/code/core/Mage/Core/Model/App.php(343): Mage_Core_Model_App->_initModules()
+#5 /chroot/home/omniinc1/omni3.mkmage.com/html/app/Mage.php(683): Mage_Core_Model_App->run(Array)
+#6 /chroot/home/omniinc1/omni3.mkmage.com/html/index.php(83): Mage::run('', 'store')
+#7 {main}";s:3:"url";s:25:"/application/application/";s:11:"script_name";s:10:"/index.php";}

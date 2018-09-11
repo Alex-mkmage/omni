@@ -1,0 +1,77 @@
+<?php
+$_helper    = $this->helper('catalog/output');
+$_category  = $this->getCurrentCategory();
+$_imgHtml   = '';
+if ($_imgUrl = $_category->getImageUrl()) {
+    $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
+    $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+}
+?>
+
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+
+
+<div class="container main">
+    <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+        <div class="category-description std">
+            <?php if($_imgUrl): ?>
+                <?php echo $_imgHtml; ?>
+            <?php endif; ?>
+            <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if($this->isContentMode()): ?>
+        <?php echo $this->getCmsBlockHtml() ?>
+
+    <?php elseif($this->isMixedMode()): ?>
+        <?php echo $this->getCmsBlockHtml() ?>
+        <?php echo $this->getProductListHtml() ?>
+
+    <?php else: ?>
+        <?php
+
+        $more_products = $this->getProductListHtml();
+
+        if(stripos($more_products, 'There are no products matching the selection.') !== false){
+
+            $category = $_category->getChildrenCategories();
+
+            if(count($category) > 0){
+                echo '<div class="container main">';
+                echo '<div class="col-main">';
+                echo '<h2 class="product-list-title">Product Lines</h2>';
+                echo '<ul class="product-list list-view">';
+                foreach($category as $subcategory){
+                    $img = Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($subcategory->getId())->getThumbnail();
+                    echo '<li><a href="'.$subcategory->getURL() .'" title="'.$subcategory->getName() .'" class="img"><img src="'.$img .'" width="137" height="137" alt="'.$subcategory->getName() .'" /></a><div class="txt"><h2 class="product-name"><a href="'.$subcategory->getURL() .'" title="'.$subcategory->getName() .'">'.$subcategory->getName() .'</a></h2>';
+                    echo '<p>'.$subcategory->getDescription().'</p>';
+                    echo '</div></li>';
+
+                }
+                echo '</ul>';
+                echo '</div></div>';
+            }else{
+                echo $more_products;
+            }
+        }else{
+            echo $more_products;
+        }
+        ?>
+
+    <?php endif; ?>
+    <?php echo $this->getChildHtml('product.featured') ?>
+</div>
+<script type="text/javascript">
+    $j(document).ready(function(){
+        function equalHeights(){
+            $j('.product-list').find('li').equalHeightColumns();
+        }; equalHeights();
+    });
+
+</script>
+    
+
+

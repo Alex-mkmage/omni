@@ -1,0 +1,30 @@
+<?php /** @var $this Ey_GTM_Block_Product_View_Details */ ?>
+
+<?php $product = $this->getProduct(); ?>
+
+<script type="text/javascript">
+    var dataLayerFlag = false,
+        productDetails = {
+            'actionField': {'list': '<?php echo $this->getCategoryName() ?>'},
+            'products': [{
+                'name': '<?php echo $product->getName() ?>',
+                'id': '<?php echo $product->getSku() ?>',
+                'price': '<?php echo $product->getFinalPrice() ?>',
+                'category': '<?php echo $this->getCategoryName() ?>'
+            }]
+        };
+    for(var i = 0 ; i < dataLayer.length ; i++){
+        if(dataLayer[i].ecommerce){
+            dataLayer[i].ecommerce.detail = productDetails;
+            dataLayerFlag = true;
+            break;
+        }
+    }
+    if(dataLayerFlag === false){
+        dataLayer.push({
+            'ecommerce': {
+                'detail': productDetails
+            }
+        });
+    }
+</script>

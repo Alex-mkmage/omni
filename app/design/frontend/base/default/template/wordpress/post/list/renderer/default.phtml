@@ -1,0 +1,16 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+<div class="post-list-item">
+    <div class="left"><?php echo date('m/d/Y', strtotime($post->getPostDateGmt())); ?></div>
+    <div class="right">
+        <h2 class="post-title"><a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
+	<?php echo $this->getBeforePostContentHtml() ?>
+	</div>
+</div>

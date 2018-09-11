@@ -1,0 +1,19 @@
+.col-main {padding-top: 20px;}
+.col2-left-layout .col-left {margin-top: 20px !important;}
+.col2-left-layout .col-main .col-main {padding-top: 20px;}
+@media only screen and (max-width: 978px) {
+    .main {width: 720px;}
+    .col2-left-layout .main > .col-main {float: right;width: 65%;}
+    .col2-left-layout .main > .col-left {float: left !important; }
+}
+@media only screen and (max-width: 767px) {
+    .main {width: auto;}
+    .col2-left-layout .main > .col-main {float: none;width: auto;margin: 0 3%;}
+    .col2-left-layout .main > .col-left {float: none !important;width: auto !important;margin: 0 3% !important;}
+    .col-main {padding-top: 110px;}
+    .post-list-item .left {width: 30%;}
+    .post-list-item .right {width: 70%;}
+}
+@media only screen and (max-width: 480px) {
+    
+}

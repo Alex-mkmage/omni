@@ -1,0 +1,26 @@
+<?php if($this->getItems()->getSize()): ?>
+<div id="accessories" class="main-tab container">
+		<div class="sub-title">
+				<h1><?php echo $this->__('Accessories for the Bead Ruptor 24'); ?></h1>
+		</div>
+    <ul class="accessories-list">
+    <?php foreach($this->getItems() as $_item): $_product = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+				<li>
+						<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="img"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(76,76) ?>" width="76" height="76" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+						<?php if($_product->isSaleable()): ?>
+								<p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button red" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+						<?php else: ?>
+								<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+						<?php endif; ?>
+						<div class="txt">
+								<h2 class="product-title"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h2>
+								<?php $shortdescription = $_product->getShortDescription(); if(!empty($shortdescription)): ?>
+										<?php echo $shortdescription; ?>
+								<?php endif; ?>
+						</div>
+				</li>
+    <?php endforeach ?>
+    </ul>
+    <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+</div>
+<?php endif ?>

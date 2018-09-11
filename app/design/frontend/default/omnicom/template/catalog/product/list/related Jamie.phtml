@@ -1,0 +1,47 @@
+<?php if($this->getItems()->getSize()): ?>
+<div  class="main-tab container">
+   
+    <ul class="product-list list-view">
+      
+    <?php $counter = 0; foreach($this->getItems() as $_item): ++$counter; $_product = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+        <li class="item">
+            <div class="product">
+                <?php if($_product->isSaleable()): ?>
+                        <div class="small-cart-wrapper">
+                            <form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>"  method="post" id="product_addtocart_form_<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                                <div class="no-display">
+                                    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                                    <input type="hidden" name="related_product" id="related-products-field<?php echo $_product->getId(); ?>" value="" />
+                                </div>
+                                <input type="submit" class="no-display" value="Sub"/>
+                                <div class="add-to-cart">
+                                    <input type="text" name="qty" id="qty<?php echo $_product->getId(); ?>" maxlength="12" value="1" title="<?php echo $this->__('Qty') ?>" class="text qty" />
+                                    <button class="button btn-cart" title="Plaats in winkelwagen" onclick="product_addtocart_form_<?php echo $_product->getId() ?>.submit()" type="button"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                </div>
+                            </form>
+                        </div>
+                    <?php endif; ?>
+                <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="img">
+                    <img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(71,71) ?>" width="71" height="71" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" />
+                </a>
+               <div class="txt">
+                  <h2 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h2>
+            
+            <!-- Product Description-->
+            <?php $sdesc = $_product->getShortDescription();
+$sdesc = trim($sdesc);
+$limit = 150;
+if (strlen($sdesc) > $limit) {
+$sdesc = substr($sdesc, 0, strrpos(substr($sdesc, 0, $limit), ' '));
+} ?>
+<?php echo $sdesc."..."; ?>
+            <!--End Product description-->
+                    </div>
+                </div>
+        </li>
+    <?php if($counter == 3){ break; } endforeach ?>
+        
+    </ul>
+    <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+</div>
+<?php endif ?>

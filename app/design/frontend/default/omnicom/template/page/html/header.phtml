@@ -1,0 +1,53 @@
+<header id="header">
+  <div class="cell"></div>
+  <div class="cell bgn">
+    <div class="container">
+        <div class="logo-holder">
+          <h2 class="logo"><a href="<?php echo $this->getUrl('') ?>"><?php echo $this->getLogoAlt() ?></a></h2>
+        </div>
+        <div class="top-bar">
+            <div class="top-bar-top">
+                
+                <?php echo $this->getChildHtml('cart_sidebar') ?>
+                <?php echo $this->getChildHtml('quote_link') ?>
+
+                <?php if($this->helper('customer')->isLoggedIn() ): ?>
+                    <ul class="links">
+                        <li><span class="welcome-msg"></span></li>
+                        <li><span><?php echo $this->__('Welcome ')?></span><a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo Mage::getSingleton('customer/session')->getCustomer()->getFirstname(); ?></a></li>
+                        <!--<li><a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo $this->__('My Account'); ?></a></li>-->
+                        <li><span><?php echo $this->__("/")?></span></li>
+                        <li><a href="<?php echo $this->getUrl('customer/account/logout'); ?>"><?php echo $this->__('Logout'); ?></a></li>
+                        <li style="display: none;">
+                            <p class="custName"><?php echo Mage::getSingleton('customer/session')->getCustomer()->getName(); ?></p>
+                            <p class="custCart"><?php echo $this->helper('checkout/cart')->getQuote()->getGrandTotal(); ?></p> 
+                            <p class="custCartQty"><?php echo $this->helper('checkout/cart')->getSummaryCount(); ?></p>
+                            <p class="custEmail"><?php echo Mage::getSingleton('customer/session')->getCustomer()->getEmail(); ?></p>
+                            <p class="custType">Logged In</p>
+                            <p class="custID"><?php echo Mage::getSingleton('customer/session')->getCustomerId(); ?></p>
+                        </li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="links">
+                        <li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('Login'); ?></a></li>
+                        <li><span><?php echo $this->__("/")?></span></li>
+                       <!--Added Register--> 
+                       <li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('Register'); ?></a></li> 
+                       <!--End Register-->  
+                        
+                    </ul>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('topSearch') ?>
+                <a href="<?php echo $this->getUrl('newsletter'); ?>" class="link-newsletterheader"><i class="fa fa-envelope"></i><?php echo $this->__("Sign Up for Our Newsletter")?></a>
+                <div class="clear"></div>
+            </div>
+            <?php echo $this->getChildHtml('header-chat') ?>
+          <?php echo $this->getChildHtml('distributor_location'); ?>
+          <div id="LP-video-slider"></div>
+         
+        </div>
+    </div>
+  </div>
+  <div class="cell"></div>
+</header>
+<?php echo $this->getChildHtml('header-menu') ?>

@@ -1,0 +1,167 @@
+<div class="qquote-client-collaterals">
+
+    <div class="client-data col-md-6">
+        <h4><?php echo $this->__('Remarks') ?></h4>
+        <p>Do you have a general remark with this Quote Request?</p>
+        <textarea name="customer[client_request]" id="customer:client_request" cols="10" rows="5" style="width:95%;" class="input-text"></textarea>
+        <?php
+            $billingEmail           = $this->getValue('email', 'billing');
+            $requireShipping        = (Mage::getStoreConfig('qquoteadv/quote_form/require_shipping'))? true : false;
+            $requireBilling         = (Mage::getStoreConfig('qquoteadv/quote_form/require_billing'))? true : false;
+            $requireExtraOptions    = (Mage::getStoreConfig('qquoteadv/quote_form/require_delivery_options'))? true : false;       
+            $customer               = $this->getCustomerSession()->getCustomer();        
+        ?>
+    </div>
+
+    <div class="distribution-list col-md-6">
+
+        <div id="billDiv" >
+
+            <h4><?php echo $this->__("Current selected distributer:") ?></h4>
+
+            <div id="qquote-tbl-billing">
+            
+                <?php
+                $selectedDisributer = Mage::getModel('core/session')->getData('current_distributer');
+                if($selectedDisributer){ ?>
+                <p><strong><?php echo $selectedDisributer['title']; ?></strong></p>
+                <p><?php echo $selectedDisributer['phone'];  ?></p>
+                <p><?php echo $selectedDisributer['street'];
+                  if($selectedDisributer['city']) echo ", ".$selectedDisributer['city'];
+                  if($selectedDisributer['postal_code']) echo ", ".$selectedDisributer['postal_code'];  ?>
+                </p>
+                <p><a href="<?php echo $selectedDisributer['website'] ?>">WEBSITE</a></p>
+                <?php } else{ ?>
+                <p>No Distributor available</p>
+                <?php } ?>
+
+                <?php
+                    $extraOptions = Mage::getModel('qquoteadv/extraoptions')->getExtraoptionsForm(array());
+
+                    if($extraOptions != NULL):
+                    foreach($extraOptions as $option):
+                    $pos1       = Ophirah_Qquoteadv_Model_Extraoptions::FORM_POS1;
+                    $pos2       = Ophirah_Qquoteadv_Model_Extraoptions::FORM_POS2;                            
+                ?>
+          
+                <div>
+                    <?php if($option[$pos1] != NULL):
+                    $required = (isset($option[$pos1]['required']))? $option[$pos1]['required'] : false;
+                    echo Mage::getModel('qquoteadv/extraoptions')->createInputHtml($option[$pos1], $required);
+                    endif; ?>
+                </div>
+
+                <div>
+                <?php if($option[$pos2] != NULL):
+                    $required = (isset($option[$pos2]['required']))? $option[$pos2]['required'] : false;
+                    echo Mage::getModel('qquoteadv/extraoptions')->createInputHtml($option[$pos2], $required);
+                endif;?>
+                </div>
+
+                <?php endforeach;
+                endif; ?>
+            </div><!--  /qquote-tbl-billing  -->
+
+            <div id="distibutorList"></div>
+        </div><!--  /billDiv  -->
+
+    </div>
+    
+</div>
+
+
+
+<div class="box address-form">
+
+    <div id="billing-new-address-form">
+        <div class="input-box">
+            <div id="accountDiv">
+                <?php $email = $customer->getEmail() ? $customer->getEmail() : $this->getCustomerEmail() ?>
+
+                <div id="qquote-tbl-address">
+                    <h4>Please fill out the following form fields before submitting your quote, thank you.</h4>
+                    <p class="required">* <?php echo $this->__('Required Fields') ?></p>
+                    <div class="input-group">
+                        <label for="customer[firstname]"><?php echo $this->__('First Name') ?><span class="required">*</span></label>
+                        <input class="required-entry input-text" id='customer:firstname' name='customer[firstname]' type='text' value="<?php echo $customer->getData('firstname'); ?>">
+                    </div>
+                    <div class="input-group">
+                        <label for="customer[lastname]"><?php echo $this->__('Last Name') ?><span class="required">*</span></label>
+                        <input class="required-entry input-text" id='customer:lastname' name='customer[lastname]' type='text' value="<?php echo $customer->getData('lastname'); ?>"> 
+                        <!-- hidden field -->
+                        <input id='customer:telephone' name='customer[telephone]' type='hidden' value="<?php echo $this->getValue('telephone', 'billing')?>"> 
+                        <input id='customer:postcode' name='customer[postcode]' type='hidden' value="<?php echo $this->getValue('postcode', 'billing'); ?>"> 
+                        <input id='customer:city' name='customer[city]' type='hidden' value="<?php echo $this->getValue('city', 'billing'); ?>">
+                    </div>
+                    <div class="input-group">
+                        <label for="customer[email]"><?php echo $this->__('Email Address') ?><span class="required">*</span></label>
+                        <input class="validate-email required-entry input-text" id='customer:email' name='customer[email]' type='text' value="<?php echo $email; ?>">
+                        <span id="please-wait" style="display:none;">
+                          <img alt="<?php echo $this->__('Checking..') ?>" src="%3C?php%20echo%20$this-%3EgetSkinUrl('images/ajax-loader.gif')%20?%3E">
+                        </span>
+                        <div id="email_message" style="display:none;"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="customer[company]"><?php echo $this->__('Company') ?><span class="required">*</span></label>
+                        <input class="required-entry input-text" id='customer:company' name='customer[company]' type='text' value="<?php echo $this->getValue('company', 'billing') ?>">
+                    </div>
+                </div><!--  /qquote-tbl-address  -->
+
+            </div><!--  /accountDiv  -->
+        </div><!--  /input-box  -->
+    </div><!--  /billing-new-address-form  -->
+    
+    <div id="shipDiv">
+      
+        <h4><?php echo $this->__('Shipping details') ?></h4>
+        <p><?php echo $this->__("Enter your destination to receive a shipping quotation.") ?></p>
+      
+        <div id="qquote-tbl-shipping">
+
+            <div class="input-group">
+                <label for="customer[shipping_address]"><?php echo $this->__('Address') ?><span class="required">*</span></label>
+                <input class="required-entry input-text addr w224" id='customer:shipping_address' name='customer[shipping_address]' onfocus="Element.setStyle(this, {color:'#2F2F2F'});" type='text' value="<?php echo $this->getValue('street', 'shipping'); ?>">
+            </div>
+
+            <div class="input-group">
+                <label for="customer[shipping_postcode]"><?php echo $this->__('Zip/Postal Code') ?><span class="required">*</span></label>
+                <input class="required-entry input-text w224" id='customer:shipping_postcode' name='customer[shipping_postcode]' onfocus="Element.setStyle(this, {color:'#2F2F2F'});" type='text' value="<?php echo $this->getValue('postcode', 'shipping'); ?>">
+            </div>
+
+            <div class="input-group">
+                <label for="customer[shipping_city]"><?php echo $this->__('City') ?><span class="required">*</span></label>
+                <input class="required-entry input-text w224" id='customer:shipping_city' name='customer[shipping_city]' onfocus="Element.setStyle(this, {color:'#2F2F2F'});" type='text' value="<?php echo $this->getValue('city', 'shipping'); ?>">
+            </div>
+
+            <div class="input-group">
+                <?php //$countryCode = $this->getValue('country', 'billing'); ?><?php //if (empty($countryCode)) { $countryCode = null; } ?>
+                <label for="customer[shipping_country_id]">Country<span class="required">*</span></label>
+                <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getValue('country_id', 'shipping'), 'customer[shipping_country_id]', 'shipping_country', $this->__('Country')) ?>
+            </div>
+
+            <div class="input-group">
+                <label for="customer[shipping_region]"><?php echo $this->__('State/Province') ?><span class="required">*</span></label>
+                <select class="required-entry validate-select w224" id='shipping_region_id' name='customer[shipping_region_id]' style="display:none;" title="<?php echo $this->__('State/Province') ?>">
+                    <option value="">
+                        <?php echo $this->getValue('region_id', 'shipping'); ?>
+                    </option>
+                </select> 
+                <input class="required-entry input-text w224" id='shipping_region' name='customer[shipping_region]' onfocus="Element.setStyle(this, {color:'#2F2F2F'});" title="<?php echo $this->__('State/Province') ?>" type="text" value="<?php echo $this->getValue('region', 'shipping'); ?>">
+            </div>
+              
+        </div><!--  /qquote-tbl-shipping  -->
+        <?php
+          // Adding extra option fields
+          // pass Option Types as argument
+          // to getExtraoptionsForm()
+          $extraOptions = Mage::getModel('qquoteadv/extraoptions')->getExtraoptionsForm(array());
+        ?>
+    </div><!--  /shipDiv  -->
+
+</div><!--  /box address-form  -->
+
+
+
+
+
+

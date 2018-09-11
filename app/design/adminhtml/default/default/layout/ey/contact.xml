@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_contactus_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="ey_contact/adminhtml_contact_grid" name="contactus_grid" />
+        </block>
+    </adminhtml_contactus_grid>
+</layout>

@@ -1,0 +1,42 @@
+﻿<header id="header">
+  <div class="cell"></div>
+  <div class="cell bgn">
+    <div class="container">
+        <div class="logo-holder">
+          <strong class="logo"><a href="<?php echo $this->getUrl('') ?>"><?php echo $this->getLogoAlt() ?></a></strong>
+          <strong class="slogan"><?php echo $this->__('“The Homogenizer Company”'); ?></strong>
+        </div>
+        <div class="top-bar">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            <?php if($this->helper('customer')->isLoggedIn() ): ?>
+                <ul class="links">
+                    <li><a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo $this->__('My Account'); ?></a></li>
+                    <li><a href="<?php echo $this->getUrl('customer/account/logout'); ?>"><?php echo $this->__('logout'); ?></a></li>
+                </ul>
+            <?php else: ?>
+                <ul class="links">
+                    
+                   <!--Added Register--> <li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('register'); ?></a></li> <!--End Register--> <li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('login'); ?></a></li> 
+                    
+                </ul>
+            <?php endif; ?>
+            
+            <?php echo $this->getChildHtml('cart_sidebar') ?>
+            
+         
+                <!-- Google Language Translator -->
+<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        
+ <!-- End Google Language Translator-->
+        
+        <?php echo $this->getChildHtml('header-chat') ?>
+    </div>
+  </div>
+  <div class="cell"></div>
+</header>
+<?php echo $this->getChildHtml('header-menu') ?>
+ 

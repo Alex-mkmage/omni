@@ -1,0 +1,273 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+
+<!-- Get Last URL -->
+<?php
+$sessionfree = Mage::getSingleton('core/session');
+$lasturl = $sessionfree->getLastUrl();
+
+if(!strpos($lasturl, "ampromo/cart/update")){
+    $urlproduk = $this->getContinueShoppingUrl();
+    Mage::getSingleton('core/session')->setUrlinCheckout($urlproduk);
+}
+?>
+
+<?php
+$currentCountry = Mage::getModel('core/session')->getData('current_country');
+if(in_array($currentCountry['code'], array('CA','US'))):
+    $allowedCountry = true;
+else:
+    $allowedCountry = false;
+endif
+?>
+<div class="cart cart-2columns">
+    <div class="page-title title-buttons">
+        <h1>Shopping Cart</h1>
+        <?php if(!$this->hasError()): ?>
+            <!-- <ul class="checkout-types">
+        <?php foreach ($this->getMethods('top_methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul> -->
+        <?php endif; ?>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <div class="cart-main">
+        <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+            <?php echo $this->getBlockHtml('formkey'); ?>
+            <fieldset>
+                <table id="shopping-cart-table" class="data-table cart-table">
+
+                    <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                    <thead>
+                    <tr>
+                        <th>
+                            <span class="nobr product-name"><?php echo $this->__('Product Name') ?></span>
+                            <span class="unit-price"><?php echo $this->__('Unit Price') ?></span>
+                            <span class="qty"><?php echo $this->__('Qty') ?></span>
+                            <span class="subtotal"><?php echo $this->__('Subtotal') ?></span>
+                            <span class="remove-item"><?php echo $this->__('Remove') ?></span>
+                        </th>
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                        <tr>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        </tr>
+                    <?php endif; ?>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <div class="subtotalBelowCart">
+                                <?php $quote = Mage::getSingleton('checkout/cart')->getQuote(); ?>
+                                Subtotal (<span class="itemCount"><?php echo $quote->getItemsCount(); ?></span> items):
+                                <span class="subtotalValue">
+                                    <span class="price">
+                                        <?php echo Mage::helper('core')->currency($quote->getSubtotal(), true, false); ?>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="btnBelowCart">
+                                <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
+                                <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class="button btn-empty" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button>
+                            </div>
+                            <!--[if lt IE 8]>
+                            <input type="hidden" id="update_cart_action_container" />
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                Event.observe(window, 'load', function()
+                                {
+                                    // Internet Explorer (lt 8) does not support value attribute in button elements
+                                    $emptyCartButton = $('empty_cart_button');
+                                    $cartActionContainer = $('update_cart_action_container');
+                                    if ($emptyCartButton && $cartActionContainer) {
+                                        Event.observe($emptyCartButton, 'click', function()
+                                        {
+                                            $emptyCartButton.setAttribute('name', 'update_cart_action_temp');
+                                            $cartActionContainer.setAttribute('name', 'update_cart_action');
+                                            $cartActionContainer.setValue('empty_cart');
+                                        });
+                                    }
+
+                                });
+                            //]]>
+                            </script>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+                <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+            </fieldset>
+        </form>
+        <div class="cart-main-bottom">
+            <?php echo $this->getChildHtml('checkout.cart.extra') ?>
+            <?php echo $this->getChildHtml('coupon') ?>
+            <?php echo $this->getChildHtml('recently_viewed') ?>
+            <div class="return-policy">
+                <?php
+                $block = $this->helper('ey_core')->getCartReturn();
+                echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="cart-collaterals">
+        <?php /* Extensions placeholder */ ?>
+        <div id="parrentSection">
+            <div class="promos">
+                <?php
+                $block = $this->helper('ey_core')->getCartPromos();
+                echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+                ?>
+            </div>
+            <?php if($allowedCountry): ?>
+                <div class="totals">
+                    <div id="total-section">
+                        <?php echo $this->getChildHtml('totals'); ?>
+                    </div>
+                    <?php if(!$this->hasError()): ?>
+                        <ul class="checkout-types">
+                            <?php foreach ($this->getMethods('methods') as $method): ?>
+                                <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                    <li><?php echo $methodHtml; ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <li class="payments-accepted">
+                                <img src="/skin/frontend/default/omnicom/images/Payments-by-Sage-Pay-Horizontal-3.jpg" alt="Sage Payments">
+                            </li>
+                            <li class="continue-shopping">
+                                <?php if($this->getContinueShoppingUrl()): ?>
+                                    <?php $lasturl = (string)$lasturl; ?>
+                                    <?php if (strpos($lasturl, "checkout/cart/add")) { ?>
+                                        <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                                    <?php } elseif (strpos($lasturl, "ampromo/cart/update/uenc")){ ?>
+                                        <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $sessionfree->getUrlinCheckout() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                                    <?php } else { ?>
+                                        <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="location.href='<?php echo $lasturl;?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                                    <?php }  ?>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+
+                </div>
+            <?php endif; ?>
+            <div class="shippingSection">
+                <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+            </div>
+        </div>
+        <?php echo $this->getChildHtml('crosssell') ?>
+    </div>
+</div>
+
+<div class="ajaxUpdateQtyLoading">
+    <div class="inner">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+
+<script>
+    jQuery(function ($) {
+        $('.ajaxUpdateQtyLoading').appendTo('body');
+
+        jQuery(".cart .shipping h2").click(function(e) {
+            if(jQuery(this).parent().hasClass('expand')){
+                jQuery(this).parent().removeClass('expand');
+            } else{
+                jQuery(this).parent().addClass('expand');
+            }a
+        });
+
+        $('.spin-up').unbind("click").on('click',function(){
+            var id = $(this).data('product-id');
+            var qty = $('.input-text.qty[data-product-id="'+id+'"]').val();
+            $('.input-text.qty[data-product-id="'+id+'"]').val(parseInt(qty)+1);
+            $('.input-text.qty[data-product-id="'+id+'"]').trigger('change');
+        });
+
+        $('.spin-down').unbind("click").on('click',function(){
+            var id = $(this).data('product-id');
+            var qty = $('.input-text.qty[data-product-id="'+id+'"]').val();
+            $('.input-text.qty[data-product-id="'+id+'"]').val(parseInt(qty)-1);
+            $('.input-text.qty[data-product-id="'+id+'"]').trigger('change');
+        });
+
+        $('.input-text.qty').on('change paste', function(){
+            $('.ajaxUpdateQtyLoading').addClass('open');
+            var id = $(this).data('product-id');
+            <?php $quote = Mage::getSingleton('checkout/session')->getQuote(); ?>
+            var quoteId = "<?php echo $quote ? $quote->getId() : '' ?>";
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo Mage::getBaseUrl(); ?>ey/cart/updateqty/',
+                data: { qty: $(this).val(), product: id, quote: quoteId },
+                success: function(data) {
+                    data = $.parseJSON( data );
+                    console.log(data);
+                    if(data.success == true){
+                        if(data.subtotal_with_discount){
+                            $('.subtotalValue .price').text(data.subtotal_with_discount);
+                        }
+                        if(data.tax){
+                            $('.taxValue .price').text(data.tax);
+                        }
+                        if(data.grand_total){
+                            $('.grandValue .price').text(data.grand_total);
+                        }
+                        if(data.item_count){
+                            $('.itemCount').text(data.item_count);
+                        }
+                    }
+                    $('.ajaxUpdateQtyLoading').removeClass('open');
+                }, error: function(xhr, ajaxOptions, thrownError){
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                    $('.ajaxUpdateQtyLoading').removeClass('open');
+                }
+            });
+        });
+    });
+</script>

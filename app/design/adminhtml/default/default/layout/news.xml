@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <news_adminhtml_news_index>
+        <reference name="content">
+            <block type="news/adminhtml_news" name="news" />
+        </reference>
+        <reference name="head">
+			<action method="setTitle" translate="title"><title>News Manager</title></action>
+		</reference>
+		<default>
+			<reference name="head">
+				
+				<action method="setCanLoadExtJs"><flag>1</flag></action>
+				<action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
+				<action method="addJs"><script>lib/flex.js</script></action>
+				<action method="addJs"><script>lib/FABridge.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
+				<action method="addJs"><script>mage/adminhtml/browser.js</script></action>
+				<action method="addJs"><script>prototype/window.js</script></action>
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+				<action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
+			</reference>
+		</default> 
+    </news_adminhtml_news_index>
+    
+    
+    <news_adminhtml_news_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+        <block type="news/adminhtml_news_edit_tab_categories" name="news.edit.tab.categories"/>
+        </block>
+    </news_adminhtml_news_categories>
+    
+    
+    <news_adminhtml_news_related>
+        <block type="core/text_list" name="root" output="toHtml">
+        <block type="news/adminhtml_news_edit_tab_related" name="news.edit.tab.related"/>
+             <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                 <reference name="related_grid_serializer">
+                     <action method="initSerializerBlock">
+                        <grid_block_name>news.edit.tab.related</grid_block_name>
+                        <data_callback>getSelectedProductsNew</data_callback>
+                        <hidden_input_name>productlinks[products]</hidden_input_name>
+                        <reload_param_name>news_products</reload_param_name>
+                     </action>
+                     <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                 </reference>
+             </block>
+        </block>
+    </news_adminhtml_news_related>
+        
+     <news_adminhtml_news_relatedgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="news/adminhtml_news_edit_tab_related" name="news.edit.tab.related"/>
+        </block>
+    </news_adminhtml_news_relatedgrid>
+    
+    
+    <news_adminhtml_news_pages>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="news/adminhtml_news_edit_tab_pages" name="news.edit.tab.pages"/>
+             <block type="adminhtml/widget_grid_serializer" name="pages_grid_serializer">
+                 <reference name="pages_grid_serializer">
+                     <action method="initSerializerBlock">
+                        <grid_block_name>news.edit.tab.pages</grid_block_name>
+                        <data_callback>getSelectedPagesNew</data_callback>
+                        <hidden_input_name>links[pages]</hidden_input_name>
+                        <reload_param_name>news_pages</reload_param_name>
+                     </action>
+                     <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                 </reference>
+             </block>
+        </block>
+    </news_adminhtml_news_pages>
+    
+    <news_adminhtml_news_pagesgrid>
+        <block type="core/text_list" name="root">
+            <block type="news/adminhtml_news_edit_tab_pages" name="news.edit.tab.pages"/>
+        </block>
+    </news_adminhtml_news_pagesgrid>
+     
+    
+</layout>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ey_Distributor>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <IWD_StoreLocator />
+                <Icube_Distributor />
+            </depends>
+        </Ey_Distributor>
+    </modules>
+</config>

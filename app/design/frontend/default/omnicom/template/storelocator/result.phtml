@@ -1,0 +1,71 @@
+<?php $collection = $this->getCollection(); ?>
+<?php $page = $this->getPage();?>
+<?php $pagination = $this->getLoad();?>
+<?php
+$option = Mage::getStoreConfig(IWD_StoreLocator_Helper_Data::XML_PATH_METRIC);
+if ($option == 1){
+    $methic  = 'km';
+}
+
+if ($option == 2){
+    $methic  = 'mi';
+}
+?>
+<?php if ($collection->getSize()>0):?>
+
+    <?php $_collectionSize = $collection->count() ?>
+    <?php $_columnCount = 3; ?>
+
+    <?php if (!$pagination):?>
+        <div class="row">
+    <?php endif;?>
+    <?php  $i=0;  foreach ($collection as $store):?>
+
+        <div class="item" >
+            <?php if (!Mage::getStoreConfig('storelocator/global/hide_placeholder')):?>
+                <?php $image = $this->prepareImage($store)?>
+                <?php if ($image):?>
+                    <div class="image">
+                        <img src="<?php echo $image;?>" />
+                    </div>
+                <?php endif;?>
+            <?php endif;?>
+            <div class="store-info">
+                <div class="store-name">
+                    <h4><span><?php echo $this->prepareCountry($store->getCountryId())?> - </span><?php echo $store->getTitle()?><?php if ($store->getDistance()!=0):?><span class="distance">(<?php echo round($store->getDistance(), 2);?> <?php echo $methic;?>)</span><?php endif;?></h4>
+                </div>
+                <div class="phone">
+                    <a href="tel:<?php echo $store->getPhone()?>"><?php echo $store->getPhone()?></a>
+                </div>
+
+                <div class="store-address">
+                    <address>
+                        <?php echo $store->getStreet().",".$store->getCity().".".$this->prepareState($store->getCountryId(), $store->getRegion(), $store->getRegionId())."<br/>".$this->prepareCountry($store->getCountryId()).",".$store->getPostalCode()?>
+                    </address>
+                </div>
+
+                <?php $site = $store->getWebsite()?>
+
+                <div class="extend-link">
+                    <?php if (!empty($site)):?>
+                        <a target="_blank"  href="<?php echo $store->getWebsite()?>" class="website"><?php echo $this->__('Visit Website')?></a>
+                    <?php endif;?>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="divider"></div>
+        </div>
+
+    <?php endforeach;?>
+    </div>
+<?php else:?>
+    <p class="no-result"><?php echo Mage::getStoreConfig('storelocator/global/nfoundmessage')?></p>
+<?php endif;?>
+<script>
+   function equalHeights(){
+        $j('.storelocator').find('.item').equalHeightColumns();
+        $j('.storelocator .item').find('h4').equalHeightColumns();
+    };
+    equalHeights();
+    IWD.StoreLocator.page = <?php echo $page?>;
+</script>

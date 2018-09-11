@@ -1,0 +1,87 @@
+<?php
+    $_product = $this->getProduct();
+	$arqspin = $_product->getArqspin();
+    $_helper = $this->helper('catalog/output');
+    $_nativeZoom = false;
+?>
+
+<div class="product-image">
+	<?php if ($arqspin && $arqspin['config']['display_type'] == 'primary'): ?>
+		<iframe src="" data-src="<?php echo $arqspin['image']['spin_url']; ?>" width="335" height="269" scrolling="no" frameborder="0" id="arqspin-iframe" class="hide"></iframe>
+	<?php endif; ?>
+	<div class="product-other-images">
+		<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+			<?php list($_imgWidth, $_imgHeight) = $this->helper('catalog/image')->init($_product, 'image')->getOriginalSizeArray(); ?>
+			<?php if ($_imgWidth > 380 || $_imgHeight > 380):?>
+				<div class="product-image-inner" id="main-image">
+					<?php
+						$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(670,538).'" height="269" width="335" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+						echo $_helper->productAttribute($_product, $_img, 'image');
+					?>
+				</div>
+			<?php else: ?>            
+				<p class="product-image-inner">
+					<?php
+						$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(670,538).'" height="269" width="335" alt="'.$this->htmlEscape($_product->getImageLabel()).'" title="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+						echo $_helper->productAttribute($_product, $_img, 'image');
+					?>
+				</p>
+			<?php endif; ?>
+		<?php endif; ?>
+	</div>
+</div>
+
+<?php if (count($this->getGalleryImages()) > 1): ?>
+<div class="more-views-image">
+    <ul class="thumbnails">
+    	<?php 
+    	$imageArray = $this->getGalleryImages()->toArray();
+    	$firstInset = $imageArray[0]; 
+    	if(isset($firstInset['video']) && isset($imageArray[1])){
+    		$firstInset = $imageArray[1];
+    	} elseif(isset($firstInset['video']) && !isset($imageArray[1])){
+    		$arqspin = null;
+    	}
+    	?>
+		<?php if ($arqspin && $arqspin['config']['display_type'] == 'primary'): ?>
+			<li class="inset-360">
+				<img src="/media/wysiwyg/360-image.png" width="94" height="94"  />
+			</li>
+		<?php endif; ?>
+		<?php $i = 0; foreach ($this->getGalleryImages() as $_image): ?>
+			<li class="additional_image">
+				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(94,94); ?>" width="94" height="94" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" data-change-image="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(670,538); ?>" />
+			</li>
+		<?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+<?php if ($arqspin && $arqspin['config']['display_type'] == 'separate'): ?>
+	<div class="product-image">
+		<iframe src="<?php echo $arqspin['image']['spin_url']; ?>" width="335" height="269" scrolling="no" frameborder="0"></iframe>
+	</div>
+<?php endif; ?>
+<script>
+(function($){
+	$(document).ready(function(){
+		$(document).on('click','.additional_image', function(){ 
+			$('#arqspin-iframe, .iwd-pv-video').addClass('hide');
+			var ChangeImage = $(this).find('img').attr('data-change-image');
+			console.log(ChangeImage);
+			$('.product-other-images').find('img').attr('src', ChangeImage);
+			$('.product-other-images').removeClass('hide');
+		});
+		$(document).on('click','.additional_image.iwd-pv-thumb-video', function(){ 
+			$('#arqspin-iframe, .product-other-images').addClass('hide');
+			$('.iwd-pv-video').removeClass('hide');
+		});
+		$(document).on('click','.thumbnails .inset-360',function(){
+			console.log('cc');
+			var iframeUrl = $('#arqspin-iframe').attr('data-src');
+			$('.iwd-pv-video, .product-other-images').addClass('hide');
+			$('#arqspin-iframe').removeClass('hide');
+			$('#arqspin-iframe').attr('src', iframeUrl);
+		});
+	});
+})(jQuery);
+</script>

@@ -1,0 +1,78 @@
+<?php
+/**
+ * zeonsolutions inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.zeonsolutions.com/shop/license-community.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * This package designed for Magento Community edition
+ * =================================================================
+ * zeonsolutions does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * zeonsolutions does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   design
+ * @package    base_default
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2013 zeonsolutions.Inc. (http://www.zeonsolutions.com)
+ * @license    http://www.zeonsolutions.com/shop/license-community.txt
+ */
+?>
+<?php
+$_jobsCollection = $this->getJobsCollection();
+$processor = Mage::helper('zeon_jobs')->getBlockTemplateProcessor();
+?>
+<div id="messages_jobs_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<?php if ($_category = $this->getCurrentCategory()): ?>
+    <div class="page-title category-title">
+        <h1><?php echo $this->htmlEscape($_job->getTitle()) ?></h1>
+    </div>
+    <div class="category-description std">
+        <?php echo $processor->filter($_category->getDescription()) ?>
+    </div>
+<?php else: ?>
+    <div class="page-title category-title">
+        <h1><?php echo $this->__('Careers') ?></h1>
+    </div>
+<?php endif; ?>
+
+<p><strong>Join Our Team! </strong></p>
+<p>Omni International offers a wide variety of positions for all types of hard working people.&nbsp; Whether you're in school, have just graduated, or have been in the workforce for many years; Omni has many opportunities to bolster your professional development.</p>
+<p>Because we're committed to constant improvement and innovation, we design and manufacture all of our products right here in Georgia.&nbsp; Customer satisfaction is our top priority and we're dedicated to providing a wide variety of high quality homogenizer products to support any customer need.</p>
+<p>Omni is as committed to our employees as we are our customers.&nbsp; If you're a driven, like minded individual and think you have what it takes to join the Omni team, we're interested in hearing from you.&nbsp;</p>
+<?php if (!$_jobsCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no jobs matching the selection.') ?></p>
+<?php else: ?>
+    <div class="category-products">
+        <?php echo $this->getToolbarHtml() ?>
+        <?php $_iterator = 0; ?>
+        <ol class="products-list" id="jobs-list">
+            <?php foreach ($_jobsCollection as $_job): ?>
+                <li class="item<?php if (++$_iterator == sizeof($_jobsCollection)): ?> last<?php endif; ?>" style="margin-top:5px;">
+                    <?php // Job description ?>
+                    <div class="jobs-shop">
+                        <div class="f-fix">
+                            <?php $_jobNameStripped = $this->stripTags($_job->getTitle(), null, true); ?>
+                            <h2 class="product-name">
+                                <a href="<?php echo $this->getUrl('careers/' . $_job->getIdentifier()) ?>" title="<?php echo $_jobNameStripped; ?>"><?php echo $this->htmlEscape($_job->getTitle()) ?></a>
+                            </h2>
+                            <div class="desc std">
+                                <?php echo $processor->filter($_job->getShortDescription()) ?>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+        <script type="text/javascript">decorateList('jobs-list', 'none-recursive')</script>
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+<?php endif; ?>

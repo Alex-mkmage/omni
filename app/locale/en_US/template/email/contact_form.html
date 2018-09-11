@@ -1,0 +1,235 @@
+<!--@subject Contact Form@-->
+<!--@vars
+{"var data.name":"Sender Name",
+"var data.email":"Sender Email",
+"var data.telephone":"Sender Telephone",
+"var data.comment":"Comment"}
+@-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Omni-Inc New Order</title>
+</head>
+<body style="background:#e9edf0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+	<div style="background:#e9edf0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+		<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td align="center" style="padding:20px 0 20px 0" valign="top">
+					<table align="center" bgcolor="#FAFAFA" border="0" cellpadding="0" cellspacing="0" style="border:1px solid #E0E0E0;" width="650">
+						<!-- [ header starts here] -->
+						<tr>
+							<!-- [ spacing -15px] -->
+							<td bgcolor="#444444" style="height: 15px;" valign="top"></td>
+						</tr>
+						<tr>
+							<td bgcolor="#444444" valign="top">
+								<table align="center" width="95%">
+									<tr>
+										<td valign="top">
+											<a href="www.omni-inc.com"><img border="0" src="https://gallery.mailchimp.com/837626de9997b7b0c5c187e7a/images/480d57ec-bea9-4308-a3e7-99505bb4a0c4.png"></a>
+										</td>
+										<td width="20px">&nbsp;</td>
+										<td style="color: #ffffff; font-size: 26px;" valign="middle">Great Science Starts Here!</td>
+									</tr>
+								</table>
+							</td>
+						</tr><!-- [ middle starts here] -->
+						<tr>
+							<!-- [ spacing -15px] -->
+							<td bgcolor="#444444" style="height: 15px;" valign="top"></td>
+						</tr>
+						<tr>
+							<!-- [ spacing -15px] -->
+							<td style="height: 15px;" valign="top"></td>
+						</tr>
+						<tr>
+							<td>
+								<table align="center" bgcolor="#FAFAFA" border="0" cellpadding="10" cellspacing="0" width="95%">
+									<tr>
+										<td valign="top">
+											<table align="center" bgcolor="#FAFAFA" border="0" cellpadding="0" cellspacing="0" width="100%">
+												<tr>
+													<td valign="top">
+														<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+															<tr>
+																<td style="text-align: left; color: #444444; font-size: 22px;" valign="top">Hello  {{var data.name}}</td>
+															</tr>
+															<tr>
+																<!-- [ spacing -10px] -->
+																<td style="height: 10px;" valign="top"></td>
+															</tr>
+															<tr>
+																<td style="text-align: left; color: #444444; font-size: 14px;" valign="top">
+																	Email: <a href="mailto:{{var data.email}}" style="color: #4486be;"><strong>{{var data.email}}</strong></a>
+																</td>
+															</tr>
+															<tr>
+																<!-- [ spacing -10px] -->
+																<td style="height: 10px;" valign="top"></td>
+															</tr>
+															<tr>
+																<td style="text-align: left; color: #444444; font-size: 14px;" valign="top">Telephone: <strong style="color: #4444444;">{{var data.telephone}}</strong></td>
+															</tr>
+															<tr>
+																<!-- [ spacing -10px] -->
+																<td style="height: 10px;" valign="top"></td>
+															</tr>
+															<tr>
+																<td style="text-align: left; color: #444444; font-size: 14px;" valign="top">Service Requested: <strong style="color: #444444;">{{var data.service-requested}}</strong></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td style="text-align: right;" valign="top">
+											<table align="right" border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td style="color: #444444; font-size: 22px; text-align: left;" valign="top">Questions?</td>
+												</tr>
+												<tr>
+													<!-- [ spacing -10px] -->
+													<td style="height: 10px;" valign="top"></td>
+												</tr>
+												<tr>
+													<td style="text-align: left; color: #444444; font-size: 14px;" valign="top">
+														Call Us: <a href="tel:{{config path='general/store_information/phone'}}" style="color:#4486be;">{{config path="general/store_information/phone"}}</a>
+													</td>
+												</tr>
+												<tr>
+													<!-- [ spacing -5px] -->
+													<td style="height: 5px;" valign="top"></td>
+												</tr>
+												<tr>
+													<td style="text-align: left; color: #444444;font-size: 14px;" valign="top">
+														Email Us: <a href="mailto:{{config path='trans_email/ident_sales/email'}}" style="color: #4486be;">{{config path="trans_email/ident_sales/email"}}</a>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table align="center" bgcolor="#FAFAFA" border="0" cellpadding="10" cellspacing="0" width="95%">
+									<tr>
+										<td valign="top">
+											<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">										
+												<tr>
+													<td style="text-align: left; color: #444444; font-size: 14px; line-height: 18px;" valign="top">
+														<strong>Thank you for contacting us at Omni.</strong> If you have any more questions please contact us at <a href="mailto:{{config path='trans_email/ident_sales/email'}}" style="color: #4486be;">{{config path="trans_email/ident_sales/email"}}</a> or call us at <a href="tel:{{config path='general/store_information/phone'}}" style="color:#4486be;">{{config path="general/store_information/phone"}}</a> Monday - Friday, 8am - 5pm.<br>
+														<br>
+														Thank you again for your trust.
+													</td>
+												</tr>
+												<tr>
+													<!-- [ spacing -10px] -->
+													<td style="height: 10px;" valign="top"></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<!-- [ Line breaker spacing ] -->
+							<td>
+								<table align="center" width="95%">
+									<tr>
+										<td align="center" bgcolor="#EAEAEA" style="height: 1px; font-size: 0;" valign="top" width="100%"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<table align="center" border="0" cellpadding="10" cellspacing="0" width="95%">
+									<tr>
+										<td valign="top">
+											<table align="left" border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td style="text-align: left; color: #444444; font-size: 22px; line-height: 24px;">Comment:</td>
+												</tr>
+												<tr>
+													<!-- [ spacing -10px] -->
+													<td style="height: 10px;" valign="top"></td>
+												</tr>
+												<tr>
+													<td style="text-align: left; color: #444444; font-size: 16px; line-height: 20px;">{{var data.comment}}</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<!-- [ spacing -10px] -->
+										<td style="height: 10px;" valign="top"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
+								<table align="center" bgcolor="#444444" width="100%">
+									<tr>
+										<!-- [ spacing -20px] -->
+										<td style="height: 20px;" valign="top"></td>
+									</tr>
+									<tr>
+										<td align="center" style="text-align:center; color: #ffffff; font-size: 22px"><strong>Thank you, 
+{{config path="general/store_information/name"}}.</strong></td>
+									</tr>
+									<tr>
+										<!-- [ spacing -20px] -->
+										<td style="height: 15px;" valign="top"></td>
+									</tr><!-- Spacing -->
+									<tr>
+										<td>
+											<!-- Social icons -->
+											<table align="center" border="0" cellpadding="10" cellspacing="0" class="devicewidth" width="150">
+												<tbody>
+													<tr>
+														<td align="center" height="43" width="43">
+															<div class="imgpop">
+																<a href="https://www.facebook.com/pages/Omni-International-The-Homogenizer-Company/109409925762526" target="_blank"><img alt="" border="0" height="43" src="https://gallery.mailchimp.com/837626de9997b7b0c5c187e7a/images/5ac0c9fe-325c-47c9-9a33-b3b0684a1f7b.png" style="display:block; border:none; outline:none; text-decoration:none;" width="43"></a>
+															</div>
+														</td>
+														<td align="left" style="font-size:1px; line-height:1px;" width="20">&nbsp;</td>
+														<td align="center" height="43" width="43">
+															<div class="imgpop">
+																<a href="https://twitter.com/OmniInc" target="_blank"><img alt="" border="0" height="43" src="https://gallery.mailchimp.com/837626de9997b7b0c5c187e7a/images/02632fd3-ce1c-4182-b2ca-eecdd21dd37b.png" style="display:block; border:none; outline:none; text-decoration:none;" width="43"></a>
+															</div>
+														</td>
+														<td align="left" style="font-size:1px; line-height:1px;" width="20">&nbsp;</td>
+														<td align="center" height="43" width="43">
+															<div class="imgpop">
+																<a href="https://www.linkedin.com/company/omni-international_2" target="_blank"><img alt="" border="0" height="43" src="https://gallery.mailchimp.com/837626de9997b7b0c5c187e7a/images/648fc929-1e07-46b8-9cfb-dd91cd7562f7.png" style="display:block; border:none; outline:none; text-decoration:none;" width="43"></a>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table><!-- end of Social icons -->
+										</td>
+									</tr><!-- Spacing -->
+									<tr>
+										<td bgcolor="#444444" height="10" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
+									</tr><!-- Spacing -->
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left" bgcolor="#444444" style="color: #ffffff; text-align: center;"><small>© 2016 OMNI, INC. ALL RIGHTS RESERVED.</small></td>
+						</tr><!-- Spacing -->
+						<tr>
+							<td bgcolor="#444444" height="10" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
+						</tr><!-- Spacing -->
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+   </body>
+</html>

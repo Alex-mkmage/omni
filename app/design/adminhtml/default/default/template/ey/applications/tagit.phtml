@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    jQuery(function ($) {
+        /** Tag inputs **/
+        $('.tagItSku').tagsInput({
+            autocomplete_url: '<?php echo Mage::helper('adminhtml')->getUrl("adminhtml/application/products"); ?>'
+        });
+        $('.tagIt').tagsInput();
+    });
+</script>

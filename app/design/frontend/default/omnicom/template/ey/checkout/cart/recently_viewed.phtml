@@ -1,0 +1,52 @@
+<?php $items = $this->getItems() ?>
+
+<?php if($items && $items->getSize()): ?>
+    <h2 class="cart-recently-viewed-title">
+        Your Recently Viewed Items and Featured Recommendations
+    </h2>
+    <div class="cart-recently-viewed">
+        <?php foreach($items as $item): ?>
+            <div class="contentsDiv">
+                <div class="contentsImg">
+                    <a href="<?php echo $item->getProductUrl() ?>" data-sku="<?php echo $item->getSku() ?>"
+                       title="<?php echo $this->stripTags
+                    ($this->getImageLabel($item, 'small_image'), null, true) ?>" class="img"><img src="<?php echo $this->helper('catalog/image')->init($item, 'small_image')->resize(137,137); ?>" width="137" height="137" alt="<?php echo $this->stripTags($this->getImageLabel($item, 'small_image'), null, true) ?>" /></a>
+                </div>
+                <div class="contentsName">
+                    <a href="<?php echo $item->getProductUrl(); ?>" data-sku="<?php echo $item->getSku() ?>"><?php echo $item->getName(); ?></a>
+                </div>
+                <div class="contentsSku">
+                    SKU # <?php echo $item->getSku(); ?>
+                </div>
+                <?php if($item->isSaleable()): ?>
+                    <div class="contentsAction add-to-cart">
+                        <!-- Cart -->
+                        <?php echo Mage::app()->getLayout()->createBlock('qquoteadv/qquotebtn')
+                            ->setData('product', $item)
+                            ->setTemplate('qquoteadv/catalog/product/c2qBtnGrid.phtml')
+                            ->toHtml(); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <script>
+        jQuery(function($){
+            $(".cart-recently-viewed").owlCarousel({
+                items : 4,
+                itemsDesktop : [1200,4],
+                itemsDesktopSmall : [980,3],
+                itemsTablet: [600,2],
+                itemsMobile : [400,1],
+                lazyLoad : true,
+                navigation : true,
+                autoPlay: false,
+                navigationText: [
+                    "<i class='fa fa-caret-left'></i>",
+                    "<i class='fa fa-caret-right'></i>"
+                ]
+            });
+        });
+    </script>
+
+<?php endif; ?>

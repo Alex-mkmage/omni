@@ -1,0 +1,30 @@
+<?php $searchCriteria = $this->getSearchCriteriaLabels(); ?>
+
+<div class="application-result">
+	<div class="application-result-bar">
+		<ul class="application-result-title search-term
+			<?php echo isset($searchCriteria['name']) && $searchCriteria['name'] != '%%' ? 'show' : ''; ?>">
+			<li class="label">Search: </li>
+			<li class="value open">
+				<?php
+					echo isset($searchCriteria['name']) && $searchCriteria['name'] != '%%' ?
+						trim($searchCriteria['name'], '%') : '...';
+				?>
+			</li>
+		</ul>
+		<ul class="sample-type search-term <?php echo isset($searchCriteria['sampletype_id']) ? 'show' : ''; ?>">
+			<li class="label">Sample Type: </li>
+			<li class="value open">
+				<?php echo isset($searchCriteria['sampletype_id']) ? implode(',', $searchCriteria['sampletype_id']) : '...'; ?>
+			</li>
+		</ul>
+		<ul class="product-type search-term <?php echo isset($searchCriteria['product_id']) ? 'show' : ''; ?>">
+			<li class="label">Product Type: </li>
+			<li class="value open">
+				<?php echo isset($searchCriteria['product_id']) ? implode(',', $searchCriteria['product_id']) : '...'; ?>
+			</li>
+		</ul>
+	</div>
+	<div id="application-search-results">
+	</div>
+</div>

@@ -1,0 +1,6 @@
+<form action="<?php echo $this->getActionUrl(); ?>" id="protocol_import" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    <label for="protocol_csv">Upload CSV</label>
+    <input type="file" name="protocol_csv" id="protocol_csv" value>
+    <button><span>Submit</span></button>
+</form>

@@ -1,0 +1,33 @@
+<?php /** @var $this Ey_GTM_Block_Product_List_ProductClick */ ?>
+
+<script type="text/javascript">
+    window.productObj = <?php echo $this->getJsonConfig() ?>;
+    jQuery(function ($) {
+        $('.product-list').on('click', 'a', function(e){
+            var sku = $(this).data('sku');
+
+            if(window.productObj.hasOwnProperty(sku)){
+                e.preventDefault();
+                var productObj = window.productObj[sku];
+                dataLayer.push({
+                    'event': 'productClick',
+                    'ecommerce': {
+                        'click': {
+                            'actionField': {'list': '<?php echo $this->getListType() ?>'},
+                            'products': [{
+                                'name': productObj.name,
+                                'id': productObj.sku,
+                                'price': productObj.price,
+                                'category': productObj.category,
+                                'position': productObj.position
+                            }]
+                        }
+                    },
+                    'eventCallback': function() {
+                        document.location = productObj.url
+                    }
+                });
+            }
+        });
+    });
+</script>

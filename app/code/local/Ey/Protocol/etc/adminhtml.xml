@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <ey_protocol translate="title" module="ey_protocol">
+            <title>Protocol</title>
+            <sort_order>75</sort_order>
+            <children>
+                <application translate="title" module="ey_protocol">
+                    <title>Manage Applications</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/papplication/index</action>
+                </application>
+                <sample_type translate="title" module="ey_protocol">
+                    <title>Manage Sample Types</title>
+                    <sort_order>20</sort_order>
+                    <action>adminhtml/psampletype/index</action>
+                </sample_type>
+                <file translate="title" module="ey_protocol">
+                    <title>Manage Files</title>
+                    <sort_order>15</sort_order>
+                    <action>adminhtml/pfile/index</action>
+                </file>
+                <import translate="title" module="ey_protocol">
+                    <title>Import</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/protocolimport/index</action>
+                </import>
+            </children>
+        </ey_protocol>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <ey_protocol translate="title" module="ey_protocol">
+                        <title>Protocol</title>
+                        <sort_order>75</sort_order>
+                        <children>
+                            <application translate="title" module="ey_protocol">
+                                <title>Manage Applications</title>
+                            </application>
+                            <sample_type translate="title" module="ey_protocol">
+                                <title>Manage Sample Types</title>
+                            </sample_type>
+                            <file translate="title" module="ey_protocol">
+                                <title>Manage Files</title>
+                            </file>
+                            <import translate="title" module="ey_protocol">
+                                <title>Import</title>
+                            </import>
+                        </children>
+                    </ey_protocol>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

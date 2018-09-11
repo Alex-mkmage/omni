@@ -1,0 +1,129 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @var Mage_Checkout_Block_Cart_Minicart $this
+ */
+?>
+
+<?php
+$_cartQty = $this->getSummaryCount();
+if(empty($_cartQty)) {
+    $_cartQty = 0;
+}
+?>
+<div id="minicart-error-message" class="minicart-message"></div>
+<div id="minicart-success-message" class="minicart-message"></div>
+<?php if($_cartQty): ?>
+    <div class="block-subtitle">
+        <h2>SHOPPING CART</h2>
+        <div class="close-cart cart-close">
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>    
+    </div>
+    <div class="cta-quote">
+        <a class="cart-link btn btn-solid" href="<?php echo $this->getUrl('checkout/onepage'); ?>">PROCEED TO CHECKOUT</a>
+    </div>
+<?php endif; ?>
+<div class="minicart-wrapper">
+    <?php $_items = $this->getRecentItems() ?>
+    <?php $countItems = count($_items); ?>
+    <?php if($countItems): ?>
+        <div>
+            <ul id="cart-sidebar" class="mini-products-list">
+                <?php foreach($_items as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            truncateOptions();
+            decorateList('cart-sidebar', 'none-recursive');
+            $j('document').ready(function() {
+                var minicartOptions  = {
+                    formKey:           "<?php echo $this->getFormKey();?>"
+                }
+                var Mini = new Minicart(minicartOptions);
+                Mini.init();
+            });
+        </script>
+        <div id="minicart-widgets">
+            <?php echo $this->getChildHtml('cart_promotion') ?>
+        </div>
+        <div class="block-content mini">
+            <p class="continue-shopping">Continue Shopping <strong>&lsaquo;</strong></p>
+            <p class="subtotal">
+                <?php if ($this->canApplyMsrp()): ?>
+                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                <?php else: ?>
+                    <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                    <?php endif; ?>
+                <?php endif; ?>
+            </p>
+        </div>
+        <?php
+            
+            $appliedRuleIds = Mage::getSingleton('checkout/session')->getQuote()->getAppliedRuleIds();
+            $appliedRuleIds = explode(',', $appliedRuleIds);
+            $rules =  Mage::getModel('salesrule/rule')->getCollection()->addFieldToFilter('rule_id' , array('in' => $appliedRuleIds));
+            $coupon_methods = '';
+            foreach ($appliedRuleIds as $ruleId) {
+                $rule = Mage::getModel('salesrule/rule')->load($ruleId);
+                $coupon_methods .=  $rule->getStoreLabel();
+                if ($ruleId !== end($appliedRuleIds)) {
+                    $coupon_methods .= ', ';
+                }
+                //var_dump(get_class_methods($rule));
+            }
+            
+        ?>
+		<?php
+		$totals = Mage::getSingleton('checkout/session')->getQuote()->getTotals();
+        if(!empty($totals["discount"])) :
+		?>
+        <div class="disc-amount" style="width:100%;text-align:center;">
+            <?php
+				$totalDiscount = $totals["discount"]->getValue();
+                $amount = str_replace('-','',$totalDiscount);
+                echo 'Discount ('.$coupon_methods.') - $'.sprintf('%0.2f', $amount);;
+			?>
+        </div>
+        <?php endif; ?>
+        <div class="minicart-actions">
+            <a class="cart-link" href="<?php echo $this->getUrl('checkout/cart'); ?>">
+                <?php echo $this->__('View and edit cart'); ?>
+            </a>
+        </div>
+
+    <?php else: ?>
+        <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+
+    <?php endif ?>
+</div>

@@ -1,0 +1,1570 @@
+//colors
+$sand-green: #d9ddd3;
+$omni-green: #007b33;
+$white: #ffffff;
+$blue: #305893;
+$light-border-offwhite: #d0cbc1;
+$offwhite: #f9f9f9;
+$omni-grey: #444444;
+$dark-blue: #0a263c;
+$blue: #1c76ba;
+$black: #000000;
+
+//fonts
+$font-awesome: fontAwesome;
+
+//@extend-elements
+//original selectors
+//.col-main .c2q li.section:hover .tab-title, .col-main .c2q li.section .tab-title, .col-main .c2q li.section.active .tab-title
+%extend_1 {
+	position: relative;
+	background: none;
+	background-color: $blue;
+	border: none;
+	//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	text-shadow: none;
+	z-index: 0;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 0;
+	//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+	transition: all 300ms;
+}
+
+//original selectors
+//.col-main .c2q li.section.active .tab-title .numeration, .col-main .c2q li.section .tab-title .numeration
+%extend_2 {
+	color: $white;
+	border-right: 1px solid $white;
+	line-height: 32px;
+}
+
+//original selectors
+//.col-main .c2q li.section.active .tab-title h2, .col-main .c2q li.section .tab-title h2
+%extend_3 {
+	color: $white;
+	font-size: 18px;
+	margin: 10px 0.8em;
+}
+
+//original selectors
+//.form-list li.control input.radio, .form-list li.control input.checkbox
+%extend_4 {
+	width: 15px;
+	height: 15px;
+	padding: 0;
+}
+
+//original selectors
+//.col-right, .col-left
+%extend_5 {
+	float: none;
+	width: 100%;
+	overflow: hidden;
+}
+
+//original selectors
+//#shopping-cart-table tbody td.last .td.price:before, #shopping-cart-table tbody td.last .td.qty:before, #shopping-cart-table tbody td.last .td:nth-child(3):before, #shopping-cart-table tbody td.last .td.last:before
+%extend_6 {
+	position: absolute;
+	content: '';
+	top: -25px;
+	left: 50%;
+	font-size: 14px;
+	background-color: $omni-grey;
+	color: $white;
+	padding: 5px 0;
+	text-align: center;
+	width: 100%;
+	//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+	transform: translateX(-50%);
+}
+
+//original selectors
+//#shopping-cart-table tbody .td.first, #shopping-cart-table tbody .td.desc, #shopping-cart-table tbody .td.edit, #shopping-cart-table tbody .td.move, #shopping-cart-table tbody .td.price, #shopping-cart-table tbody .td.qty, #shopping-cart-table tbody .td.last
+%extend_7 {
+	float: none;
+	width: 100%;
+	text-align: left;
+	padding: 3px 0;
+}
+
+//original selectors
+//#shopping-cart-table tbody .td.edit, #shopping-cart-table tbody .td.price, #shopping-cart-table tbody .td.qty, #shopping-cart-table tbody .td.last
+%extend_8 {
+	float: left;
+	width: 20%;
+	margin-top: 20px;
+}
+
+//original selectors
+//.col2-set .col-1, .col2-set .col-2
+%extend_9 {
+	float: none;
+	width: 100%;
+	margin: 0 0 15px;
+}
+
+//original selectors
+//#shopping-cart-table thead span:first-child, #my-orders-table thead span:first-child
+%extend_10 {
+	display: block;
+	text-align: left;
+	padding-left: 10px;
+}
+
+//original selectors
+//.product-view .product-shop, .product-view .product-img-box
+%extend_11 {
+	float: none;
+	padding: 0 2%;
+	width: 96%;
+}
+
+//original selectors
+//.pager .amount, .pager .limiter, .pager .pages
+%extend_12 {
+	margin: 0 0 3px;
+	float: none;
+	text-align: left;
+}
+
+//original selectors
+//.title-buttons h1, .title-buttons h2, .title-buttons h3, .title-buttons h4, .title-buttons h5, .title-buttons h6
+%extend_13 {
+	float: none;
+	text-align: left;
+	margin: 0 0 15px;
+}
+
+
+body {
+	min-width: 320px;
+}
+img {
+	max-width: 100%;
+}
+.wrapper {
+	min-width: 320px;
+}
+.header {
+	width: auto;
+	max-width: 930px;
+	.quick-access {
+		width: 65%;
+	}
+	.form-search input.input-text {
+		width: 202px;
+	}
+}
+#nav {
+	width: auto;
+	max-width: 918px;
+	li.hover ul {
+		left: 0;
+		ul {
+			left: -10000px;
+		}
+		li.hover ul {
+			left: 9em;
+			z-index: 3000;
+		}
+	}
+}
+.main {
+	width: auto;
+	max-width: 900px;
+}
+.col-main {
+	width: 76%;
+	ol.c2q {
+		background: none;
+		border: none;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+		padding-left: 0;
+	}
+	.c2q li.section {
+		.tab-title {
+			@extend %extend_1;
+			background-color: lighten($blue, 5%);
+			&:before {
+				position: absolute;
+				content: "";
+				bottom: 0;
+				display: none;
+				width: 100%;
+				left: 50%;
+				//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+				transform: translateX(-50%);
+				height: 4px;
+				background-color: none;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 10px 10px 0 10px;
+				border-color: lighten($blue, 5%) transparent transparent transparent;
+			}
+			.numeration {
+				@extend %extend_2;
+			}
+			h2 {
+				@extend %extend_3;
+			}
+		}
+		&.active {
+			.tab-title {
+				@extend %extend_1;
+				&:before {
+					position: absolute;
+					content: "";
+					bottom: -10px;
+					display: block;
+					width: 100%;
+					left: 50%;
+					//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+					transform: translateX(-50%);
+					height: 4px;
+					background-color: none;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 10px 10px 0 10px;
+					border-color: $blue transparent transparent transparent;
+				}
+				.numeration {
+					@extend %extend_2;
+				}
+				h2 {
+					@extend %extend_3;
+				}
+			}
+			&:hover .tab-title {
+				background-color: $blue;
+			}
+		}
+		&:hover .tab-title {
+			@extend %extend_1;
+			background-color: lighten($blue, 3%);
+		}
+	}
+}
+.footer {
+	width: auto;
+	max-width: 930px;
+}
+.form-list {
+	padding: 0 0 10px;
+	li {
+		&.wide {
+			textarea {
+				width: 100%;
+				//Instead of the line below you could use @include box-sizing($bs)
+				box-sizing: border-box;
+			}
+			select {
+				width: auto;
+			}
+		}
+		&.control input {
+			&.radio {
+				@extend %extend_4;
+			}
+			&.checkbox {
+				@extend %extend_4;
+			}
+		}
+	}
+	.input-box {
+		width: auto;
+	}
+}
+.products-grid {
+	.product-image {
+		width: auto;
+		height: auto;
+	}
+	li.item {
+		width: 33%;
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+	}
+}
+.page-popup {
+	width: auto;
+	padding: 10px;
+}
+.product-view {
+	.product-img-box {
+		width: 42%;
+	}
+	.product-shop {
+		width: 52%;
+	}
+	.box-up-sell .products-grid {
+		border-collapse: collapse;
+	}
+}
+.pinned {
+	display: none;
+}
+.data-table {
+	.btn-remove {
+		margin: 0 auto;
+		text-indent: 0;
+	}
+	.td {
+		float: left;
+		width: 35%;
+		&.first {
+			width: 25%;
+			img {
+				height: auto;
+				max-width: 113px;
+			}
+		}
+		&.last {
+			width: 5%;
+		}
+	}
+	thead th {
+		white-space: normal;
+	}
+}
+.my-wishlist {
+	.product-image {
+		height: auto;
+		width: auto;
+		margin: 5px;
+	}
+	textarea {
+		width: 97% !important;
+		margin: 0 0 10px;
+	}
+}
+.btn-remove2 {
+	position: relative;
+	background: none;
+	width: 20px;
+	height: 20px;
+	&:before {
+		position: absolute;
+		content: '\f1f8';
+		font-family: $font-awesome;
+		font-size: 18px;
+		color: $black;
+		top: 50%;
+		left: 50%;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: translate(-50%, -50%);
+	}
+}
+.block {
+	.btn-edit {
+		text-indent: 0;
+	}
+	.btn-remove {
+		text-indent: 0;
+	}
+}
+#my-orders-table {
+	thead span {
+		width: 16%;
+		float: left;
+		text-align: left;
+	}
+	tbody span {
+		float: left;
+		width: 16%;
+		span {
+			width: auto;
+			float: none;
+		}
+		&.separator {
+			display: none;
+		}
+	}
+}
+#shopping-cart-table {
+	th span {
+		width: 7%;
+		float: left;
+		text-align: center;
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+		&:first-child {
+			width: 47%;
+			text-align: center;
+			padding-left: 10px;
+			color: $white;
+		}
+		&.unit-price {
+			width: 15%;
+			text-align: center;
+		}
+		&.subtotal {
+			width: 15%;
+			text-align: center;
+		}
+		&.remove-item {
+			width: 14%;
+			text-align: center;
+		}
+		&.qty {
+			width: 9%;
+			text-align: center;
+		}
+		&.product-name.quote {
+			width: 56%;
+			text-align: center;
+			padding-left: 10px;
+			color: $white;
+		}
+	}
+	tbody .td {
+		&.quote {
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+			padding: 0 5px;
+		}
+		&.first {
+			width: 13%;
+		}
+		&.desc {
+			width: 34%;
+			&.quote {
+				width: 43%;
+			}
+		}
+		&.edit {
+			width: 6%;
+			text-align: center;
+			display: none !important;
+		}
+		&.move {
+			width: 6%;
+			text-align: center;
+		}
+		&.price {
+			width: 15%;
+			text-align: center;
+			.cart-price {
+				padding: 0 0 0 10px;
+			}
+		}
+		&.qty {
+			width: 9%;
+		}
+		&.last {
+			width: 14%;
+		}
+	}
+	thead .td {
+		width: 20%;
+		text-align: center;
+	}
+}
+.nobr {
+	white-space: normal !important;
+}
+.block-poll {
+	li {
+		padding: 4px 9px;
+	}
+	label {
+		line-height: 18px;
+	}
+	.label {
+		margin: 0;
+	}
+	input.radio {
+		float: left;
+		width: 15px;
+		height: 15px;
+		padding: 0;
+		margin: 0 5px 0 0;
+	}
+}
+@media only screen and(max-width:980px) {
+	.col-main {
+		width: 72%;
+	}
+	.send-friend .form-list li {
+		margin: 0 0 8px;
+		&.wide .input-box {
+			width: 100%;
+		}
+	}
+}
+@media only screen and(max-width:979px) {
+	.col3-layout {
+		.col-right {
+			float: none;
+			width: 100%;
+		}
+		.col-left {
+			float: none;
+			width: 100%;
+		}
+		.col-wrapper {
+			width: 100%;
+			float: none;
+			overflow: hidden;
+			.col-main {
+				float: none;
+				width: 100%;
+				margin: 0 0 15px;
+			}
+		}
+		.products-grid {
+			background: none;
+			.actions {
+				width: 100%;
+				left: 0;
+			}
+			li.item {
+				border-left: 1px solid $sand-green;
+				text-align: center;
+				position: relative;
+				&.first {
+					border: 0;
+				}
+			}
+		}
+	}
+	.add-to-box {
+		.or {
+			float: none;
+			display: block;
+			margin: 0;
+		}
+		.add-to-cart {
+			float: none;
+		}
+	}
+	.cart {
+		.totals {
+			float: none;
+			overflow: hidden;
+			width: auto;
+			margin: 0 0 25px;
+		}
+		.cart-collaterals .col2-set {
+			float: none;
+			width: auto;
+			overflow: hidden;
+			.col-2 {
+				width: 48%;
+			}
+		}
+	}
+	.product-view .box-reviews .form-add .form-list {
+		.input-box {
+			width: 100%;
+		}
+		textarea {
+			width: 100%;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+		}
+		input.input-text {
+			width: 100%;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+		}
+	}
+	.advanced-search .form-list {
+		.input-box {
+			float: none;
+		}
+		.input-range {
+			float: none;
+		}
+	}
+	.product-order-wrapper .options-block {
+		.product-name {
+			font-size: 22px;
+		}
+		.add-to-cart button.button {
+			position: relative;
+			margin-top: 20px;
+			width: 100%;
+			height: 45px;
+			background: $omni-green;
+			border: none;
+			overflow: hidden;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all 300ms;
+			span {
+				position: relative;
+				height: 45px;
+				font-size: 18px;
+				line-height: 45px;
+				background: none;
+				color: $white;
+				span {
+					padding: 0 0 0 45px;
+					&:before {
+						width: 45px;
+						height: 45px;
+					}
+				}
+			}
+			&.btn-quote span span:after {
+				font-size: 20px;
+				left: 12px;
+			}
+		}
+	}
+}
+@media only screen and(max-width:916px) {
+	.form-list {
+		li {
+			margin: 0;
+			&.control {
+				padding: 5px 0 0;
+				label {
+					line-height: 20px;
+				}
+			}
+			&.wide {
+				.input-box {
+					margin: 0 0 8px;
+					width: auto;
+				}
+				input.input-text {
+					width: 100%;
+					//Instead of the line below you could use @include box-sizing($bs)
+					box-sizing: border-box;
+				}
+			}
+		}
+		label {
+			float: none;
+			display: inline-block;
+		}
+		select {
+			width: 100%;
+			height: 35px;
+			margin: 10px 0;
+		}
+		input.input-text {
+			width: 100%;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+		}
+	}
+}
+@media only screen and(max-width:800px) {
+	.main {
+		padding: 25px 10px 80px;
+	}
+	#newsletter-validate-detail .input-box {
+		float: left;
+		margin: 0 5px 0 0;
+	}
+	.product-options ul.options-list input {
+		&.radio {
+			margin-top: -3px;
+		}
+		&.checkbox {
+			margin-top: -3px;
+		}
+	}
+}
+@media only screen and(max-width:767px) {
+	#main-nav {
+		background: $blue !important;
+	}
+	.col-main {
+		float: none;
+		width: 100%;
+		margin: 0 0 15px;
+	}
+	.col-right {
+		float: none;
+		width: 100%;
+		overflow: hidden;
+	}
+	.col-left {
+		float: none;
+		width: 100%;
+		overflow: hidden;
+	}
+	.main {
+		min-height: 10px;
+		padding-bottom: 20px;
+	}
+	.product-view {
+		.box-tags .form-add {
+			.input-box {
+				width: 100%;
+				//Instead of the line below you could use @include box-sizing($bs)
+				box-sizing: border-box;
+			}
+			input.input-text {
+				width: 100%;
+				//Instead of the line below you could use @include box-sizing($bs)
+				box-sizing: border-box;
+				margin-bottom: 10px;
+			}
+		}
+		.product-shop .add-to-links li .separator {
+			display: none;
+		}
+	}
+	.cart-table {
+		border: 1px solid $light-border-offwhite;
+	}
+	#wishlist-table {
+		border: 1px solid $light-border-offwhite;
+	}
+	.product-collateral {
+		padding: 25px 10px;
+	}
+	.link-compare {
+		display: none !important;
+	}
+	.block-compare {
+		display: none !important;
+	}
+	.block-compared {
+		display: none !important;
+	}
+	.products-grid {
+		.actions {
+			position: static;
+			margin: 0 0 10px;
+		}
+		li.item {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+	.form-list {
+		.input-box {
+			width: auto;
+		}
+		.field {
+			width: 100%;
+			margin: 0 0 8px;
+		}
+		li.wide .input-box {
+			width: auto;
+		}
+	}
+	.block-subscribe input.input-text {
+		width: 100%;
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+	}
+	.products-list .add-to-links .separator {
+		display: none;
+	}
+}
+@media only screen and(max-width:667px) {
+	#LPMcontainer-1448044380885-0 {
+		display: none !important;
+	}
+	#shopping-cart-table {
+		&.data-table {
+			tbody {
+				.td {
+					&.first {
+						text-align: center;
+					}
+					&.desc {
+						text-align: center;
+					}
+				}
+				tr {
+					&.even {
+						background: $offwhite;
+					}
+					td.last {
+						position: relative;
+						&:before {
+							position: absolute;
+							content: 'Product Name';
+							top: 0;
+							left: 0;
+							width: 100%;
+							font-size: 16px;
+							color: $white;
+							background-color: $blue;
+							padding: 5px;
+							//Instead of the line below you could use @include box-sizing($bs)
+							box-sizing: border-box;
+							padding-left: 10px;
+							padding-bottom: 11px;
+						}
+					}
+					&:nth-child(1) td.last {
+						padding: 10px;
+						&:before {
+							display: none;
+						}
+					}
+				}
+				td.last div p.sku {
+					text-align: center;
+				}
+			}
+			td.last {
+				border: none;
+			}
+			th.last {
+				border: none;
+			}
+		}
+		&.cart-table {
+			td {
+				padding: 30px 10px 10px;
+			}
+			tfoot td {
+				padding: 10px;
+			}
+		}
+		tbody {
+			.td {
+				position: relative;
+				&.first {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					text-align: center;
+				}
+				&.desc {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					text-align: center;
+					text-align: center;
+				}
+				&.edit {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					float: left;
+					width: 20%;
+					margin-top: 20px;
+				}
+				&.move {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+				}
+				&.price {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					float: left;
+					width: 20%;
+					margin-top: 20px;
+					width: 35%;
+					.cart-price {
+						padding: 0;
+						text-align: left;
+						.price {
+							font-size: 18px;
+							font-weight: 700;
+							display: block;
+							padding-top: 5px;
+						}
+					}
+				}
+				&.qty {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					float: left;
+					width: 20%;
+					margin-top: 20px;
+					width: 20%;
+				}
+				&.last {
+					float: none;
+					width: 100%;
+					text-align: left;
+					padding: 3px 0;
+					float: left;
+					width: 20%;
+					margin-top: 20px;
+					width: 10%;
+					text-align: left;
+					float: right;
+				}
+			}
+			td.last .td {
+				&.price:before {
+					position: absolute;
+					content: '';
+					top: -25px;
+					left: 50%;
+					font-size: 14px;
+					background-color: $omni-grey;
+					color: $white;
+					padding: 5px 0;
+					text-align: center;
+					width: 100%;
+					//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+					transform: translateX(-50%);
+					content: 'Unit Price';
+				}
+				&.qty:before {
+					position: absolute;
+					content: '';
+					top: -25px;
+					left: 50%;
+					font-size: 14px;
+					background-color: $omni-grey;
+					color: $white;
+					padding: 5px 0;
+					text-align: center;
+					width: 100%;
+					//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+					transform: translateX(-50%);
+					content: 'Qty';
+				}
+				&:nth-child(3):before {
+					position: absolute;
+					content: '';
+					top: -25px;
+					left: 50%;
+					font-size: 14px;
+					background-color: $omni-grey;
+					color: $white;
+					padding: 5px 0;
+					text-align: center;
+					width: 100%;
+					//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+					transform: translateX(-50%);
+					content: 'Subtotal';
+				}
+				&.last:before {
+					position: absolute;
+					content: '';
+					top: -25px;
+					left: 50%;
+					font-size: 14px;
+					background-color: $omni-grey;
+					color: $white;
+					padding: 5px 0;
+					text-align: center;
+					width: 100%;
+					//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+					transform: translateX(-50%);
+					content: 'X';
+				}
+				span span {
+					text-align: center;
+				}
+			}
+		}
+		thead span:first-child {
+			font-size: 16px;
+			font-weight: 300;
+			display: block;
+			text-align: left;
+			padding-left: 10px;
+		}
+		tr th span {
+			display: none;
+			&:nth-child(1) {
+				display: block;
+			}
+		}
+	}
+	.header {
+		padding-top: 10px;
+		text-align: left;
+		.logo {
+			float: none;
+			display: block;
+			margin: 0;
+		}
+		.form-search {
+			right: 0;
+			position: static;
+			background: $dark-blue;
+			padding: 9px 5px 0 10px;
+			margin: 0 0 9px;
+			width: 280px;
+			label {
+				display: none;
+			}
+		}
+		.links {
+			padding: 0 0 10px;
+			float: left;
+			li {
+				font-size: 10px;
+				padding: 0 6px 0 5px;
+				margin: 0 5px 0 -5px;
+				&.first {
+					padding-left: 5px !important;
+				}
+				&.last {
+					padding-right: 0;
+					margin-right: 0;
+				}
+			}
+		}
+		.quick-access {
+			float: none;
+			display: block;
+			width: 100%;
+			padding: 12px 0 0;
+		}
+		.welcome-msg {
+			text-align: left;
+			margin: 0 0 10px;
+		}
+		.form-language {
+			text-align: left;
+		}
+	}
+	#nav {
+		padding: 0 3px;
+		li .shown-sub {
+			ul.shown-sub {
+				left: 10px;
+				top: 100%;
+			}
+			li div.shown-sub {
+				left: 10px;
+				top: 100%;
+			}
+		}
+	}
+	.col-main {
+		.c2q {
+			li.section {
+				display: inline-block;
+				width: 160px;
+				.tab-title {
+					margin: 0;
+				}
+			}
+			.tab-title h2 {
+				line-height: 1.25em;
+			}
+		}
+		ol.c2q {
+			background: none;
+			border: none;
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: none;
+			padding-left: 0;
+			display: inline-block;
+			text-align: center;
+			width: 100%;
+		}
+	}
+	.col2-set {
+		.col-1 {
+			float: none;
+			width: 100%;
+			margin: 0 0 15px;
+		}
+		.col-2 {
+			float: none;
+			width: 100%;
+			margin: 0 0 15px;
+		}
+	}
+	.cart {
+		.totals {
+			float: none;
+			width: 100%;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+		.cart-collaterals .col2-set {
+			width: 100%;
+			.col-2 {
+				width: 100%;
+			}
+		}
+	}
+	.fieldset {
+		padding: 22px 15px 12px 18px;
+	}
+	.form-list {
+		.field {
+			margin: 0 0 8px;
+		}
+		.name-lastname {
+			margin: 0;
+		}
+	}
+	#my-orders-table {
+		thead span:first-child {
+			display: block;
+			text-align: left;
+			padding-left: 10px;
+		}
+		tbody span {
+			float: none;
+			width: 49%;
+			display: inline-block;
+		}
+	}
+	div#LPMcontainer-1448044527697-0.LPMcontainer.LPMslider {
+		display: none !important;
+	}
+	.footer li {
+		white-space: nowrap;
+	}
+	.account-login .content {
+		min-height: 200px;
+	}
+	.sp-methods .form-list {
+		padding-left: 0;
+	}
+	.product-view .box-up-sell {
+		.products-grid {
+			td {
+				border: 1px solid $sand-green;
+				width: auto;
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+			tr.last td {
+				border: 1px solid $sand-green;
+			}
+		}
+		table.products-grid {
+			border-collapse: collapse;
+		}
+	}
+	.ratings .rating-box {
+		float: none;
+	}
+	.products-grid .ratings .rating-box {
+		margin: 0 auto 5px;
+	}
+	.catalog-product-view .ratings .rating-box {
+		margin: 0 0 8px;
+	}
+	.data-table .td.first img {
+		width: 100%;
+	}
+	.form-add .button {
+		float: right;
+	}
+	#wishlist-table th span:first-child + span {
+		white-space: normal;
+		text-align: left;
+	}
+	#main-nav .drop-wrapper .drop {
+		margin-top: 0;
+	}
+	.container .featured-title-bar h2 {
+		font-size: 20px;
+	}
+}
+@media only screen and(max-width:479px) {
+	.col3-layout {
+		.products-grid {
+			margin: 10px 0;
+			li {
+				float: none;
+				width: 100%;
+				overflow: hidden;
+				position: relative;
+				border: 1px solid $sand-green;
+				border-bottom: 0;
+				&.item.first {
+					border: 1px solid $sand-green;
+					border-bottom: 0;
+				}
+			}
+		}
+		.add-to-links li {
+			border: 0;
+		}
+	}
+	.products-grid {
+		&.last {
+			border-bottom: 1px solid $sand-green;
+		}
+		.product-image {
+			margin: 10px 0;
+		}
+		li.item {
+			height: auto !important;
+			min-height: 20px !important;
+			min-height: 20px;
+		}
+	}
+	.product-view {
+		.product-shop {
+			float: none;
+			padding: 0 2%;
+			width: 96%;
+		}
+		.product-img-box {
+			float: none;
+			padding: 0 2%;
+			width: 96%;
+		}
+	}
+	.pager {
+		.amount {
+			margin: 0 0 3px;
+			float: none;
+			text-align: left;
+		}
+		.limiter {
+			margin: 0 0 3px;
+			float: none;
+			text-align: left;
+		}
+		.pages {
+			margin: 0 0 3px;
+			float: none;
+			text-align: left;
+			margin: 0;
+		}
+	}
+	.product-options-bottom {
+		.add-to-cart {
+			float: none;
+		}
+		.price-box {
+			float: none;
+			overflow: hidden;
+			margin: 0 0 5px;
+		}
+	}
+	.cart {
+		overflow: hidden;
+		.title-buttons .checkout-types {
+			float: none;
+			overflow: hidden;
+		}
+		.page-title h1 {
+			margin: 0 0 10px;
+		}
+	}
+	.title-buttons {
+		h1 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+		h2 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+		h3 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+		h4 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+		h5 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+		h6 {
+			float: none;
+			text-align: left;
+			margin: 0 0 15px;
+		}
+	}
+	.buttons-set2 {
+		text-align: left;
+		button.button {
+			margin: 0 5px 10px 0;
+		}
+	}
+	#product-review-table {
+		th {
+			padding: 3px;
+		}
+		td {
+			padding: 3px;
+		}
+	}
+	#wishlist-table {
+		.cart-cell {
+			padding: 0;
+		}
+		th span {
+			display: none;
+			&:first-child + span {
+				display: block;
+				width: 100%;
+				text-align: left;
+			}
+		}
+	}
+	.inner {
+		margin: 0 0 5px;
+	}
+	.product-name {
+		margin: 0 0 5px;
+	}
+	.truncated {
+		margin: 5px 0;
+		.show .item-options {
+			left: 0;
+		}
+	}
+	.product-essential {
+		padding: 10px 0 0;
+	}
+	.v-fix {
+		float: none;
+		overflow: hidden;
+		margin: 0 0 10px;
+	}
+	.fieldset {
+		padding: 22px 10px 12px;
+		.legend {
+			margin-left: 0;
+		}
+	}
+	.item-options dd {
+		padding-left: 0;
+		margin: 0;
+	}
+	#products-list .product-image {
+		width: 30%;
+		height: auto;
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+	.products-list .product-shop {
+		margin: 0;
+		float: right;
+		width: 67%;
+	}
+	.ratings .rating-box {
+		float: none;
+		margin: 0 0 5px;
+	}
+	.product-shop .product-options-bottom .add-to-links {
+		text-align: left;
+	}
+	.page-popup .page-title {
+		text-align: left;
+		overflow: hidden;
+		h1 {
+			float: none;
+			margin: 0 0 5px;
+		}
+	}
+	.data-table .td {
+		float: none;
+		width: 100%;
+		&.first {
+			float: none;
+			width: 100%;
+			img {
+				width: auto;
+			}
+		}
+		&.last {
+			float: none;
+			width: 100%;
+		}
+	}
+	.my-wishlist .product-image {
+		margin: 0 0 5px;
+		width: auto;
+		img {
+			width: 113px;
+			height: 113px;
+		}
+	}
+	.cart-table .button {
+		float: none !important;
+		margin: 0 0 5px;
+	}
+	.form-list li.wide select {
+		width: 238px;
+	}
+	.form-add .button {
+		float: right;
+	}
+	#nav ul li.hover ul {
+		left: 0 !important;
+	}
+	.send-friend .form-list {
+		.input-box {
+			width: 100%;
+		}
+		.field {
+			width: 100%;
+		}
+		textarea {
+			width: 100%;
+		}
+		input.input-text {
+			width: 100%;
+		}
+	}
+	.order-items.order-details #my-orders-table {
+		width: 100%;
+		font-size: 11px;
+		td {
+			font-size: 10px;
+			padding: 3px;
+		}
+		th {
+			padding: 3px;
+		}
+		tbody span {
+			&.price-excl-tax {
+				width: 100%;
+			}
+			&.nobr {
+				width: 100%;
+			}
+		}
+	}
+}
+@media only screen and(max-width:330px) {
+	#nav {
+		ul {
+			width: 10em;
+		}
+		div {
+			width: 10em;
+		}
+	}
+	.cart-table {
+		img {
+			width: 100%;
+		}
+		td {
+			padding: 5px;
+			width: 60px;
+		}
+	}
+	.form-list li.wide select {
+		width: 238px;
+	}
+	.my-account .title-buttons h1 {
+		float: left;
+	}
+	#shopping-cart-table tbody .td {
+		&.price {
+			width: 25%;
+			float: left;
+			&:first-child {
+				clear: both;
+			}
+		}
+		&.qty {
+			width: 25%;
+			float: left;
+		}
+		&.last {
+			width: 25%;
+			float: left;
+		}
+		&.edit {
+			width: 50%;
+			float: left;
+		}
+		&.move {
+			width: 50%;
+			float: left;
+		}
+	}
+}
+.col3-layout .col-main {
+	//Instead of the line below you could use @include box-sizing($bs)
+	box-sizing: border-box;
+}
+#upsell-product-table .empty {
+	display: none !important;
+}
+#quotelist .qquote-client-collaterals {
+	width: 100%;
+	float: none;
+	font-size: 0;
+	.box {
+		display: inline-block;
+		vertical-align: top;
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+		font-size: 14px;
+		margin-left: 0;
+		margin-right: 0;
+		&.client-data {
+			width: 48%;
+			float: left;
+		}
+		&.distribution-list {
+			width: 48%;
+			float: right;
+		}
+		&.address-form {
+			width: 100%;
+		}
+	}
+}
+.td.price.quote {
+	text-align: center;
+}
+td.last div p {
+	text-align: center;
+	&.sku {
+		text-align: left;
+	}
+}
+.block-compared .block-title {
+	background: $white;
+}
+.block-compare .block-title {
+	background: $white;
+}
+.block-viewed .block-title {
+	background: $white;
+}
+input.qty {
+	width: 2em !important;
+	padding-left: 10px;
+	margin: 0 auto;
+	display: block;
+}
+.truncated .show .item-options {
+	left: -50%;
+}
+.tool-tip-content img {
+	width: 100%;
+}
+.send-friend .form-list {
+	width: 100%;
+	li.wide {
+		.input-box {
+			width: 616px;
+		}
+		textarea {
+			width: 100%;
+			//Instead of the line below you could use @include box-sizing($bs)
+			box-sizing: border-box;
+		}
+	}
+}

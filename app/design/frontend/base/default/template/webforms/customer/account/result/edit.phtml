@@ -1,0 +1,10 @@
+<?php
+$_result = $this->getResult();
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="dashboard">
+    <div class="page-title">
+        <h1><?php echo $_result->getWebform()->getName() ?></h1>
+    </div>
+    <?php echo $this->getChildHtml('webforms_customer_account_form_edit') ?>
+</div>

@@ -1,0 +1,17 @@
+<select name="filter[product_id]" id="productUsed">
+    <option value="">-- Select Product Type --</option>
+    <option value="GLH-115">Omni GLH</option>
+    <option value="MESP-115">Omni Macro ES</option>
+    <option value="17104">Omni Mixer &amp; Macro</option>
+    <option value="05-90020">Omni MultiMix 200</option>
+    <option value="06-021">Omni Prep</option>
+    <option value="TH115">Omni TH</option>
+    <option value="3_750X">Omni Tip Plastic Probes</option>
+    <option value="09-A10-050">Biomasher</option>
+    <option value="12-500">Omni THQ</option>
+    <option value="25-010">Omni Ruptor</option>
+    <option value="F2107-05">Omni Tissue Master</option>
+    <option value="25-010">Bead Ruptor 4</option>
+    <option value="19-050">Bead Ruptor 12</option>
+    <option value="19-040">Bead Ruptor 24 Elite</option>
+</select>

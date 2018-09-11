@@ -1,0 +1,12 @@
+<?php if($this->getItems()->getSize()): ?>
+    <div class="inner-wrap">
+        <?php foreach($this->getItems() as $_item): ?>
+        <a class="product" href="<?php echo $_item->getProductUrl() ?>" data-sku="<?php echo $_item->getSku() ?>">
+            <figure>
+                <span class="caption"><?php echo $this->htmlEscape($_item->getName()) ?></span>
+                <img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100,100) ?>" width="100" height="100" alt="<?php echo $this->htmlEscape($_item->getName()) ?>"  />
+            </figure>
+        </a>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>

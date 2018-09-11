@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+			<multislider module="multislider">
+				<title>multislider Slider</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="multislider">
+						<title>Manage Banners</title>
+						<sort_order>0</sort_order>
+						<action>multislider/adminhtml_multislider</action>
+					</items>
+				</children>
+			</multislider>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<puru_multislider>
+							<title>multislider Module</title>
+							<sort_order>10</sort_order>
+						</puru_multislider>
+						<system>
+							<children>
+								<config>
+									<children>
+										<multislider translate="title" module="multislider"> 
+											<title>multislider Slider Settings</title>
+											<sort_order>50</sort_order>
+										</multislider>
+									</children>							
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+</config>
+

@@ -1,0 +1,95 @@
+<div class="row top-header mobile-hide">
+	<div class="container">		
+		<button class="pull-left live-chat">
+			Live Chat
+			<svg id="blog-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80.445">
+				<path d="M37.615 0C16.903 0 .112 11.264.112 25.166c0 7.494 4.885 14.218 12.628 18.828-1.648 3.054-4.905 6.95-11.64 12.234-1.1.862-2.474 2.11 1.974 1.22 7.448-1.49 15.396-5.287 21.455-8.692 4.074 1.02 8.48 1.577 13.086 1.577 20.71 0 37.502-11.264 37.502-25.166S58.326 0 37.615 0z"></path>
+				<path d="M99.19 63.12c-5.78-4.535-6.606-7.096-6.888-8.957 4.033-2.922 6.5-6.83 6.5-11.128 0-7.997-8.532-14.648-19.818-16.094C78.05 38.38 68.12 47.854 53.95 52.01c4.364 4.463 11.883 7.412 20.432 7.412 3.68 0 7.168-.55 10.3-1.528 3.296 2.113 8.937 5.353 13.956 6.355 2.297.46 1.12-.686.552-1.13z"></path>
+			</svg>
+		</button>
+		<span>Customer Service: 1-800-776-4431</span>
+		<div class="pull-right">
+			<ul class="social-icons">
+				<li class="facebook"><a href="https://www.facebook.com/OMNIInternationalInc/" target="_blank">Facebook</a></li>
+				<li class="twitter"><a href="https://twitter.com/OmniInc" target="_blank">Twitter</a></li>
+				<li class="linkedin"><a href="https://www.linkedin.com/company/omni-international_2/" target="_blank">Linkedin</a></li>
+				<li class="instagram"><a href="https://www.instagram.com/omni_international/ " target="_blank">Instagram</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="row logo-links">
+	<div class="container header flex">
+		<div class="logo">
+			<a href="<?php echo $this->getUrl('') ?>">
+				<picture>
+					<source media="(max-width: 767px)" srcset="<?php echo Mage::getDesign()->getSkinUrl() . 'images/omni-small-logo.svg' ?>" alt="<?php echo $this->getLogoAlt() ?>"/>				
+					<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+				</picture>
+			</a>
+		</div>
+		<div class="header-actions">
+			<div class="header-links center mobile-hide">
+				<ul>
+					<li class="list-group-item"><a href="/distributor-locator/">Distributor Locator</a></li>
+					<li class="list-group-item"><a href="/news/">News</a></li>
+					<li class="list-group-item"><a href="/industries.html">Industries</a></li>
+					<li class="list-group-item"><a href="/about-omni/">About Us</a></li>
+				</ul>
+			</div>
+			<?php echo $this->getChildHtml('topSearch') ?>
+		</div>
+		<div class="header-actions right">
+			<div class="header-links right mobile-hide">
+				<?php if($this->helper('customer')->isLoggedIn() ): ?>				
+				<ul>
+					<li>
+						<div class="account">
+							<a href="<?php echo $this->getUrl('customer/account'); ?>">
+								<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/account.svg' ?>">
+							</a>
+						</div>
+					</li>
+					<li><a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo Mage::getSingleton('customer/session')->getCustomer()->getFirstname(); ?></a></li>
+					<li><span><?php echo $this->__("|")?></span></li>
+					<li><a href="<?php echo $this->getUrl('customer/account/logout'); ?>"><?php echo $this->__('Logout'); ?></a></li>						
+				</ul>
+				<?php else: ?>
+				<ul class="header-links">
+					<li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('Login'); ?></a></li>
+					<li><span><?php echo $this->__("|")?></span></li>
+					<li><a href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo $this->__('Register'); ?></a></li> 
+				</ul>					
+				<?php endif; ?>
+			</div>
+			<?php echo $this->getChildHtml('distributor_location'); ?>
+		</div>
+	</div>
+</div>
+<div class="row" id="main-nav">
+	<div class="container">
+		<div class="minicart-wrap">
+			<div class="header-icon-group">
+				<div class="search mobile-show">
+					<a href="#">
+						<img src="/media/wysiwyg/search-icon.png">
+					</a>
+				</div>
+				<div class="account mobile-show">
+					<a href="<?php echo $this->getUrl('customer/account'); ?>">
+						<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/account.svg' ?>">
+					</a>
+				</div>				
+				<?php echo $this->getChildHtml('quote_link') ?>
+				<?php echo $this->getChildHtml('cart_sidebar') ?>
+			</div>
+			<div id="header-quote" class="header-quote">
+				<?php echo $this->getChildHtml("miniquote_content"); ?>
+			</div>
+			<div id="header-minicart" class="header-minicart">
+				<?php echo $this->getChildHtml('minicart_head'); ?>
+			</div>
+		</div>	
+		<?php echo $this->getChildHtml('header-menu') ?>
+	</div>		
+</div>

@@ -1,0 +1,60 @@
+/* Form */
+.col-main .banner img {
+  width: 100%;
+  margin-bottom: 20px; }
+.col-main .fieldset {
+  padding: 0;
+  border: 0;
+  margin-bottom: 0; }
+  .col-main .fieldset .legend {
+    display: none; }
+.col-main .form-list {
+  max-width: 560px; }
+  .col-main .form-list > li:not(:last-child) {
+    margin-bottom: 20px; }
+  .col-main .form-list label {
+    margin-bottom: 10px;
+    color: black; }
+  .col-main .form-list label.required em {
+    color: black; }
+  .col-main .form-list input[type=text] {
+    height: 30px;
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .col-main .form-list select {
+    height: 30px;
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .col-main .form-list .field {
+    width: 48%; }
+    .col-main .form-list .field:last-child {
+      float: right; }
+  .col-main .form-list li.wide .input-box {
+    width: 100%; }
+.col-main .buttons-set {
+  border: none;
+  margin-top: 0;
+  max-width: 560px; }
+  .col-main .buttons-set p.required {
+    display: none; }
+
+.col-right > div:not(.contact-info) {
+  display: none; }
+
+@media only screen and (max-width: 978px) {
+  .col-main .form-list .field {
+    width: 100%;
+    float: none !important;
+    margin: 0; }
+    .col-main .form-list .field + .field {
+      margin-top: 20px; } }

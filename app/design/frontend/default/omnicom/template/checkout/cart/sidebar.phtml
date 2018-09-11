@@ -1,0 +1,28 @@
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+<div class="block block-cart">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <div class="block-title">
+        <strong><span><?php echo $this->__('My Cart') ?></span></strong>
+    </div>
+    <div class="block-content">
+    <?php if ($_cartQty>0): ?>
+        <p class="empty"><a href="<?php echo $this->getUrl('checkout/cart'); ?>" class="cart-link"><strong><?php echo $_cartQty; ?></strong></a></p>
+    <?php else: ?>
+        <p class="empty"><a href="<?php echo $this->getUrl('checkout/cart'); ?>" class="cart-link"><strong>0</strong></a></p>
+    <?php endif ?>
+    </div>
+</div>
+<?php endif;?>
+
+
+<!-- Set Current URL -->
+<?php
+
+ $currentUrl = $this->helper('core/url')->getCurrentUrl();
+ $currentUrl = (string)$currentUrl;
+
+ if (!strpos($currentUrl, "checkout/cart")) {
+    Mage::getSingleton('core/session')->setLastUrl($currentUrl);
+ }
+
+?> 

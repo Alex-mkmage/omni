@@ -1,0 +1,104 @@
+<?php
+$currentCountry = Mage::getModel('core/session')->getData('current_country');
+if(in_array($currentCountry['code'], array('US','CA'))):
+    $allowedCountry = true;
+else:
+    $allowedCountry = false;
+endif;
+
+?>
+<?php if($this->getItems()->getSize()): ?>
+<?php
+    $attribute = Mage::getSingleton('eav/config')
+        ->getAttribute(Mage_Catalog_Model_Product::ENTITY, 'accessory_category');
+    $categories = array(
+        array(
+            'value' => '',
+            'label' => 'Accessories',
+        )
+    );
+    if ($attribute->usesSource()) {
+        $categories = array_merge($categories, $attribute->getSource()->getAllOptions(false));
+    }
+    foreach ($categories as $i => $data){
+        $categories[$data['value']] = $data['label'];
+        unset($categories[$i]);
+    }
+?>
+<div  class="main-tab container">
+    <?php
+    $category_count = 0;
+    $all_category = count($categories);
+    foreach($categories as $c_value => $c_label):
+    ?>
+    <ul class="block-related product-list list-view <?php echo preg_replace("/[\s_]/", "-", strtolower($c_label)); ?>">
+    <?php
+    $counter = 0;
+    foreach($this->getItems() as $_item):
+        $ac =  $_item->getAccessoryCategory();
+        if(
+            $_item->getAccessoryCategory() == $c_value
+        ):
+        ++$counter;
+        $_product = Mage::getModel('catalog/product')->load($_item->getId());
+    ?>
+        <li class="item">
+            <div class="product">
+                <a href="<?php echo $_item->getProductUrl() ?>" data-sku="<?php echo $_item->getSku() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="img"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(71,71) ?>" width="71" height="71" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+               <div class="txt">
+                     <h2 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>" data-sku="<?php echo $_item->getSku() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h2>
+
+            
+                <!-- start sku--> 
+                <strong><label><?php echo $this->__('SKU: ') ?></label></strong>
+                <?php echo nl2br($_product->getSku()) ?><br>
+                        <!-- end sku-->
+        <?php if($_product->_data['price']!=0): ?>
+        <?php echo $this->getPriceHtml($_item, true, '-related') ?>
+        <?php endif; ?>
+                <div class="small-cart-wrapper">
+                        <form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>"  method="post" id="product_addtocart_form_<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                            <div class="no-display">
+                                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                                <input type="hidden" name="related_product" id="related-products-field<?php echo $_product->getId(); ?>" value="" />
+                            </div>
+                            <input type="submit" class="no-display" value="Sub"/>
+                            <div>
+                                 <input type="text" name="qty" id="qty<?php echo $_product->getId(); ?>" maxlength="12" value="1" title="<?php echo $this->__('Qty') ?>" class="text qty" />
+                                 <span class="qty-label">Quantity</span>
+                            </div>
+                            <div class="add-to-cart">
+                            <?php if($_product->_data['price']!=0){ ?>
+                                
+                                <button class="button btn-cart" title="Add to Cart" onclick="product_addtocart_form_<?php echo $_product->getId() ?>.submit(); ga('send', 'event', 'Add-to-cart', 'Product-added');" type="button"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+
+                                <?php } ?>
+
+                        <?php if($_product->isSaleable()): ?>
+                        <?php $url = $this->helper('qquoteadv/catalog_product_data')->getUrlAdd2Qquoteadv($_product); ?>
+                        <?php $actionQuote = "setLocation('".$url."')"; ?>
+
+                        <!-- quote button -->
+                        <?php if($_product->getData('allowed_to_quotemode')==1){ ?>
+                                    <button type="button" title="<?php echo Mage::helper('qquoteadv')->__("Add to Quote");?>" class="button btn-quote allow-from-backend" onclick="<?php echo $actionQuote;?>"><span><span><?php echo Mage::helper('qquoteadv')->__("Add to Quote");?></span></span></button>
+                                <?php
+                                }else{ ?>
+                                    <button type="button" title="<?php echo Mage::helper('qquoteadv')->__("Add to Quote");?>" class="button btn-quote" onclick="<?php echo $actionQuote;?>"><span><span><?php echo Mage::helper('qquoteadv')->__("Add to Quote");?></span></span></button>
+                                <?php
+                                }
+                                ?>
+                        <!--  -->
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <?php endif; ?>
+        </li>
+    <?php if($counter == 50){ break; } endif; endforeach; ?>
+    </ul>
+    <?php endforeach; ?>
+    <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+</div>
+<?php endif ?>

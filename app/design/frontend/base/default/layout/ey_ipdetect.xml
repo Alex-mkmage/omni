@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	
+	<default>
+					
+		<reference name="after_body_start">
+		
+			<block type="core/template" name="ipdetect" as="ipdetect" template="ey/ipdetect/ipdetect.phtml"/>
+			
+		</reference>	
+				
+	</default>
+	
+</layout>

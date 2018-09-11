@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <ey_applications_application_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>applications/2columns-left.phtml</template>
+            </action>
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>jquery/jquery-ui-1.11.0.js</script><sort_order>10</sort_order></action>
+            <action
+                    method="addJs"><script>tagsinput/jquery.tagsinput.min.js</script><sort_order>11</sort_order></action>
+            <action method="addJs"><script>simplePagination/jquery.simplePagination.js</script><sort_order>12
+            </sort_order></action>
+            <action method="addItem"><type>js_css</type><name>simplePagination/simplePagination.css</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery-ui-1.8.13.css</name></action>
+            <action method="addItem"><type>js_css</type><name>tagsinput/jquery.tagsinput.min.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>ey/js/applications.js</name><sort_order>13
+            </sort_order></action>
+            <!-- <action method="addItem"><type>skin_js</type><name>ey/js/ofi.browser.js</name><sort_order>14
+            </sort_order></action>
+            <action method="addItem"><type>skin_js</type><name>ey/js/picturefill.min.js</name><sort_order>15
+            </sort_order></action> -->
+            <action method="addItem"><type>skin_js</type><name>js/jquery.equalHeightColumns-1.3.js</name><sort_order>14</sort_order></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery-match-height.min.js</name><sort_order>15
+            </sort_order></action>
+            <action method="addCss"><stylesheet>ey/css/application.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/app-database.css</stylesheet></action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ey/css/app-ie.css</name>
+                <params/>
+                <if>gt IE 7</if>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="ey_applications/application_filter" name="application_filter"
+                   template="applications/filter.phtml">
+                <block type="core/template" name="application_filter_product"
+                       template="applications/filter/product.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+            
+            <block type="ey_applications/application" name="application_search"
+                   template="applications/search.phtml" />
+            <block type="ey_applications/application_featured" name="application_featured"
+                   template="applications/featured.phtml">
+                <action method="setData">
+                    <name>limit</name>
+                    <value>3</value>
+                </action>
+                <block type="ey_applications/application_featured" name="application_featured_list"
+                    template="applications/list.phtml"/>
+            </block>
+            <block type="ey_applications/application" name="application_results"
+                   template="applications/results.phtml" />
+        </reference>
+    </ey_applications_application_index>
+    <ey_applications_application_document>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>ey/js/applications.js</name></action>
+            <action method="addCss"><stylesheet>ey/css/application.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/app-database.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="ey_applications/application_document" name="application_view"
+                   template="applications/view.phtml" >
+            <block type="ey_applications/application_document_upsell" name="application_view_upsell"
+                    template="applications/view/upsell.phtml" />
+            </block>
+        </reference>
+    </ey_applications_application_document>
+    <ey_applications_application_list>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>applications/blank.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="ey_applications/application_list" name="application_list"
+                   template="applications/list.phtml" />
+        </reference>
+    </ey_applications_application_list>
+</layout>

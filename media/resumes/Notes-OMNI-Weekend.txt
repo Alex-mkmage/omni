@@ -1,0 +1,34 @@
+List of TASKS and ACCOMPANIMENTS
+ 
+- Fixed Media Bug for uploads
+- Need to fix Media bug front end displayed Bead Ruptor 12 & 24
+-Debugg Connection Manager Error. Magento requires PHP 5.2.13+ (). RESET All FILE PERMISSIONS, IN ORDER TO
+
+USE MAGENTO CONNECT TO INSTALL EXTENSIONS. This takes several hours.
+-Patent Pending Snap Tube Carriage - image missing
+-Bead Ruptor 24 video missing
+-Bead Ruptor 24 missing accessories. On bead ruptor
+
+website does not include 1.5mL Tube Carriage Kit, but the catelog includes the 1.5mL Carriage Kit.
+- Chat Broken image this issue is the same as the
+
+issue with images from the media file not displaying correctly.
+
+Issues:
+Images not displaying correctly on the product Description field. solution may be to change PHP Memory_limit no less than 512
+
+Contact us form submission not working. May look at  help desk ticket system.  help desk ticket system will give you the functionality that you want with the contact us form, with the benefit of automating requests and message tracking. I prefer the product with *.   In addition I did look at freebies. They just  didn't have the functionality.
+
+http://www.magentocommerce.com/magento-connect/help-
+
+desk-ultimate-by-aheadworks.html
+
+*http://www.magentocommerce.com/magento-
+
+connect/helpdesk-help-desk-mx.html
+
+Images need to be resized
+
+Directions: Please name all media with lowercase and no spaces. You can use '_' if you would like.
+
+

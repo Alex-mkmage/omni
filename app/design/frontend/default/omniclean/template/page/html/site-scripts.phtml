@@ -1,0 +1,63 @@
+<script>
+$j(document).ready(function(){
+	$j(window).scroll(function(){
+		var sticky = $j('body'),
+		scroll = $j(window).scrollTop();
+		//console.log(scroll);
+		if (scroll >= 156) sticky.addClass('fixed');
+		else sticky.removeClass('fixed');
+	});
+	$j(document).on('click','.search', function() {
+		$j('.searchautocomplete').show();
+	});
+	$j(document).on('click','.search-close', function() {
+		$j('.searchautocomplete').removeClass('active');
+		$j('.searchautocomplete').hide();
+	});
+	$j(document).on('click','.quote a', function(e) {
+		e.preventDefault();
+		$j('.header-minicart').removeClass('active');
+		$j(this).parents('.container').find('#header-quote').toggleClass('active');
+	});
+	$j(document).on('click','.close-cart.quote', function(e) {
+		$j(this).parents('.container').find('#header-quote').toggleClass('active');
+	});
+	$j(document).on('click','.close-cart.cart-close', function(e) {
+		$j(this).parents('.container').find('.header-minicart').toggleClass('active');
+	});
+	$j(document).on('click','.continue-sh', function(e) {
+		$j(this).parents('.container').find('.header-minicart').toggleClass('active');
+	});
+	$j(document).on('click','#cart', function(e) {
+		console.log('#cart');
+		e.preventDefault();
+		$j('#header-quote').removeClass('active');
+		$j(this).parents('.container').find('.header-minicart').toggleClass('active');
+		setTimeout(function(){
+		  $j('.header-minicart').removeClass('active');
+		}, 4500);
+	});
+	//$j(document).on('click','.logo-links, #main-content', function(e) { 
+	//	$j('.header-minicart').removeClass('active');
+	//});
+	if ($j(window).width() < 753) {
+			$j('.minicart-wrap').appendTo('header .header');
+			$j('.changeLocation-wrapper').appendTo('header .toggle-menu');
+		} else {
+			$j('.minicart-wrap').appendTo('#main-nav .container');
+			$j('.changeLocation-wrapper').appendTo('.header-actions.right');
+			
+		}
+
+});
+	$j( window ).resize(function() {
+		if ($j(window).width() < 753) {
+			$j('.minicart-wrap').appendTo('header .header');
+			$j('.changeLocation-wrapper').appendTo('header .toggle-menu');
+		} else {
+			$j('.minicart-wrap').appendTo('#main-nav .container');
+			$j('.changeLocation-wrapper').appendTo('.header-actions.right');
+			
+		}
+	});
+</script>

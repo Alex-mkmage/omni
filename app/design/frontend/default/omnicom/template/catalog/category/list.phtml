@@ -1,0 +1,25 @@
+<?php
+
+/** @var Ey_Core_Block_Category_List $this */
+
+$category = $this->getCategory();
+
+if($category && $category->getId()){
+    $children = $category->getChildrenCategories();
+
+    if(!empty($children)){
+        echo '<div class="container main">';
+        echo '<div class="col-main">';
+        echo '<h2 class="product-list-title">Product Lines</h2>';
+        echo '<ul class="product-list list-view">';
+        foreach($children as $subcategory){
+            $img = Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($subcategory->getId())->getThumbnail();
+            echo '<li><a href="'.$subcategory->getURL() .'" title="'.$subcategory->getName() .'" class="img"><img src="'.$img .'" width="137" height="137" alt="'.$subcategory->getName() .'" /></a><div class="txt"><h2 class="product-name"><a href="'.$subcategory->getURL() .'" title="'.$subcategory->getName() .'">'.$subcategory->getName() .'</a></h2>';
+            echo '<p>'.$subcategory->getDescription().'</p>';
+            echo '</div></li>';
+
+        }
+        echo '</ul>';
+        echo '</div></div>';
+    }
+}

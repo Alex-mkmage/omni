@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Icube_Distributor>
+			<version>0.1.0</version>
+		</Icube_Distributor>
+	</modules>
+    <frontend>
+        <routers>
+            <distributor>
+                <use>standard</use>
+                <args>
+                    <module>Icube_Distributor</module>
+                    <frontName>distributor</frontName>
+                </args>
+            </distributor>
+        </routers>
+    </frontend>
+	<global>
+		<blocks>
+			<distributor>
+				<class>Icube_Distributor_Block</class>
+			</distributor>
+		</blocks>
+
+		<helpers>
+            <distributor>
+                <class>Icube_Distributor_Helper</class>
+            </distributor>		
+        </helpers>
+ 
+
+		<models>
+			<distributor>
+				<class>Icube_Distributor_Model</class>
+				<resourceModel>distributor_mysql4</resourceModel>
+			</distributor>
+			
+			<distributor_mysql4>
+				<class>Icube_Distributor_Model_Mysql4</class>
+				<entities>		  
+					<distributor>
+						<table>icube_distributor</table>
+					</distributor>
+				</entities>
+			</distributor_mysql4>
+		</models>
+
+		<resources>
+			<icube_distributor_setup>
+				<setup>
+					<module>Icube_Distributor</module>
+				</setup><!-- 
+				<connection>
+					<use>core_setup</use>
+				</connection> -->
+			</icube_distributor_setup> 
+			<distributor_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</distributor_write>
+			<distributor_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</distributor_read>
+		</resources>
+	</global>
+	
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<distributor before="Mage_Adminhtml">Icube_Distributor_Adminhtml</distributor>
+					</modules>
+				</args>
+			</adminhtml>
+			</routers>
+	</admin>
+	<adminhtml>
+		<layout>
+			<updates>
+				<distributor>
+					<file>icube/distributor.xml</file>
+				</distributor>
+				</updates>
+			</layout>
+	</adminhtml>
+</config> 

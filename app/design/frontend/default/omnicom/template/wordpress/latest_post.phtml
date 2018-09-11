@@ -1,0 +1,26 @@
+<?php
+/**
+ * @category    Custom
+ * @package     Custom
+ * @function    Get latest post
+ */
+?>
+<?php $latestPost = Mage::getModel('wordpress/post')->getCollection()->setOrder('post_date', 'desc')->addIsPublishedFilter()->setPageSize(5);?>
+<?php if(count($latestPost) > 0):?>
+    <div class="sidebar-news">
+        <div class="block block-blog">
+            <div class="block-title">
+                <strong><span><?php echo $this->__('News &amp; Events') ?></span></strong>
+            </div>
+            <div class="block-content sidebar-section">
+                <ul>
+                    <?php foreach ($latestPost as $post): ?>
+                    <li><span><?php echo $this->escapeHtml(date("F j, Y", strtotime($post->getPostDateGmt()))) ?></span><br/>
+                    <a href="<?php echo $post->getPermalink() ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+<?php endif;?>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <!-- Default -->
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>lib/jquery/jquery-1.10.2.min.js</script></action>
+            <action method="addJs"><script>lib/jquery/noconflict.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/hammer.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.main.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.navmenu.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.fancybox.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/enquire.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/minicart.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/fontawesome-all.min.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/fa-svg-with-js.css</name></action>
+            <!-- add the local js -->
+            <action method="addItem"><type>skin_js</type><name>js/ie.js</name><params/><if> lt IE 9</if></action>
+        </reference>    
+        <reference name="header">
+            <block type="cms/block" name="header-menu" as="header-menu">
+                <action method="setBlockId"><block_id>header-menu</block_id></action>
+            </block>
+            <block type="cms/block" name="header-chat" as="header-chat">
+                <action method="setBlockId"><block_id>header-chat</block_id></action>
+            </block>
+
+            <block type="core/template" name="distributor_location" template="distributor/location.phtml"/>
+            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/sidebar/default.phtml</template>
+                </action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+            </block>
+            <block type="qquoteadv/sidebar" name="quote_link" template="qquoteadv/top-link.phtml" after="cart_sidebar"/>
+            <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml" before="-">
+                <block type="checkout/cart_sidebar" name="minicart_content" template="checkout/cart/minicart/items.phtml">
+                    <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+                    <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/minicart/default.phtml</template></action>
+                    <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/minicart/default.phtml</template></action>
+
+                    <block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion" translate="label" module="checkout">
+                        <label>Mini-cart promotion block</label>
+                    </block>
+                    <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                        <label>Shopping Cart Sidebar Extra Actions</label>
+                    </block>
+                </block>
+            </block>
+        </reference>
+        <reference name="after_body_start">
+        	<block type="core/template" name="header.actions.scripts" as="header.actions.scripts" template="page/html/site-scripts.phtml"/>
+        </reference> 
+    </default>
+    
+    <catalog_category_default translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </catalog_category_default>
+    
+    <catalog_category_layered translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </catalog_category_layered>
+    
+    <catalog_category_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+    </catalog_category_view>   
+     
+    <catalog_product_view>
+    	<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+         <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/qquoteadv.js</name></action>
+        </reference>
+        <reference name="product.info.additional">
+            <remove name="product_tag_list"/>
+        </reference>
+        <reference name="product.info">
+            <block type="catalog/product_list_related" name="catalog.product.related" as="related" template="catalog/product/list/related.phtml"></block>
+        </reference>
+        <reference name="product.info">
+            <block type="core/template" name="catalog.product.accessories" as="product.accessories" template="catalog/product/accessories.phtml"></block>
+        </reference>
+    </catalog_product_view>
+    
+    <checkout_cart_index translate="label">
+        <reference name="breadcrumbs">
+			<action method="addCrumb"><crumbName>home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo><cssClass>home</cssClass></action>
+			<action method="addCrumb"><crumbName>shopping-cart</crumbName><crumbInfo><label>Shopping Cart</label><title>Shopping Cart</title></crumbInfo></action>        
+        </reference>
+    </checkout_cart_index>
+      
+    <checkout_onepage_index>
+        <reference name="breadcrumbs">
+			<action method="addCrumb"><crumbName>home</crumbName><crumbInfo><label>Home</label><title>Home</title><link>/</link></crumbInfo></action>
+			<action method="addCrumb"><crumbName>checkout</crumbName><crumbInfo><label>Checkout</label><title>Checkout</title></crumbInfo></action>        
+        </reference>
+        <reference name="root">
+        	<block type="core/template" name="page_title" template="checkout/page-title.phtml"></block>
+        </reference>
+    </checkout_onepage_index>  
+    
+    <checkout_onepage_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>    	
+    </checkout_onepage_success>    
+</layout>

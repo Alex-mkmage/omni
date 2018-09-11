@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Puru
+ * @package    Puru_Multislider
+ * @author     purusharma.cs@gmail.com
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Puru_Multislider>
+            <version>0.1.0</version>
+        </Puru_Multislider>
+    </modules>
+    <frontend>
+        <routers>
+            <multislider>
+                <use>standard</use>
+                <args>
+                    <module>Puru_Multislider</module>
+                    <frontName>multislider</frontName>
+                </args>
+            </multislider>
+        </routers>
+        <layout>
+            <updates>
+                <multislider>
+                    <file>multislider.xml</file>
+                </multislider>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<multislider>
+				<use>admin</use>
+				<args>
+					<module>Puru_Multislider</module>
+					<frontName>multislider</frontName>
+				</args>
+			</multislider>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<multislider module="multislider">
+				<title>Multislider</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<multislider module="multislider">
+						<title>Manage Multislider</title>
+						<sort_order>0</sort_order>
+						<action>multislider/adminhtml_multislider</action>
+					</multislider>
+					<multislider module="multislider">
+						<title>Multislider Settings</title>
+						<sort_order>1</sort_order>
+						<action>adminhtml/system_config/edit/section/multislider</action>
+					</multislider>
+				</children>
+			</multislider>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Puru_Multislider>
+							<title>Multislider Module</title>
+							<sort_order>10</sort_order>
+						</Puru_Multislider>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<multislider>
+					<file>multislider.xml</file>
+				</multislider>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <multislider>
+                <class>Puru_Multislider_Model</class>
+                <resourceModel>multislider_mysql4</resourceModel>
+            </multislider>
+            <multislider_mysql4>
+                <class>Puru_Multislider_Model_Mysql4</class>
+                <entities>
+                    <multislider>
+                        <table>multislider</table>
+                    </multislider>
+                </entities>
+            </multislider_mysql4>
+        </models>
+        <resources>
+            <multislider_setup>
+                <setup>
+                    <module>Puru_Multislider</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </multislider_setup>
+            <multislider_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </multislider_write>
+            <multislider_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </multislider_read>
+        </resources>
+        <blocks>
+            <multislider>
+                <class>Puru_Multislider_Block</class>
+            </multislider>
+        </blocks>
+        <helpers>
+            <multislider>
+                <class>Puru_Multislider_Helper</class>
+            </multislider>
+        </helpers>
+    </global>
+	
+	<default>
+        <multislider>
+           <settings>
+		   <banner_enable>1</banner_enable>
+		   <image_width>900</image_width>
+		   <image_height>385</image_height>
+		   <show_description>2</show_description>
+		   <list_style>10</list_style>
+		   <show_simple>0</show_simple>
+		   <time_delay>800</time_delay>
+		   <pause_time>2600</pause_time>
+		   <caption_opacity>0.5</caption_opacity>
+		   <slices_count>14</slices_count>
+		   <boxes_count>11</boxes_count>
+		   <hover_pause>2</hover_pause>
+		   <navigation_type>1</navigation_type>
+		   <caption_effect>rotate</caption_effect>
+		   
+                
+           </settings>
+       </multislider>
+    </default>
+</config>

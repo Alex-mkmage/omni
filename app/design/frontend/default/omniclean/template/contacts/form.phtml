@@ -1,0 +1,135 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="sales-page-title page-title">
+	<h1>Contact Us</h1>
+</div>
+<div id="messages_product_view">
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class="form-horizontal">
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<div class="input-group">
+							<label for="name">Name:</label>
+							<input class="form-control required-entry" placeholder="Name" name="name" id="name" type="text">
+						</div>
+						<div class="input-group">
+							<label for="email">Email:</label>
+							<input class="form-control required-entry validate-email" placeholder="Email" id="email" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" name="email" type="email" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>">
+						</div>
+						<div class="input-group">
+							<label for="requested-info">Requested Information:</label>
+							<select name="requested-info" class="form-control" id="requested-info">
+								<option value="Product Sample Request">Product Sample Request</option>
+								<option value="Product Demo Request">Product Demo Request</option>
+								<option value="Customer Service">Customer Service</option>
+								<option value="Sales">Sales</option>
+								<option value="Human Resources">Human Resources</option>
+								<option value="Accounts Payable">Accounts Payable</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<div class="input-group">
+							<label for="company">Company | Institute:</label>
+							<input class="form-control" placeholder="Company | Institute" name="company" id="company-institute" type="text">
+						</div>
+						<div class="input-group">
+							<label for="phone">Phone Number:</label>
+							<input class="form-control" placeholder="Phone Number" name="phone" id="phone" type="tel">
+						</div>
+						<div class="input-group">
+							<label for="findus">How did you find us?:</label>
+							<select name="findus" class="form-control" id="findus">
+								<option value="Search Engine Google">Search Engine Google</option>
+								<option value="Search Engine Other">Search Engine Other</option>
+								<option value="Tradeshow">Tradeshow</option>
+								<option value="Reffering Site">Reffering Site</option>
+								<option value="Omni Customer">Omni Customer</option>
+								<option value="Catalog">Catalog</option>
+								<option value="Journal Article">Journal Article</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="input-group wide">
+							<label for="comment">Leave us a message</label>
+							<textarea class="form-control required-entry" type="text" id="comment" name="comment" placeholder="Message" cols="5" row="2" style="min-height: 200px;"></textarea>
+						</div>
+						<button type="submit" class="btn btn-solid btn-lg">SUBMIT</button>
+					</div>
+				</div>
+			</form>
+
+			<script type="text/javascript">
+				//<![CDATA[
+				var contactForm = new VarienForm('contactForm', true);
+				//]]>
+			</script>
+		</div>
+		<div class="col-md-3">
+			<div class="contact-sidebar">
+				<div class="logo-wrap">
+					<img class="logo" src="/skin/frontend/default/omniclean/images/omni-logo-new.svg" alt="logo">
+				</div>
+				<h4><strong>Omni International</strong></h4>
+				<div>
+					<p>935-C Cobb Place Blvd</p>
+					<p>Kennesaw GA, 30144</p>
+					<p>United States</p>
+				</div>
+				<p class="email-info">
+					<strong>Email: </strong>
+					<a href="mailto:sales@omni-inc.com">sales@omni-inc.com</a>
+				</p>
+				<div class="info-contact">
+					<p>
+						<strong>Phone: </strong>
+						<span>770-421-0206</span>
+					</p>
+					<p>
+						<strong>Toll-Free: </strong>
+						<span>770-421-0206</span>
+					</p>
+					<p>
+						<strong>Fax: </strong>
+						<span>1-800-776-4431</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

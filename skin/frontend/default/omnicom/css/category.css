@@ -1,0 +1,39 @@
+.container .col-main {
+	padding-top: 10px;
+}
+
+.applicationnotes, .productbrochure, .productmanuals,.repairinstallationguide,.quickstartguides,.msds {display: none;}
+
+.product-list .col-1 {
+	width: 100%;
+	float: none;
+}
+
+.product-list .col-2 {
+	width: 100%;
+	float: none;
+}
+
+.product-list .col-2 .add-to-cart{
+	float: right;
+	width: 100%;
+}
+
+.add-to-cart button.button {
+	width: 100%;
+}
+
+
+@media only screen and (max-width:530px){
+	.product-list .col-1 {
+		width: auto;
+		float: left;
+		padding-right: 10px;ß
+	}
+
+	.product-list .col-2 {
+		width: 100%;
+		float: none;
+		clear: left;
+	}
+}

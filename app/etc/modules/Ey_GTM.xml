@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ey_GTM>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Catalog />
+                <Ey_Core />
+                <Ey_Applications />
+            </depends>
+        </Ey_GTM>
+    </modules>
+</config>

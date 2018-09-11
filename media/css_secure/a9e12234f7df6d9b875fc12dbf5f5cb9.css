@@ -1,0 +1,9 @@
+#featuredApp .content #application-list #application-list-results .featured-item .left-col.col .image img.featured-img{
+    width: 500px;
+    height: auto !important;
+    max-width: none;
+    left: -125px;
+}
+#featuredApp .content #application-list #application-list-results .featured-item .left-col.col{min-height: 328px;}
+#featuredApp .content #application-list #application-list-results .featured-item .left-col.col div.image{height: 328px;}
+

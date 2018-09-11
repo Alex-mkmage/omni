@@ -1,0 +1,100 @@
+<?php 
+	$session = Mage::getSingleton('core/session');
+	$visitorCountry = $session->getData('current_country');
+	$visitorCountryDist = isset($visitorCountry['distibutors']) ? $visitorCountry['distibutors'] : array();
+	$dist = $session->getData('current_distributer');
+	$showPopup = $session->getData('show_dist');
+?>
+<?php if(!is_null($dist) && !empty($dist)): ?>
+<style>.fancybox-close{display: block;}</style>
+<?php endif; ?>
+
+<?php if($visitorCountry): ?>
+
+<script type="text/javascript">
+
+	var noDist = false;	
+	
+	<?php if(empty($visitorCountryDist)): ?>
+	noDist = true;
+	<?php endif; ?>
+
+	var globalBcp = null, globalBcpInterval, globalCountryInterval, globalCountryCode = localStorage.getItem('countryCode'), 
+		globalCountryName = localStorage.getItem('countryName'), countries = null, promptElement = document.createElement('div'); 
+	
+	promptElement.id = 'promptEl';
+	
+	if(globalCountryCode === null) {
+		localStorage.setItem('countryCode',"<?php echo $visitorCountry['code'] ?>");
+		localStorage.setItem('countryName',"<?php echo $visitorCountry['name'] ?>");
+		globalCountryCode = "<?php echo $visitorCountry['code'] ?>";
+		globalCountryName = "<?php echo $visitorCountry['name'] ?>";
+	}
+	
+	function promptPopup () {
+
+		var countriesInterval = null;
+
+		document.getElementById('countrySection').style.opacity = 0;
+		
+		globalBcp.showPopup();
+
+		countriesInterval = setInterval(function(){
+
+			countries = document.getElementsByClassName('countryLink');
+
+			if(countries !== null && countries.length > 0) {
+	
+				if(countries !== null && countries.length > 0) {
+					for(var i=0; i<countries.length; i++) {
+						var c = countries[i], ch = c.childNodes, v = ch[0].getAttribute('alt'), cArr = v.split(' ');
+						if(cArr[0] == globalCountryCode) {
+							$j(ch[0]).trigger('click');
+							break;
+						}
+					}
+				}
+			
+				document.getElementById('countrySection').style.opacity = 1;	
+				
+				clearInterval(countriesInterval);		
+	
+			}
+		
+		},100);
+	
+	}
+	
+	globalBcpInterval = setInterval(function(){
+
+		countries = document.getElementsByClassName('countryLink');
+	
+		if (globalBcp !== null) {
+
+			globalBcp.showPopup = function(){document.getElementById('changeLocation').click()}
+			
+			<?php if($showPopup): ?>		
+			
+			document.getElementsByTagName('body')[0].prepend(promptElement);
+			if(!noDist) {
+				document.getElementById('promptEl').innerHTML = '<p>We have detected multiple distributers in your area, <a id="promptElTrigger" href="#">please click here to select your distributor.</a></p>';
+			}
+			
+			promptEl = document.getElementById('promptElTrigger');
+			if(promptEl !== null) {
+				promptEl.onclick = function() {
+					promptPopup();
+					return false;
+				}
+			}
+			<?php endif; ?>
+			
+			clearInterval(globalBcpInterval);
+			
+		}
+	
+	},100);
+
+</script>
+
+<?php endif; ?>

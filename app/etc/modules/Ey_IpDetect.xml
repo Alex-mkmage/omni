@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ey_IpDetect>
+            <active>true</active>
+            <codePool>local</codePool>
+			<depends>
+				<Ey_Core />
+				<Icube_Distributor />
+				<Ophirah_Qquoteadv />
+			</depends>            
+        </Ey_IpDetect>
+    </modules>
+</config>

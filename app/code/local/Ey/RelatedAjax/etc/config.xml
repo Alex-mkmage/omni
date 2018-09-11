@@ -1,0 +1,35 @@
+<config>  
+    <modules>
+        <Ey_RelatedAjax>
+            <version>0.1.0</version>
+        </Ey_RelatedAjax>
+    </modules>
+	<frontend>
+        <routers>
+            <relatedajax>
+                <use>standard</use>
+                <args>
+                    <module>Ey_RelatedAjax</module>
+                    <frontName>relatedajax</frontName>
+                </args>
+            </relatedajax>
+        </routers>  
+    </frontend> 
+    <global>
+        <blocks>
+            <relatedajax>
+                <class>Ey_RelatedAjax_Block</class>
+            </relatedajax>
+        </blocks>
+        <models>
+            <relatedajax>
+                <class>Ey_RelatedAjax_Model</class>
+            </relatedajax>
+        </models>
+        <helpers>
+            <relatedajax>
+                <class>Ey_RelatedAjax_Helper</class>
+            </relatedajax>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,9 @@
+<?php
+
+$productId = '586';   // Your Product Id
+$_product = Mage::getModel('catalog/product')->load($productId);
+<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart btn" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>')"><span><span>Add to Cart</span></span></button>
+
+{{block type="ey_core/product_list" name="category.product.list" template="catalog/product/list.phtml" product_ids="<?php echo $productId ?>"}}
+
+?>

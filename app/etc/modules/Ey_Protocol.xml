@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ey_Protocol>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ey_Protocol>
+    </modules>
+</config>

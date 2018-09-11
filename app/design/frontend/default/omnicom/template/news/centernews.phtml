@@ -1,0 +1,200 @@
+<?php
+
+$currentId = null;
+$_iterator = 0;
+$i = 0;
+$j = 0;
+$count = 0;
+$effects = '';
+$checkArr = '';
+$cur_data = date("Y-m-d", Mage::getModel('core/date')->timestamp(time()));
+
+$store_id = Mage::app()->getStore()->getId();
+
+$news = Mage::getModel('news/news');
+if($news){
+    $collection = $news->getCollection()->addFieldToFilter('newsposition', '3')->addStoreFilter($store_id);
+    if($collection){
+        $collection = $collection->addfieldtofilter('start_date',
+            array(
+                array('to' => $cur_data),
+                array('start_date', 'null'=>'')))
+            ->addfieldtofilter('end_date',
+                array(
+                    array('gteq' => $cur_data),
+                    array('end_date', 'null'=>''))
+            );
+
+        $news_collection = $collection->count();
+    }
+}
+
+$pageID = Mage::getBlockSingleton('cms/page')->getPage()->getId();
+$isPageType = 0;
+if ($pageID && $pageID != '') {
+    $currentId = $pageID;
+    $isPageType = 1;
+}
+if (!$pageID && Mage::registry('current_category')):
+    $currentId = Mage::registry('current_category')->getId();
+    $isPageType = 2;
+endif;
+if (!$pageID && Mage::registry('current_product')):
+    $currentId = Mage::registry('current_product')->getId();
+    $isPageType = 3;
+endif;
+
+?>
+<?php if (Mage::getStoreConfig('news/settings/news_show') == '1' && $isPageType != 0): ?>
+    <div class="block block-news">
+        <div class="block-title">
+            <strong><span><?php echo $this->__('NEWS') ?></span></strong>
+        </div>
+        <div class="block-content"> 
+            <ul>
+                <li class="item">
+                    <div  class="news-sliding">
+                        <div id="news_divSimpleSlider">	
+                          <?php
+                        
+                            foreach ($collection as $item):
+                                    $count++;
+                                    $j++;
+
+                                if ($item->getEffects() != ''):
+                                    $effects .= $item->getEffects() . ",";
+                                endif;
+                            
+                                ?>
+                                <?php
+                                if($isPageType == 1){ $pagestr = $item->getpages(); $checkArr = explode(",", $pagestr); }
+                                if($isPageType == 2){ $catstr = $item->getCategories(); $checkArr = explode(",", $catstr); }
+                                if($isPageType == 3){ $prostr = $item->getproducts(); $checkArr = explode(",", $prostr);  }
+                                ?>
+                                <?php
+                                $helper = Mage::helper('news/wysiwyg_images');
+                                $processor = $helper->getPageTemplateProcessor();
+                                $html = $processor->filter($item->getText()); 
+                                
+                                ?>
+                                    <?php  if (in_array($currentId, $checkArr)): $i++; ?>
+                                        <div class="news-main" id="newsshow">
+                                            <div class="center-news-style">
+                                                <div class="title" id="title">
+                                                    <strong><a class="news-title-<?php echo $i; ?> news-title-center-<?php echo $i; ?>" href="#" onClick="openPopup(this,'<?php echo $i; ?>','news-title-center-');"><?php echo $item->getTitle(); ?></a></strong>
+                                                </div>
+
+                                                <div class="news-img"> 
+                                                    <?php  if ($item->getThumbnail()): ?>
+                                                        <?php $marginPosition = ($item->getThumbnailAlign() == "left") ? "margin-right: 10px;" : "margin-left: 12px;"; ?>
+                                                        <img src="<?php echo Mage::helper('news')->resizeImg($item->getThumbnail(),100,100); ?>" align="<?php echo $item->getThumbnailAlign(); ?>" style="<?php echo $marginPosition; ?> padding: 2px;" alt="Thumbnail" width="100" />
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="news-img-large" style="display:none;"> 
+                                                    <?php if ($item->getThumbnail()): ?>
+                                                        <?php $marginPosition = ($item->getThumbnailAlign() == "left") ? "margin-right: 12px;" : "margin-left: 12px;"; ?>
+                                                        <img src="<?php echo Mage::helper('news')->resizeImg($item->getThumbnail(),150,150); ?>" align="<?php echo $item->getThumbnailAlign(); ?>" style="<?php echo $marginPosition; ?> padding: 2px;" alt="Thumbnail" width="150" height="150"  />
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="news_content" ><?php echo nl2br(substr($html, 0, 220)) . '...'; ?><a  href="#" onClick="openPopup(jQuery('.news-title-center-<?php echo $i; ?>'),'<?php echo $i; ?>','news-title-center-');"><?php echo $this->__('Read More') ?></a></div>
+                                                <div class="news-content-full" style="font-size:11px; display:none;"><?php echo $html; ?></div>
+                                                <div class="a-right news-date" ><?php echo date('l , jS F Y', strtotime($item->getStartDate())); ?></div>
+
+                                                <?php
+                                                
+                                                $fbtitle = $item->getTitle();
+                                                $fburl = Mage::getBaseUrl() . 'news';
+                                                $fbcontent = strip_tags($html);
+                                                $marginPosition = ($item->getThumbnailAlign() == "left") ? "float: left; margin-right: 10px;" : "float: right; margin-left: 10px;";
+                                                $title = urlencode($fbtitle);
+                                                $url = urlencode($fburl);
+                                                $summary = urlencode($fbcontent);
+                                                
+                                                if ($item->getThumbnail())
+                                                {
+                                                  $socialImage = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $item->getThumbnail();
+                                                  $image = urlencode($socialImage);
+                                                  $fburl = 'http://www.facebook.com/sharer.php?s=100&p[title]='.$title.'&p[summary]='.$summary.'&p[url]='.$url.'&p[images][0]='.$image;
+                                                }
+                                                else
+                                                {  
+                                                   $fburl = 'http://www.facebook.com/sharer.php?s=100&p[title]='.$title.'&p[summary]='.$summary.'&p[url]='.$url;
+                                                }
+                                                 
+                                                ?>
+
+                                                <div class="news-social-buttons">
+                                                    <?php  if (Mage::getStoreConfig('news/social_settings/news_facebook_show') == '1'): ?>
+                                                        <a onClick="window.open('<?php echo $fburl ?>','sharer','toolbar=0,status=0,width=548,height=325');" href="javascript: void(0)">
+                                                            <img height="20" alt="Share on Facebook" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) . "skin/frontend/default/default/news/images/fbshare.png" ?>">
+                                                        </a>
+                                                        &nbsp;&nbsp;
+                                                    <?php endif; ?>
+                                                    <?php if (Mage::getStoreConfig('news/social_settings/news_googleplus_show') == '1'): ?>
+                                                        <a href="https://plus.google.com/share?url={http://115.112.143.170/ECO/mag/demo/index.php/testimonials/}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                                            <img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+" height="20"/>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif;   ?>
+                            <?php endforeach; //foreach ?>
+                          <?php if($i == 0): ?>
+                             <?php echo $this->__('There are no news for this section'); ?>
+                          <?php endif; ?>    
+                        </div>
+                        <?php if($i > 1): ?>
+                            <div class="news_control" id="news_control">
+                                <a id="news_pause_btn" class="news_pause" title="Pause">&nbsp;</a>
+                                <a id="news_play_btn" class="news_no-display" title="Play">&nbsp;</a>
+                            </div>
+                            <ul class="news_navigate">
+                                <li class="news_prev"><a href="#" title="Previous">&nbsp;</a></li>
+                                <li class="news_next"><a href="#" title="Next">&nbsp;</a></li>
+                            </ul>
+                            <div class="news-main_down">
+
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            </ul>
+            <div class="actions"><a href="<?php echo $this->getUrl('news') ?>" title="Read More News"><?php echo $this->__('Show All News') ?></a></div>
+        </div>
+    </div>
+<?php endif; ?>
+
+
+<script type="text/javascript">
+    //<![CDATA[
+    $bn2(document).ready(function() {
+        var slider = $bn2("#news_divSimpleSlider").cycle({
+            /*fx: 'blindX,blindZ,blindY',*/
+            fx: '<?php echo $effects; ?>',
+            speed: 1000,
+            timeout: 5000,
+            prev: '.news_prev',
+            next: '.news_next',
+            pager: '#news_divSimpleSliderRotate',
+            pagerEvent: 'click',
+            fastOnEvent: false,
+            pause: 0,
+            pause_btn: '#news_pause_btn',
+            play_btn: '#news_play_btn',
+            randomizeEffects: false
+        });                                
+    });
+    $bn2('#news_pause_btn').click(function() { 
+        $bn2('#news_divSimpleSlider').cycle('pause'); 
+        document.getElementById('news_pause_btn').className = 'news_no-display';
+        document.getElementById('news_play_btn').className = 'news_play';
+    });
+
+    $bn2('#news_play_btn').click(function() { 
+        $bn2('#news_divSimpleSlider').cycle('resume'); 
+        document.getElementById('news_play_btn').className = 'news_no-display';
+        document.getElementById('news_pause_btn').className = 'news_pause';
+    });
+    // ]]> 
+</script>

@@ -1,0 +1,219 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+
+<!-- Get Last URL -->
+<?php
+$sessionfree = Mage::getSingleton('core/session');
+$lasturl = $sessionfree->getLastUrl();
+
+if(!strpos($lasturl, "ampromo/cart/update")){
+    $urlproduk = $this->getContinueShoppingUrl();
+    Mage::getSingleton('core/session')->setUrlinCheckout($urlproduk);
+}
+?>
+
+<?php
+$currentCountry = Mage::getModel('core/session')->getData('current_country');
+if(in_array($currentCountry['code'], array('CA','US'))):
+    $allowedCountry = true;
+else:
+    $allowedCountry = false;
+endif
+?>
+<div class="sales-page-title page-title title-buttons">
+	<h1>Shopping Cart</h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="container">
+	<div class="row">
+		<div class="cart">
+			<div class="col-lg-9 pull-left">			
+				<?php echo $this->getChildHtml('form_before') ?>
+				<div class="cart-main">
+					<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+						<?php echo $this->getBlockHtml('formkey'); ?>
+						<table id="shopping-cart-table" class="data-table cart-table">
+
+							<?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+							<thead>
+								<tr>
+									<th class="text-left"><?php echo Mage::helper('sales')->__('Items in Your Cart') ?></th>					
+									<th class="text-left"><?php echo Mage::helper('checkout')->__('Price') ?></th>
+									<th class="text-left"><?php echo Mage::helper('sales')->__('Qty') ?></th>
+									<th></th>
+									<th class="text-right"><?php echo Mage::helper('sales')->__('Item Subtotal') ?></th>					
+								</tr>
+							</thead>
+							<tbody>
+							<?php foreach($this->getItems() as $_item): ?>
+								<?php echo $this->getItemHtml($_item) ?>
+							<?php endforeach ?>
+							</tbody>
+							<tfoot>
+							<tr>
+								<td colspan="5">
+									<div class="subtotalBelowCart">
+										<?php $quote = Mage::getSingleton('checkout/cart')->getQuote(); ?>
+										Order Subtotal:
+										<span class="subtotalValue">
+											<span class="price">
+												<?php echo Mage::helper('core')->currency($quote->getSubtotal(), true, false); ?>
+											</span>
+										</span>
+									</div>
+								</td>
+							</tr>
+							</tfoot>
+						</table>
+						<script type="text/javascript">decorateTable('shopping-cart-table')</script>
+					</form>
+					<div class="cart-main-bottom">
+						<?php echo $this->getChildHtml('checkout.cart.extra') ?>
+						<?php echo $this->getChildHtml('coupon') ?>
+						<?php echo $this->getChildHtml('recently_viewed') ?>
+						<div class="return-policy">
+							<?php
+							$block = $this->helper('ey_core')->getCartReturn();
+							echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 pull-right">	
+				<div class="cart-collaterals">
+					<?php /* Extensions placeholder */ ?>
+					<div id="parrentSection">
+						<h3>Checkout Details</h3>
+						<div class="promos">
+							<?php
+							$block = $this->helper('ey_core')->getCartPromos();
+							echo $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+							?>
+						</div>
+						<?php if($allowedCountry): ?>
+							<div class="totals">
+								<div id="total-section">
+									<?php echo $this->getChildHtml('totals'); ?>
+								</div>
+								<?php if(!$this->hasError()): ?>
+									<ul class="checkout-types">
+										<?php foreach ($this->getMethods('methods') as $method): ?>
+											<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+												<li class="<?php echo $method; ?>"><?php echo $methodHtml; ?></li>
+											<?php endif; ?>
+										<?php endforeach; ?>
+										<li class="continue-shopping">
+											<?php if($this->getContinueShoppingUrl()): ?>
+												<?php $lasturl = (string)$lasturl; ?>
+												<?php if (strpos($lasturl, "checkout/cart/add")) { ?>
+													<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+												<?php } elseif (strpos($lasturl, "ampromo/cart/update/uenc")){ ?>
+													<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $sessionfree->getUrlinCheckout() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+												<?php } else { ?>
+													<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="location.href='<?php echo $lasturl;?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+												<?php }  ?>
+											<?php endif; ?>
+										</li>
+									</ul>
+								<?php endif; ?>
+
+							</div>
+						<?php endif; ?>
+						<div class="shippingSection">
+							<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+							 <hr>
+							<div class="payments-accepted">
+								<img class="payments" src="/skin/frontend/default/omnicom/images/Payments-by-Sage-Pay-Horizontal-3.jpg" alt="Sage Payments">
+								<img class="iso" src="/skin/frontend/default/omnicom/images/iso.png">
+							</div>
+						</div>
+					</div>
+					<?php //echo $this->getChildHtml('crosssell') ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ajaxUpdateQtyLoading">
+    <div class="inner">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+</div>
+
+<script>
+    jQuery(function ($) {
+    
+        $('.input-text.qty').on('change paste', function(){
+            $('.ajaxUpdateQtyLoading').addClass('open');
+            var el = $(this);
+            var id = $(this).data('product-id');
+            <?php $quote = Mage::getSingleton('checkout/session')->getQuote(); ?>
+            var quoteId = "<?php echo $quote ? $quote->getId() : '' ?>";
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo Mage::getBaseUrl(); ?>ey/cart/updateqty/',
+                data: { qty: $(this).val(), product: id, quote: quoteId },
+                success: function(data) {
+                    data = $.parseJSON( data );
+                    console.log(data);
+                    if(data.success == true){
+                        if(data.subtotal_with_discount){
+                            $('.subtotalValue .price').text(data.subtotal_with_discount);
+                        }
+                        if(data.tax){
+                            $('.taxValue .price').text(data.tax);
+                        }
+                        if(data.grand_total){
+                            $('#shopping-cart-totals-table tfoot .price').text(data.grand_total);
+                        }
+                        if(data.item_count){
+                            $('.itemCount').text(data.item_count);
+                        }
+                        var qty = parseInt(el.val());
+                        var priceText = el.parents('tr').find('.price-wrapper .price').text(), price = parseFloat(priceText.replace(',','').substring(1,priceText.length));
+                        var calcSubtotal = parseFloat(qty * price);
+                        el.parents('tr').find('.last .cart-price .price').text('$'+calcSubtotal.toLocaleString('en-US', {minimumFractionDigits: 2}));
+                    }
+                    $('.ajaxUpdateQtyLoading').removeClass('open');
+                }, error: function(xhr, ajaxOptions, thrownError){
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                    $('.ajaxUpdateQtyLoading').removeClass('open');
+                }
+            });
+        });
+    });
+</script>

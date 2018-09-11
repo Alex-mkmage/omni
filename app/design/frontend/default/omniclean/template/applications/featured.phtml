@@ -1,0 +1,8 @@
+<?php if($this->isFeaturedExist()): ?>
+    <div id="featuredApp">
+        <div class="content">
+        	<h1>Featured Applications</h1>
+            <?php echo $this->getChildHtml('application_featured_list'); ?>
+        </div>
+    </div>
+<?php endif; ?>

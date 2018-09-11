@@ -1,0 +1,50 @@
+<script type="text/javascript">
+//<![CDATA[
+        var getAllDistributors = function() {
+            var selectedCountry = localStorage.getItem('countryCode');
+            $j.ajax({
+                url: 'http://omni3.mkmage.com/distributor/index/index?code=' + selectedCountry,
+                type: "GET",
+                success: function(data) {
+                    results = JSON.parse(data);
+                    var dist;
+                    for(var prop in results) {
+                        if(prop === 'distributers'){
+                            dist = results[prop];
+                        }
+                    }
+                    buildDistList(dist);
+                }
+            });
+        };
+        getAllDistributors();
+
+        function buildDistList(arr){
+            var list = '';
+            arr.forEach(function(dist) {
+                list += '<div class="item"><div class="item-wrapper tab-content-cms"><div class="store-info itemscope itemtype="http://schema.org/LocalBusiness"">';
+                list += '<div class="store-name">'+ dist.title +'</div>';
+                list += '<div class="phone"><span class="label">Phone:</span><p itemprop="telephone"><a href="tel:'+ dist.phone+'">'+dist.phone +'</a></p></div>';
+                list += '<address class="store-address"><span class="label">Address:</span><p itemprop="address">'+ dist.street +', '+ dist.city +', '+ dist.region +'</p></address>';
+                list += '</div>';
+                list += '<div class="extend-link"><a target="_blank"  itemprop="url" href="'+ dist.website +'" class="btn btn-solid website">Website</a></div>';
+                list += '</div>';
+                list += '</div>';
+            });
+            $j('.search-result .row').empty();
+            $j('.search-result .row').append(list);
+        };
+//]]>
+</script>
+
+    <div class="page-title">
+        <h1><?php echo $this->__('Distributor Locator') ?></h1>
+    </div>
+   <div class="container storelocator">
+        <div class="search-result">
+        <div class="row" style="min-height: 200px;">
+            <h3 style="text-align:center; padding: 20px;">Loading Distributors</h3>
+        </div>
+        </div>
+    </div>
+    <!-- <div class="back-to-top"><a href="#filter"><?php echo $this->__('Back to Top')?></a></div> -->

@@ -1,0 +1,434 @@
+.webforms-fields-comment {
+    float: left;
+    margin-top: 4px;
+    line-height: 1.3em;
+    color: #666;
+    font-size: .9em;
+    width: 100%;
+}
+
+.webforms-fields-hint {
+    font-style: italic;
+    color: grey;
+}
+
+.group-select li textarea {
+    height: 10em;
+}
+
+.highlight .webforms-calendar input, .webforms-calendar input {
+    background-image: url(calendar.gif) !important;
+    background-position: 99% 2px !important;
+    background-repeat: no-repeat !important;
+}
+
+.calendar {
+    z-index: 1000;
+}
+
+ul.webforms-errors-list {
+    margin: 5px;
+    padding: 5px;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+ul.webforms-errors-list li {
+    margin-bottom: 5px;
+}
+
+p.webforms-error-message {
+    margin: 10px;
+    text-align: center;
+}
+
+.webforms-uploaded-file {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    float: left;
+}
+
+.webforms-uploaded-file-delete {
+    margin: 3px 0 0 0;
+    clear: both;
+}
+
+.webforms-uploaded-file-delete-label {
+    margin-left: 5px;
+    float: none !important;
+}
+
+.list-select {
+    padding: 10px !important;
+}
+
+.form-list li, li.control {
+    list-style: none;
+    position: relative;
+}
+
+.checkbox {
+    float: left;
+}
+
+figcaption {
+    padding: 5px 20px;
+    margin: 5px;
+}
+
+/* Tooltip */
+
+.ot-content {
+    text-align: left;
+}
+
+.tooltip-icon {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    background-image: url('tooltip.png');
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* Sidebar template */
+
+.block-form, .block-form .input-box label {
+    font-size: 11px !important;
+}
+
+.block-form .input-text, .block-form textarea, .block-form .form-list .input-box, .block-form .field {
+    width: 100%;
+}
+
+.block-form .input-text {
+    padding: 1px 0;
+}
+
+.block-form textarea {
+    height: 70px;
+}
+
+.block-form .block-content {
+    padding: 5px 9px;
+}
+
+.block-form label {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.block-form .input-box label {
+    font-weight: normal !important;
+}
+
+.block-form .input-box {
+    margin-bottom: 10px;
+}
+
+.block-form .required em {
+    color: red;
+}
+
+.block-form .list-select {
+    padding-bottom: 0px !important;
+}
+
+.block-form p.required {
+    float: left;
+}
+
+/* Customer account */
+#webforms-customer-account-form {
+    padding-top: 15px;
+}
+
+/* Success text */
+.webforms-success-text {
+    border: 1px solid #ccc;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 212, 96, 0.26);
+    border-radius: 5px;
+}
+
+/* File preview */
+
+.file-preview {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-preview h3 {
+    font-size: 12px;
+}
+
+.file-preview li {
+    margin: 0;
+    padding: 10px 0;
+    margin: 0;
+    overflow: auto;
+    position: relative;
+}
+
+.file-preview li img {
+    border: solid 1px #999;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 0 10px 0 0;
+    display: block;
+    float: left;
+}
+
+.file-cancel {
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left:15px;
+}
+
+.file-progress {
+    font-size: 90%;
+    color: #777;
+}
+
+/* Drop-zone */
+
+.drop-zone {
+    padding: .5rem .7rem;
+    color: #777;
+    border: .17rem dashed #ddd;
+    border-radius: .4rem;
+    opacity: .9;
+    cursor: pointer;
+}
+.drop-zone-preview-container{
+    margin-bottom: 10px;
+}
+.drop-zone:hover {
+    background-color: #f5f5f5;
+}
+
+.drop-zone-label {
+    display: inline-block !important;
+    vertical-align: top !important
+}
+
+.icon-paperclip {
+    color: rgb(240, 120, 0) !important;
+    fill: rgb(240, 120, 0) !important;
+}
+
+.icon-paperclip svg {
+    transform: rotate(45deg) scaleX(-1);
+}
+
+.text-center {
+    text-align: center !important
+}
+
+.drop-zone-preview {
+    background: #f8f8f8;
+    border: .09167rem solid #dadada;
+    border-radius: .33333rem;
+    color: #999;
+    padding:5px;
+    margin-bottom:5px;
+    line-height: 14px;
+    position:relative;
+}
+
+.drop-zone-attachment {
+    overflow: auto;
+    height: auto;
+    z-index: 2;
+    width: 100% !important;
+    position: relative;
+}
+
+.drop-zone-preview-icon-file {
+    padding-right: .66667rem;
+    float: left !important;
+}
+
+.drop-zone-preview-icon-file svg path{
+}
+
+.drop-zone-preview-file {
+    width: 70%;
+    float: left !important;
+}
+
+.drop-zone-preview-filename {
+    max-width: 62%;
+    color: #333;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: normal !important;
+    white-space: nowrap !important;
+    float: left !important;
+    vertical-align: top !important;
+}
+
+.drop-zone-preview-filename-end{
+    color: #333;
+}
+
+.drop-zone-preview-size, .drop-zone-error {
+    clear: left;
+    float: left !important;
+}
+.drop-zone-error{
+    color: red;
+}
+
+.drop-zone-preview-icon-close {
+    position: absolute;
+    top: 50%;
+    right: .41667rem;
+    margin-top: -1.5rem !important;
+    padding-top: 1rem;
+    border: 0;
+    cursor: pointer !important;
+    float: right !important;
+}
+
+.drop-zone-preview-icon-close svg {
+    fill: #999;
+}
+
+.drop-zone-progress, .drop-zone-progress-success {
+    position: absolute;
+    border-radius: .33333rem;
+    background-color: #00ff08;
+    opacity: .1;
+    height:100% !important;
+    z-index:1;
+    top:0;
+    left:0;
+    display:block;
+}
+
+.drop-zone-progress-success {
+    opacity: 0;
+}
+
+/* File pool */
+.webforms-file-pool {
+    display: table;
+    margin-bottom: 10px;
+    border:5px solid #eee;
+    padding:10px;
+    border-radius: 10px;
+}
+.webforms-file-pool-selectall{
+    margin-bottom:5px;
+}
+.webforms-file-pool-selectall label{
+    font: bold 10px/16px Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: #888;
+    float:none !important;
+    margin-left:5px;
+
+}
+.webforms-file-cell{
+    float:left;
+    flex:1;
+    height: auto;
+    text-align: center;
+    font: bold 9px/16px Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: #888;
+    display: table-cell;
+
+}
+.webforms-file-cell p label{
+    color: #888;
+
+}
+.webforms-file-cell p {
+    padding-top: 5px;
+    margin-left: -10px;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+.webforms-file-cell label{
+    float:none !important;
+    margin-left:5px;
+}
+
+.webforms-file-link{
+    display: block;
+    border-radius:5px;
+    float:left;
+    margin-right:10px;
+    height:auto;
+    box-shadow: 0 0 3px rgba(0,0,0,0.6);
+    background: #f5f5f5;
+    max-width:200px;
+}
+.webforms-file-link:hover {
+    box-shadow: 0 0 7px rgba(0,0,0,0.6);
+    background: white;
+    color: #888;
+
+}
+.webforms-file-link figure p{
+    margin:10px 0 5px 0;
+}
+.webforms-file-link figure img{
+    background:white;
+}
+
+.webforms-file-link-name {
+    display:inline;
+    max-width:60%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: normal !important;
+    white-space: nowrap !important;
+    float:left;
+}
+.webforms-file-link-name-end {display:inline;}
+
+.webforms-file-delete-checkbox{
+    vertical-align: baseline;
+}
+
+.webforms-result-action{
+    display: block;
+    height: 16px;
+    background: #ddd;
+    border-radius: 12px;
+    font: bold 10px/16px Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 10px;
+    margin: 5px 1px;
+    white-space: nowrap;
+    color: #888;
+    text-decoration: none;
+}
+.webforms-result-action:hover{
+    text-decoration: none;
+    color:white;
+    background: #aaa;
+}
+.result-action-delete {
+    border-color: red;
+}
+.result-action-delete:hover{
+    background: #ff5500;
+}
+.webforms-gdpr-checkbox {margin-top:10px; float:left; width:100%;}
+
+/* reCAPTCHA */
+.g-recaptcha{
+    margin:15px 0;
+    float:left;
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <ey_protocol_application_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>protocol/2columns-left.phtml</template>
+            </action>
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>jquery/jquery-ui-1.11.0.js</script><sort_order>10</sort_order></action>
+            <action
+                    method="addJs"><script>tagsinput/jquery.tagsinput.min.js</script><sort_order>11</sort_order></action>
+            <action method="addJs"><script>simplePagination/jquery.simplePagination.js</script><sort_order>12
+            </sort_order></action>
+            <action method="addItem"><type>js_css</type><name>simplePagination/simplePagination.css</name></action>
+            <action method="addItem"><type>js_css</type><name>jquery/jquery-ui-1.8.13.css</name></action>
+            <action method="addItem"><type>js_css</type><name>tagsinput/jquery.tagsinput.min.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>ey/js/applications.js</name><sort_order>13
+            </sort_order></action>
+            <!-- <action method="addItem"><type>skin_js</type><name>ey/js/ofi.browser.js</name><sort_order>14
+            </sort_order></action>
+            <action method="addItem"><type>skin_js</type><name>ey/js/picturefill.min.js</name><sort_order>15
+            </sort_order></action> -->
+            <action method="addItem"><type>skin_js</type><name>js/jquery.equalHeightColumns-1.3.js</name><sort_order>14</sort_order></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery-match-height.min.js</name><sort_order>15
+            </sort_order></action>
+            <action method="addCss"><stylesheet>ey/css/protocol.css</stylesheet></action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ey/css/app-ie.css</name>
+                <params/>
+                <if>gt IE 7</if>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="ey_protocol/application_filter" name="application_filter"
+                   template="protocol/filter.phtml">
+                <block type="core/template" name="application_filter_product"
+                       template="protocol/filter/product.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+
+            <block type="ey_protocol/application" name="application_search"
+                   template="protocol/search.phtml" />
+            <block type="ey_protocol/application_featured" name="application_featured"
+                   template="protocol/featured.phtml">
+                <action method="setData">
+                    <name>limit</name>
+                    <value>3</value>
+                </action>
+                <block type="ey_protocol/application_featured" name="application_featured_list"
+                       template="protocol/list.phtml"/>
+            </block>
+            <block type="ey_protocol/application" name="application_results"
+                   template="protocol/results.phtml" />
+        </reference>
+    </ey_protocol_application_index>
+    <ey_protocol_application_document>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>ey/js/protocol.js</name></action>
+            <action method="addCss"><stylesheet>ey/css/protocol.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="ey_protocol/application_document" name="application_view"
+                   template="protocol/view.phtml" >
+                <block type="ey_protocol/application_document_upsell" name="application_view_upsell"
+                       template="protocol/view/upsell.phtml" />
+            </block>
+        </reference>
+    </ey_protocol_application_document>
+    <ey_protocol_application_list>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>protocol/blank.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="ey_protocol/application_list" name="application_list"
+                   template="protocol/list.phtml" />
+        </reference>
+    </ey_protocol_application_list>
+</layout>

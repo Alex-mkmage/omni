@@ -1,0 +1,24 @@
+<?php
+if($_product  = Mage::registry('current_product')){
+	// If product page
+	$title = $_product->getName();
+}else if ($_category = Mage::registry('current_category')) {
+	// If category page
+	$title = $_category->getName();
+}else{
+
+	$title = '';
+
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('.page-title.custom-title h1').text(jQuery('.col-main .page-title').text());
+		});
+	</script>
+	<?php
+}
+?>
+
+<div class="page-title custom-title">
+	<h1><?php echo $title ?></h1>
+</div>

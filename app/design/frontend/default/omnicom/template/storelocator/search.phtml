@@ -1,0 +1,33 @@
+<?php
+	$cookies = Mage::getModel('core/cookie');
+	$cookieCountry = $cookies->get('current_country');
+	$cookieDistributer = $cookies->get('current_distributer');
+
+	if($cookieCountry && $cookieDistributer ){
+
+		$session 	= Mage::getSingleton('core/session')->getData();
+		$currentCountry = $session['current_country'];
+		$currentDistributer = $session['current_distributer'];	
+
+		if (empty($currentCountry) && empty($currentDistributer)) {
+			$session 	= Mage::getSingleton('core/session');
+			$session->setData('current_country',unserialize($cookieCountry));
+			$session->setData('current_distributer',unserialize($cookieDistributer));		
+		}
+	}else{
+		$session 	= Mage::getSingleton('core/session')->getData();
+		$currentCountry = $session['current_country'];
+		$currentDistributer = $session['current_distributer'];			
+	}
+?>
+<div class="storelocator">
+	<div class="page-title">
+		<h1><?php echo  Mage::getStoreConfig('storelocator/global/pagetitle');?></h1>
+	</div>
+	
+	
+
+	<div class="search-result" id="search-result"></div>
+	
+</div>
+

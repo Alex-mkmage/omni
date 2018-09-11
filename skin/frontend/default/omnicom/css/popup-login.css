@@ -1,0 +1,53 @@
+
+.mfp-content {
+	background: #fff;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 768px;
+}
+
+#popup-login .youama-login-window {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#popup-login .youama-window-outside {
+	margin: 0;
+	padding: 20px;
+}
+
+#popup-login .form-list label {
+	float: none;
+}
+
+#popup-login .form-list label + input {
+	display: block;
+}
+
+#popup-login .col2-set .content {
+	min-height: 230px;
+}
+
+#popup-login .buttons-set {
+	margin: 0;
+}
+
+@media only screen and (max-width: 770px) {
+
+	#popup-login .youama-login-window {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@media only screen and (max-width: 639px) {
+
+	#popup-login .col2-set .content {
+		min-height: 0;
+	}
+
+	#popup-login .buttons-set {
+		margin: 30px;
+	}
+}

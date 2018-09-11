@@ -1,0 +1,82 @@
+<?php
+    $_helper   = $this->helper('catalog/output');
+    $root_category = Mage::getModel('catalog/category')->load($this->getData('category_id')); // Put your root category ID here.
+  	$subcategories = Mage::getModel('catalog/category')->getCollection()->setStoreId(Mage::app()->getStore()->getId());
+        $subcategories->addAttributeToSelect('*')
+        ->addAttributeToFilter('parent_id', $root_category->getId())
+        ->addAttributeToFilter('is_active', 1)//get only active categories if you want
+        ->addAttributeToSort('position');//sort by position;
+?>
+
+    <div class="drop">
+        <div class="products-section">
+        	<ul class="megamenu">     
+            <?php foreach($subcategories as $subcategory): ?>
+            	<?php echo '<li class="'.$subcategory->getName().'">'; ?>  
+	        	<?php echo '<a href="'.$subcategory->getURL() .'" class="box"><div class="txt">'.$subcategory->getName().'</div></a>'; ?>    
+		        	<?php $subcategories1 = $subcategory->getChildren();?>
+                    <?php if(strlen($subcategories1) > 0): ?>
+                        <?php $subcategories2 = explode(',',$subcategories1); ?>
+                        <?php if(count($subcategories2) > 0): ?>
+                            <?php echo '<ul>'; ?>
+                            <?php foreach($subcategories2 as $subcategory1): ?>  
+                                <?php $category2 = Mage::getModel('catalog/category')->load($subcategory1);
+                                            ?>
+                                            <?php echo '<li><a href="'.$category2->getURL() .'" class="box"><div class="txt">'.$category2->getName().'</div></a></li>'; ?>
+                            <?php endforeach;?>
+                            <?php echo '</ul>'; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+    
+                    <?php if(strlen($subcategories1) == 0): ?>
+                    	<?php $products = Mage::getModel('catalog/product')->getCollection()->addCategoryFilter($subcategory)->load();  ?>
+                    	<?php if(count($products) > 0): ?>
+                        <ul>
+                        	<?php foreach($products as $product): ?>
+                           		<?php 
+                           			$model = Mage::getModel('catalog/product'); //getting product model
+									$_product = $model->load($product->getId()); 
+                           		?>
+                           		<li><a href="<?php echo $_product->getProductUrl(); ?>" title="<?php echo $_product->getName(); ?>" class="box"><div class="txt"><?php echo $_product->getName(); ?></div></a></li>
+                        	<?php endforeach; ?>
+                        </ul>
+                       	<?php endif; ?>
+                    <?php endif; ?>
+
+		    	<?php echo '</li>'; ?>                       
+            <?php endforeach;?>                                            
+        	</ul>
+        </div>
+    </div>
+    
+<?php
+
+/*
+<?php
+    $nav_class = new Mage_Catalog_Block_Navigation;
+    $categoryId = $this->getcategory_id();
+    
+    if(!empty($categoryId)){
+        $cur_category = Mage::getModel('catalog/category')->load($categoryId);
+    }
+?>
+<?php
+$childrens = $cur_category->getResource()->getChildren($cur_category, true);
+if($childrens && count($childrens)): ?>
+    <div class="drop">
+        <div class="products-section">    
+            <?php foreach ($childrens as $children): $children = Mage::getModel('catalog/category')->load($children); ?>
+                <?php if ($children->getIsActive() && $children->getIncludeInMenu()): ?>
+                    <a href="<?php print $nav_class->getCategoryUrl($children);?>" class="box">
+                        <?php $thumbnail = $children->getThumbnail(); if(!empty($thumbnail)): ?>
+                            <div class="img"><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$thumbnail; ?>" alt="Image description" width="92" height="91" /></div>
+                        <?php endif;?>        
+                        <div class="txt"><?php print $this->htmlEscape($children->getName());?></div>
+                    </a>
+                <?php endif;?>                                          
+            <?php endforeach;?>                                            
+        </div>
+    </div>
+<?php endif;?>    
+ */    
+?>   

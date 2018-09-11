@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<puru translate="label">
+			<label>Puru Extension</label>
+			<sort_order>600</sort_order>
+		</puru>
+	</tabs>
+	<sections>
+		<multislider translate="label" module="multislider">
+			<label>Multislider Banner</label>
+			<tab>puru</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>999</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+				<label>Multislider banner Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>
+					
+					
+						<banner_enable translate="label">
+							<label>Enable Banner</label>
+							<comment><![CDATA[Enable the banner]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner_enable>
+						
+						<image_width translate="label">
+                            <label>Image Width</label>	
+							<comment><![CDATA[Width in px, Make it the same size as your images, Default is "900".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image_width>
+						
+						<image_height translate="label">
+                            <label>Image Height</label>	
+							<comment><![CDATA[Height in px, Make it the same size as your images, Default is "385".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image_height>
+						
+						
+						<show_description translate="label, comment">
+							<label>Display settings</label>
+							<comment><![CDATA[If select "Images" then thumbnail image will display on banner image, if select "Content" then content will display on banner image.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>multislider/system_config_showcontent</source_model>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_description>
+						
+						<list_style translate="label, comment">
+							<label>Banner Style</label>
+							<comment><![CDATA[Choose banner style]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>multislider/system_config_styles</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</list_style>
+						
+						
+						<show_simple translate="label, comment">
+							<label>Display Simple Slider</label>
+							<comment><![CDATA[If "yes", then show the simple banner without content and thumbnail image.]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_simple>
+						
+						<time_delay translate="label">
+                            <label>Transition Time(Speed)</label>	
+							<comment><![CDATA[seconds between the end of the sliding effect and the start of the next one, Default is "800".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </time_delay>
+						
+						
+						<pause_time translate="label">
+                            <label>Pause Time</label>	
+							<comment><![CDATA[Pause time in seconds between the end of the sliding effect and the start of the next one, Default is "2600".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pause_time>
+						
+						
+						<caption_opacity translate="label">
+                            <label>Caption Opacity</label>	
+							<comment><![CDATA[Default is "0.5", Opacity of the thumbnail image.]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </caption_opacity>
+						
+						<slices_count translate="label">
+                            <label>Slices Count</label>	
+							<comment><![CDATA[count of slices in which banner will devide to show Transition effect, Default is "14".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slices_count>
+						
+						<boxes_count translate="label">
+                            <label>Box Count</label>	
+							<comment><![CDATA[count of boxes in which banner will devide to show Transition effect, Default is "11".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </boxes_count>
+						
+						<hover_pause translate="label">
+                            <label>Hover Pause Time</label>	
+							<comment><![CDATA[seconds between the end of the sliding effect and the start of the next one, Default is "2".]]></comment>						
+                            <frontend_type>text</frontend_type>                                                      
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hover_pause>
+						
+						
+						<navigation_type translate="label, comment">
+							<label>Navigation Type</label>
+							<comment><![CDATA[default is "Next Pre navigation", navigation button (prev, next and play/stop buttons)]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>multislider/system_config_navigation</source_model>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</navigation_type>
+						
+						<caption_effect translate="label, comment">
+							<label>Thumbnail image effect</label>
+							<comment><![CDATA[default is "rotate"]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>multislider/system_config_capeffect</source_model>
+							<sort_order>14</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</caption_effect>
+					</fields>
+				</settings>
+			</groups>
+		</multislider>
+	</sections>
+</config>

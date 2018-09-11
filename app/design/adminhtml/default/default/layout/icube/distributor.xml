@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_distributor_index>
+		<reference name="content">
+		  <block type="distributor/adminhtml_distributor_list" name="distributor.form"/>
+		</reference>
+	</adminhtml_distributor_index>
+ 	<adminhtml_distributor_upload>
+		<reference name="content">
+		  <block type="distributor/adminhtml_distributor_upload" name="distributor.upload"/>
+		</reference>
+	</adminhtml_distributor_upload>
+
+</layout>

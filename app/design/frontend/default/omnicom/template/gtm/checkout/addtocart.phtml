@@ -1,0 +1,21 @@
+<?php /** @var $this Ey_GTM_Block_Checkout_Cart */ ?>
+
+<?php if($product = $this->getAddedItem()): ?>
+<script type="text/javascript">
+    dataLayer.push({
+        'event': 'addToCart',
+        'ecommerce': {
+            'currencyCode': 'USD',
+            'add': {
+                'products': [{
+                    'name': '<?php echo $product['name'] ?>',
+                    'id': '<?php echo $product['sku'] ?>',
+                    'price': '<?php echo $product['price'] ?>',
+                    'variant': '<?php echo $product['variant'] ?>',
+                    'quantity': <?php echo $product['quantity'] ?>
+                }]
+            }
+        }
+    });
+</script>
+<?php endif; ?>

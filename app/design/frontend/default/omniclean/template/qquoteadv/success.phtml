@@ -1,0 +1,71 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+$totals = Mage::getSingleton('checkout/cart')->getQuote()->getTotals();
+$subtotal = $totals["subtotal"]->getValue(); 
+?>
+
+
+
+<!-- Google Code for AdWords Quote Request Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 962592967;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "fMreCIbox2QQx4GAywM";
+var google_conversion_value = 1.00;
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/962592967/?value=1.00&amp;currency_code=USD&amp;label=fMreCIbox2QQx4GAywM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+
+
+<div class="page-title">
+    <h2><?php echo $this->__('Your Quote Request has been received.') ?></h2>
+</div>
+<?php $quote =  $this->getData('quote'); ?>                
+<h3 class="thank-you"><?php echo $this->__('Thank you for your interest!') ?></h3>
+<?php if ($this->Helper('customer')->isLoggedIn()): ?>
+    <p class="quote-number"><?php echo $this->__('Your quote request # is: %s.', sprintf('<a href="%s">%s</a>', Mage::getUrl('qquoteadv/view/view', array('id'=>$quote->quote_id)), $this->escapeHtml($quote->increment_id))) ?></p>
+<?php  else :?>
+    <p class="quote-number"><?php echo $this->__('Your quote request # is: %s.', $this->escapeHtml($quote->increment_id)) ?></p>
+<?php endif;?>
+<p  class="confirmation">You will receive a quote confirmation email shortly.<br/> If you have any question please don't hesitate to <a href="https://www.omni-inc.com/contacts"><strong>contact us</strong></a>.</p>
+<div class="buttons-set">
+	<button class="button" type="button" onclick="window.location='<?php echo $this->getContinueShoppingUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>

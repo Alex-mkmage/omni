@@ -1,0 +1,28 @@
+<!-- GTM data layer -->
+<?php
+$lastOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+$order = Mage::getModel("sales/order")->load($lastOrderId);
+$json['event'] = 'orderCompletion';
+$json['transactionId'] = $order->getIncrementId();
+$json['transactionTotal'] = $order->getBaseGrandTotal() -
+    ($order->getBaseTaxAmount() + $order->getBaseShippingAmount());
+$json['transactionTax'] = (float) $order->getBaseTaxAmount();
+$json['transactionShipping'] = (float) $order->getBaseShippingAmount();
+
+$products = array();
+/** @var Mage_Sales_Model_Order_Item $item*/
+foreach ($order->getAllVisibleItems() as $item) {
+    $product['sku'] = $item->getSku();
+    $product['name'] = $item->getName();
+    $product['price'] = $item->getBasePrice();
+    $product['quantity'] = $item->getQtyOrdered();
+    $products[] = $product;
+}
+$json['transactionProducts'] = $products;
+$result = 'window.dataLayer = window.dataLayer || [];dataLayer.push(' . Mage::helper('core')->jsonEncode($json) . ");";
+?>
+<script type="text/javascript">
+    //<![CDATA[
+    <?php echo $result ?>
+    //]]>
+</script>
